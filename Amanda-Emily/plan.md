@@ -1,1 +1,0 @@
-Basic file to develop plan for mini-project. 
