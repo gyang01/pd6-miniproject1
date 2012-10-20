@@ -39,19 +39,30 @@ def del_story(story):
     todel = []
     for line in res:
         if line['name'] == story:
-            todel.append({"_id":line['_id']})
+            todel.append( {'_id':line['_id']} )
     for item in todel:
         collection.remove(item)
 
+def get_story_titles():
+    db = conn['Li-Robinson-mp1']
+    collection = db['stories']
+    res = collection.find()
+    titles = []
+    for line in res:
+        name = line['name']
+        if name not in titles:
+            titles.append(name)
+    return titles
+
 #test
 if __name__ == "__main__":
-    #story = 'Once upon a time'
+    story = 'Once upon a time'
     auth()
     db = conn['Li-Robinson-mp1']
     collection = db['stories']
     #add_story(story)
     #add_line(story,'In a land far far away')
-    #del_story('There once was a')
-    print db.collection_names()
+    #del_story(story)
+    print get_story_titles()
     for line in collection.find(): print line
     print "done"
