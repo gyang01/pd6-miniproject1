@@ -13,24 +13,29 @@ def start(): #or init
     auth()
     db = conn['Li-Robinson-mp1'] #name of database for this project
     global collection
-    collection = db['stories']
+    collection = db['stories'] #name of collection of stories
     
 def add_story(storystart):
-   # global collection
-    #collection = db['stories']
-    collection.insert({'lines':[storystart]}) #first line of story is story name
+    collection.insert({'name':storystart, 'lines':[storystart]}) #first line of story is story title, and its key is its title; its lines are a list
 
-def get_story(storyname):
-    #global collection
-    #collection = db['stories']
-    for thing in collection.find():
-        print thing['lines']
+def get_story(story):
+    res = collection.find_one({'name':story})
+    if res:
+        return res['lines']
+
+def add_line(story,line):
+    res = collection.find_one({'name':story})
+    #lines = res['lines']
+    print res#['lines']
+    #lines.append(line)
+    #collection.update({'name':story},{ '$set': {'lines':lines} })
 
 #test
 if __name__ == "__main__":
+    story = 'There once was a'
     start()
-    global collection
-    collectino = db['There once was a']
-    collection.drop()
+    for line in db.collection.find(): print line
+    #print db.collection_names()
     #add_story('There once was a')
-    #print get_story('There once was a')
+    #add_line(story,'Man named Fred')
+    #print get_story(story)
