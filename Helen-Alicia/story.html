@@ -1,0 +1,9 @@
+{% extends 'default.html' %}
+{% block title %}Story{% endblock %}
+{% block body %}
+    <p> {% previous %}
+    <form action="" method="POST">
+        <p>Next Line: <input type=text name=newLine>
+        <p><input type=submit value=new>
+    </form>
+{% endblock body %}
