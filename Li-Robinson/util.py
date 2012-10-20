@@ -32,14 +32,26 @@ def add_line(story,line):
         lines.append(line)
         collection.update({'name':story},{ '$set': {'lines':lines} })
 
+def del_story(story):
+    db = conn['Li-Robinson-mp1']
+    collection = db['stories']
+    res = collection.find()
+    todel = []
+    for line in res:
+        if line['name'] == story:
+            todel.append({"_id":line['_id']})
+    for item in todel:
+        collection.remove(item)
+
 #test
 if __name__ == "__main__":
-    story = 'Once upon a time'
+    #story = 'Once upon a time'
     auth()
     db = conn['Li-Robinson-mp1']
     collection = db['stories']
     #add_story(story)
     #add_line(story,'In a land far far away')
+    #del_story('There once was a')
     print db.collection_names()
     for line in collection.find(): print line
     print "done"
