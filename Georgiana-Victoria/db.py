@@ -10,7 +10,7 @@ db = Connection['Georgiana-Victoria']
 
 stories=db.story_collection
 titles=[]
-def add_story(title="Example", line="a"):
+def add_story(title, line):
     if not title in titles:
         titles.append(str(title))
         lines=[str(line)]
