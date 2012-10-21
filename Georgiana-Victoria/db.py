@@ -18,13 +18,42 @@ def add_story(title, line):
         stories.insert(story)
     else:
         stories.update({'title':str(title)}, {"$push": {'lines':str(line)} } )
+
 def getTitles():
+    res = stories.find()
+    titles = []
+    for line in res:
+        titles.append(line['title'])
     return titles
-#res = stories.find()
-#for line in res:
-#    print line
+
+
+def remove_story(title):
+    res = stories.find()
+    todelete = []
+    for line in res:
+        print 'In remove'
+        print line
+        if line['title'] == title:
+            stories.remove(line)
+
+def getAll():
+    res = stories.find()
+    for line in res:
+        print line
+
+
 
 def test():
     add_story('Example', 'a')
+
+
 test()
 print getTitles()
+getAll()
+print 'After test'
+remove_story('Example')
+print 'After remove'
+getAll()
+print getTitles()
+getAll()
+#print getLines()
