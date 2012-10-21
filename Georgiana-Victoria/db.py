@@ -9,38 +9,57 @@ res=db.authenticate('ml7','ml7')
 db = Connection['Georgiana-Victoria']
 
 stories=db.story_collection
-titles=[]
-<<<<<<< HEAD
 
 def add_line(title="Example", line="a"):
-    if not title in getTitles():
+    if isTitle(title)<1:
         add_story(title)
     else:
         stories.update({'title':str(title)}, {"$push": {'lines':str(line)} } )
 
 def add_story(title="Example"):
-    if not title in getTitles():
-=======
-def add_story(title, line):
-    if not title in titles:
->>>>>>> 8b222c627efe6058a2c412f2686f51852ea4ac9b
-        titles.append(str(title))
-        lines=[str(line)]
-        story={'title':str(title),'lines':str(lines)}
+    if isTitle(title)<1:
+        story={"title":str(title),'lines':[]}
         stories.insert(story)
+    else:
+        pass
+
+def isTitle(title="Example"):
+    return stories.find({'title':str(title)}).count()
 
 def getTitles():
+    res = stories.find()
+    titles = []
+    for line in res:
+        titles.append(line['title'])
     return titles
 
-#res = stories.find()
-#for line in res:
-#    print line
-<<<<<<< HEAD
-#print getTitles()
-=======
 
+def remove_story(title):
+    res = stories.find()
+    todelete = []
+    for line in res:
+        print 'In remove'
+        print line
+        if line['title'] == title:
+            stories.remove(line)
+
+def getAll():
+    res = stories.find()
+    for line in res:
+        print line
+
+
+#stories.drop()
 def test():
-    add_story('Example', 'a')
+    add_story('Example')
+    #add_line('Example','a')
 test()
+getAll()
+print 'After test'
+remove_story('Example')
+print 'After remove'
+getAll()
 print getTitles()
->>>>>>> 8b222c627efe6058a2c412f2686f51852ea4ac9b
+getAll()
+#print getLines()
+
