@@ -1,17 +1,27 @@
 from pymongo import Connection
 
-Connection = Connection('mongo.stuycs.org')
+global connection, db, res, collection 
 
-# to auth
-db = Connection.admin
-res = db.authenticate('ml7', 'ml7')
 
-# connect to your own database
-db = Connection['z-pd6']
-collection = db['HA']
+def auth():
+    global connection, db, res, collection    
+    connection = Connection('mongo.stuycs.org')
+
+    db = connection.admin
+    res = db.authenticate('ml7', 'ml7')
+
+    db = connection['z-pd6']
+    collection = db['HA']
+
+# adds a story title
+def add_title(title, line):    
+    global collection
+    collection.insert({'title': title, 'lines': [line]})
+    print collection.find_one({'title': title})['lines'][0].encode('utf8')
 
 # get a list of all the story titles
 def get_titles():
+    global collection
     title_lines = collection.find()
     titles = []
     for line in title_lines:
@@ -22,6 +32,7 @@ def get_titles():
 
 # get all lines of a story
 def get_lines(title):
+    global collection
     lines = collection.find_one({'title': title})['lines']
     for line in lines:
         print line
@@ -31,11 +42,15 @@ def get_lines(title):
 
 
 # testing
-collection.insert({'title': 'story1', 'lines': ['S1L1', 'S1L2']}) 
-collection.insert({'title': 'story2', 'lines': ['S2L2', 'S2L2']})
+auth()
+
+add_title('story1', 'line1') 
+add_title('story2', 'line2')
 
 get_titles()
-get_lines("story1")
+
+get_lines('story1')
+get_lines('story2')
 
    #add more tests here
 
