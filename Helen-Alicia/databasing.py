@@ -42,7 +42,9 @@ def get_lines(title):
 def add_line(title, line):
   lines1 = get_lines(title)
   lines1.append(line)
-  collection.update({'title': title}, {'lines': lines1})
+  print lines1
+
+#  collection.update({'title': title}, {'lines': lines1})
   
 
 # collection.find_one({'title': title})['lines'].append(line)
