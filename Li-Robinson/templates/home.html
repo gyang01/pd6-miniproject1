@@ -1,0 +1,25 @@
+{% extends 'default.html' %}
+{% block head %}
+    {{ super() }}
+{% endblock head %}
+{% block body %}
+
+<form action="" method="POST">
+  <h1>The Storyinator<h1>
+
+<form id="story_menu" action="" method="POST">
+<select name="story_menu">
+<option value="/story"></option>
+</select>
+
+<input type="submit" value="Go">
+
+<p>New Story: <input type="text" name="new_story">
+<p><input type="submit" name="button" value="Create">
+
+</form>
+
+
+{% endblock body %}
+
+
