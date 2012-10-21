@@ -6,11 +6,13 @@ db = Connection['SoTe-pd6']
 storycontent = ''
 
 def addstory(story):
-    db.stories.save({story:['string']})
-
+    db.stories.save({'story':['string']})
+    
 def addcontent(story, line):
-    #collection.find_one({story})
-    #db.stories.storycontent = db.stories.storycontent + '\n' +line
+    for line in res:
+        if line['story'] == story
+            line['string'] = line['string' + line]
+    
 
 addstory('the worst thing ever invented')
 addstory('i dont know really')
