@@ -1,0 +1,10 @@
+{% extends 'default.html' %}
+{% block title %}Home{% endblock %}
+{% block body %}
+<p>Started Stories:
+    <form id="story_menu" action="" method="POST">
+      < select name = "story_menu">
+      {% for story in stories%}
+	<p><input type=submit value=thisStory>
+    </form>
+{% endblock body %}

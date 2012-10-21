@@ -15,3 +15,4 @@ Helen Nie and Alicia Vargas-Morawetz
 
    * default.html
    * story.html
+   * homepage.html
