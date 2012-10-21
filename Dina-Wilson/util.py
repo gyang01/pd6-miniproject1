@@ -17,13 +17,24 @@ def auth():
 
 def addStory(title):
     global col
-    col.insert({'title': title, 'lines':[]})
-    print col.find_one() #test
+    col.insert({'title': title, 'lines':[title]})
 
+def addLine(title, line):
+    global col
+    res = col.find_one({'title': title})
+    if res:
+        storyLines = res['lines']
+        storyLines.append(line)
+        col.update({'title': title}, {'title': title, 'lines': storyLines})
+    
 
 def test():
     auth()
     addStory('hi')
+    print col.find_one()
+    addLine('hi', 'I like cheese')
+    res=col.find_one({'title': 'hi'})
+    print res['lines']
     col.drop()
 
 test()
