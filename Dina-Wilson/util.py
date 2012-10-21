@@ -15,4 +15,15 @@ def auth():
     db = connection['z-pd6']
     col = db['DLWS']
 
-def 
+def addStory(title):
+    global col
+    col.insert({'title': title, 'lines':[]})
+    print col.find_one() #test
+
+
+def test():
+    auth()
+    addStory('hi')
+    col.drop()
+
+test()
