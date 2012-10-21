@@ -8,6 +8,11 @@ pd6-miniproject1
 <b>util.py</b>
 <p>this will have the database stuff inside (using mongoDB)
 methods:
+	* auth() -->authenticate the connection and make the collection/connect to the collection
+	* addStory(title) --->makes new story called title
+	* addLine(title, line) --->adds line to a story called title
+	* getStory(title) --->returns the story called title
+	* getAllStories() --->returns all stories
 
 </p>
 
