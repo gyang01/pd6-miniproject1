@@ -43,6 +43,14 @@ def remove_story(title):
         if line['title'] == title:
             stories.remove(line)
 
+def getLines(title):
+    res = stories.find()
+    lines = []
+    for line in res:
+        if line['title'] == title:
+            lines.append(line['lines'])
+    return lines
+
 def getAll():
     res = stories.find()
     for line in res:
@@ -52,10 +60,15 @@ def getAll():
 #stories.drop()
 def test():
     add_story('Example')
-    #add_line('Example','a')
+    add_line('Example','a')
+    add_line('Example','b')
+    add_story('Example')
+    add_story('Second Example')
 test()
-getAll()
+#getAll()
 print 'After test'
+print getLines('Example')
+print 'After get lines'
 remove_story('Example')
 print 'After remove'
 getAll()
