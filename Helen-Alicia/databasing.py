@@ -39,10 +39,10 @@ def get_lines(title):
     return lines
 
 # insert a new line into a story
-def add_line(table, title, newLine):
+def add_line(title, line):
     global collection
-    collection = table.find_one({'title': title})
-    collection.save({line: newLine});
+    collection = get_lines(title)
+    collection.insert({'title': title, 'lines': [line]});
 
 # testing
 auth()
@@ -55,7 +55,10 @@ get_titles()
 get_lines('story1')
 get_lines('story2')
 
+add_line('story2', 'line3')
+get_lines('story2')
    #add more tests here
+
 
 collection.drop()
 
