@@ -13,6 +13,8 @@ methods:
 	* addLine(title, line) --->adds line to a story called title
 	* getStory(title) --->returns the story called title
 	* getAllStories() --->returns all stories
+	* getStoryLines(title) -----> returns the lines of the story
+	* getAllStoryLines() ---->returns all the lines of all stories
 
 </p>
 
