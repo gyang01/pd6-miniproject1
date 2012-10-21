@@ -23,4 +23,8 @@ def getTitles():
 #res = stories.find()
 #for line in res:
 #    print line
+
+def test():
+    add_story('Example', 'a')
+test()
 print getTitles()
