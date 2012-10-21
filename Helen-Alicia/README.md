@@ -1,4 +1,4 @@
-**pd6-miniproject1**
+<h1>pd6-miniproject1<h1>
 
 Helen Nie and Alicia Vargas-Morawetz
 
