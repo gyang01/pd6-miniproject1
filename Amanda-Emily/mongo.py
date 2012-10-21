@@ -45,3 +45,4 @@ if __name__ == "__main__":
   getStory('There was once a sad puppy named Biscuit')
   addstory('Once upon a time there was')
   print getAllTitles()
+  collection.drop()
