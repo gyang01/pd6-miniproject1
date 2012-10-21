@@ -40,7 +40,6 @@ def get_lines(title):
 
 # insert a new line into a story
 def add_line(title, line):
-    global collection
     collection = get_lines(title)
     collection.insert({'title': title, 'lines': [line]});
 
