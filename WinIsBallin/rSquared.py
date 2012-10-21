@@ -11,14 +11,15 @@ AUTHENTICAAAATion = db.authenticate('ml7','ml7')
 db = conn['z-pd6']
 
 #Our storybook <3
-col = db.WinBalls_StoryBook
+col = db["WinBall's StoryBook"]
 
-def newStory():
-    db.WinBalls_StoryBook.save({'name': 5}) 
+def newStory(name):
+    col.save({'name': name, 'lines': 0}) 
 
-
+newStory("Hello World!")
 test = 5
 
-newStory()
+for line in col.find():
+    print line
 
-print conn.cursor()
+col.drop()
