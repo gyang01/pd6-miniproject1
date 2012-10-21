@@ -29,6 +29,7 @@ def isTitle(title="Example"):
 #stories.drop()
 def test():
     add_story('Example')
+    #add_line('Example','a')
 test()
 res = stories.find()
 for line in res:
