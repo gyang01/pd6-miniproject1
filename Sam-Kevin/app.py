@@ -1,26 +1,25 @@
 from pymongo import *
 
-global connection, db, res, col
+global connection, db, res, collection
 
-def auth():
-     global connection, db, res, col   
+def connect():
+     global connection, db, res, collection   
      
      connection = Connection('mongo.stuycs.org')
      db = connection.admin
      res = db.authenticate('ml7', 'ml7')
      db = connection['z-pd6']
-     col = db['sk']
+     collection = db['sk']
 
 #    New story
 def addStory(title, line):    
-     global col
-     col.insert({'title': title, 'text': [line]})
-     print col.find_one({'title': title})['text'][0].encode('utf8')
+     global collection
+     collection.insert({'title': title, 'text': [line]})
 
 #    Returns a list of stories
 def getStories():
-     global col
-     text = col.find()
+     global collection
+     text = collection.find()
      stories = []
      for line in text:
           story = line['title'].encode('utf8')
@@ -30,8 +29,8 @@ def getStories():
 
 #    Returns the text of a story
 def getText(story):
-     global col
-     text = col.find_one({'title': story})['text']
+     global collection
+     text = collection.find_one({'title': story})['text']
      for line in text:
           print line
      return text
@@ -40,7 +39,13 @@ def getText(story):
 def addLine(story, line):
      text = getText(story)
      text.append(line)
-     print text
-     col.update({'title': story}, {'text': text})
+     collection.update({'title': story}, {'text': text})
      
-col.drop()
+connect()
+addStory('Story1','Sam eats an apple.')
+addStory('Story2','The apple eats Sam.')
+addLine('Story2','He was delicious.')
+getStories()
+getText('Story1')
+getText('Story2')
+collection.drop()
