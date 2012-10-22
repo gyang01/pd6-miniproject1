@@ -39,7 +39,14 @@ def get_lines(title):
     return lines
 
 # insert a new line into a story
+def add_line(title, line):
+  lines1 = get_lines(title)
+  lines1.append(line)
+  print lines1
+  collection.update({'title': title}, {'lines': lines1})
+  
 
+# collection.find_one({'title': title})['lines'].append(line)
 
 # testing
 auth()
@@ -52,7 +59,10 @@ get_titles()
 get_lines('story1')
 get_lines('story2')
 
+add_line('story2', 'line3')
+get_lines('story2')
    #add more tests here
+
 
 collection.drop()
 
