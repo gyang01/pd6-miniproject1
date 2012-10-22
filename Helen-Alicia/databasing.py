@@ -17,14 +17,14 @@ def auth():
 def add_title(title, line):    
     global collection
     collection.insert({'title': title, 'lines': [line]})
-    print collection.find_one({'title': title})['lines'][0].encode('utf8')
+    print collection.find_one({'title': title})['title'].encode('utf8') + ' - ' + collection.find_one({'title': title})['lines'][0].encode('utf8')
 
 # get a list of all the story titles
 def get_titles():
     global collection
-    title_lines = collection.find()
+    lines = collection.find()
     titles = []
-    for line in title_lines:
+    for line in lines:
         title = line['title'].encode('utf8')
         titles.append(title)
     print titles
@@ -33,36 +33,37 @@ def get_titles():
 # get all lines of a story
 def get_lines(title):
     global collection
-    lines = collection.find_one({'title': title})['lines']
-    for line in lines:
-        print line
+    uLines = collection.find_one({'title': title})['lines']
+    lines = []
+    for uLine in uLines:
+        line = uLine.encode('utf8')
+        lines.append(line)
+    print lines
     return lines
 
 # insert a new line into a story
 def add_line(title, line):
-  lines1 = get_lines(title)
+  lines1 = collection.find_one({'title': title})['lines']
   lines1.append(line)
-  print lines1
-  collection.update({'title': title}, {'lines': lines1})
-  
-
-# collection.find_one({'title': title})['lines'].append(line)
+  collection.update({'title': title}, {'title': title, 'lines': lines1})
+  print 'added new line to ' + title
 
 # testing
 auth()
 
-add_title('story1', 'line1') 
-add_title('story2', 'line2')
+add_title('story1', 'S1L1') 
+add_title('story2', 'S2L1')
 
 get_titles()
 
 get_lines('story1')
 get_lines('story2')
 
-add_line('story2', 'line3')
-get_lines('story2')
-   #add more tests here
+add_line('story1', 'S1L2')
+add_line('story2', 'S2L2')
 
+get_lines('story1')
+get_lines('story2')
 
 collection.drop()
 
