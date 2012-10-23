@@ -10,7 +10,8 @@ def beg():
 
 def addstory(name):
   global collection
-  collection.insert( {'name': name, 'body': [name] } ) 
+  db = Connection['AmandaEmily']
+  collection.insert( {'name': name, 'body':[] } ) 
   
 
 def getStory(title):
@@ -18,7 +19,7 @@ def getStory(title):
   res = collection.find()
   for x in res:
     if (str(x['name'])) == title:
-      Storytext.append(x)
+      Storytext.append(str(x['body']))
   print Storytext
   
 
@@ -29,19 +30,19 @@ def getAllTitles():
     allTitles.append(str(x['name']))
   print allTitles
 
-def addLine(title, line):
+def addLine(name, line):
   global collection
-  res = collection.find_one({'name': title})
+  res = collection.find_one({'name':name})
   if res:
     newlines=res['body']
     newlines.append(line)
-    collection.update({'name': name},{'name': name, 'body':[newlines]}) #not sure about this
+    collection.update({'name':name},{'name':name, 'body':[newlines]}) 
 if __name__ == "__main__":
   beg()
   db = Connection['AmandaEmily']
   collection = db['stories']
   addstory('There was once a sad puppy named Biscuit')
-  #addLine('There was once a sad puppy named Biscuit', 'who loved to read')
+  addLine('There was once a sad puppy named Biscuit', 'who loved to read')
   getStory('There was once a sad puppy named Biscuit')
   addstory('Once upon a time there was')
   print getAllTitles()

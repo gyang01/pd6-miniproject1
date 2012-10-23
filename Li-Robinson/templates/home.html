@@ -1,18 +1,22 @@
 {% extends 'default.html' %}
 {% block head %}
     {{ super() }}
+<style>
+</style>
 {% endblock head %}
+
 {% block body %}
 
-<form action="" method="POST">
   <h1>The Storyinator<h1>
 
-<form id="story_menu" action="" method="POST">
+<form action="" method="POST">
 <select name="story_menu">
-<option value="/story"></option>
+{% for t in title %}
+<option value="{{t}}">{{t}}</option>
+{% endfor %}
 </select>
 
-<input type="submit" value="Go">
+<input type="submit" name="button" value="Go">
 
 <p>New Story: <input type="text" name="new_story">
 <p><input type="submit" name="button" value="Create">
