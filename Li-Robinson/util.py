@@ -13,7 +13,7 @@ def start(): #or init
 def add_story(storystart):
     db = conn['Li-Robinson-mp1']
     collection = db['stories']
-    #if collection.find({'name':storystart}) == None: #try to check if the story exists
+    #if len(collection.find({'name':storystart})) == None: #try to check if the story exists
     collection.insert({'name':storystart, 'lines':[storystart]}) #first line of story is story title, and its key is its title; its lines are a list
 
 def get_story(story):
@@ -53,6 +53,11 @@ def get_story_titles():
         if name not in titles:
             titles.append(name)
     return titles
+
+def get_lines(story):
+    db = conn['Li-Robinson-mp1']
+    collection = db['stories']
+    return collection.find_one({'name':story})['lines']
 
 #test
 if __name__ == "__main__":

@@ -1,11 +1,13 @@
 from pymongo import Connection
 
-Connection = Connection('mongo.stuycs.org')
-
-db = Connection.admin
-res = db.authenticate('ml7', 'ml7')
-
-db = Connection['z-pd6']
+def startConnection() :
+    connection = Connection('mongo.stuycs.org')
+    
+    db = connection.admin
+    res = db.authenticate('ml7', 'ml7')
+    
+    db = connection['z-pd6']
+    return db
 
 #Functions needed:
 #-Get the stories list
@@ -13,77 +15,99 @@ db = Connection['z-pd6']
 #-Add new line to current story
 #-Make new story
 
-def getStories() :
+def getStories(db) :
     """
     Returns the names of all the stories.
     """
-    stories = db.mack.find()
+    stories = db.find()
     s = []
     for story in stories:
-        s.append(story['name'])
+        s.append(str(story['name']))
     return s
 
-def getStory(name) :
+def getStory(db, name) :
     """
     Returns the lines of the story with name name, if possible.
     """
-    story = db.mack.find_one({'name': name})
+    story = db.find_one({'name': name})
     if(story) :
-        return story['lines']
+        s = []
+        for line in story['lines']:
+            s.append(str(line))
+        return s
     else:
         return 'This story does not exist. How are you even seeing this?'
 
-def addLine(story, l) :
+def addLine(db, story, l) :
     """
     Adds a line l to the story story.
     """
-    db.mack.update({'name': story}, {'$push': {'lines': l}})
+    db.update({'name': story}, {'$push': {'lines': l}})
 
-def addStory(name) :
+def addStory(db, name) :
     """
     Adds a story with the name name to db as long as there isn't one with the
     same name there already.
     """
-    if(not db.mack.find_one('name': name)) :
+    if(db.find_one({'name': name})) :
         return 'There is already a story with that name. Pick a different one.'
     else :
-        db.mack.save({'name': name, 'lines': []})
+        db.save({'name': name, 'lines': []})
 
-def removeStory(name):
+def removeStory(db, name):
     # removes a specific story
-    db.mack.remove({'name': name})
+    db.remove({'name': name})
 
-def removeAll():
+def removeAll(db):
     # removes everything
-    db.mack.remove()
+    db.remove()
 
-def clearStory(name):
+def clearStory(db, name):
     #deletes all lines in a story
-    db.mack.update({'name': name}, {'$set': {'lines': []}})  
+    db.update({'name': name}, {'$set': {'lines': []}})
 
-def removeLastLine(name):
+def removeLastLine(db, name):
     #removes the last line in the story
-     story = db.mack.find_one({'name': name})
-     lines = []
+    story = db.find_one({'name': name})
+    lines = []
     if(story) :
-        lines =  story['lines']
+        lines = story['lines']
     lines.pop()
-    db.mack.update({'name': name), {'$set': {'lines': lines}})
+    db.update({'name': name}, {'$set': {'lines': lines}})
 
-def removeLine(name, index):
+def removeLine(db, name, index):
     # removes line at index
-     story = db.mack.find_one({'name': name})
-     lines = []
+    story = db.find_one({'name': name})
+    lines = []
     if(story) :
-        lines =  story['lines']
+        lines = story['lines']
     lines.pop(index)
-    db.mack.update({'name': name), {'$set': {'lines': lines}})    
+    db.update({'name': name}, {'$set': {'lines': lines}})
 
-def addLineAt(name, line, index):
+def addLineAt(db, name, line, index):
     #adds a line at index
-     story = db.mack.find_one({'name': name})
-     lines = []
+    story = db.find_one({'name': name})
+    lines = []
     if(story) :
-        lines =  story['lines']
+        lines = story['lines']
     lines.insert(index, line)
-    db.mack.update({'name': name), {'$set': {'lines': lines}}) 
+    db.update({'name': name}, {'$set': {'lines': lines}})
+
+#main method
+if __name__ == '__main__' :
+    db = startConnection()
+    try:
+        db.create_collection('mack')
+    except:
+        pass
+    mack = db.mack
+    storyname = 'The Tale of How Bad Development for SwordQuest 2 Was Going'
+    addStory(mack, storyname)
+    addLine(mack, storyname, 'Beginning of May')
+    addLine(mack, storyname, 'This is going great, we\'ll totally finish!')
+    addStory(mack, 'Goblins and Orcs Yay')
+    print getStory(mack, storyname)
+    print getStories(mack)
+    clearStory(mack, storyname)
+    removeAll(mack)
+    print getStories(mack)
