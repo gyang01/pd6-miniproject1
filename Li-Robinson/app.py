@@ -14,7 +14,9 @@ def home():
         button = request.form["button"]
         if button == "Go":
             storyname = str(request.form["story_menu"])
-            return redirect(url_for(story(storyname))) #not sure this will work 
+            #print storyname #the above does indeed work
+            #return redirect(url_for(story(storyname))) #not sure this will work 
+            return render_template("home.html",titles=util.get_story_titles())
         elif button == "Create":
             storyname = request.form["new_story"]
             util.add_story(storyname)
