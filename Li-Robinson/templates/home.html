@@ -2,7 +2,6 @@
 {% block head %}
     {{ super() }}
 <style>
-h1{}
 </style>
 {% endblock head %}
 
@@ -10,11 +9,14 @@ h1{}
 
   <h1>The Storyinator<h1>
 
-<form id="story_menu" action="" method="POST">
+<form action="" method="POST">
 <select name="story_menu">
-{% if titles %}
+{% if titles <style>
+h1{}
+</style>%}
 {% for t in title %}
-<option value="{{t}}" name></option>
+<option value="{{t}}">{{t}}</option>
+<br>
 {% endfor %}
 {% endif %}
 </select>
