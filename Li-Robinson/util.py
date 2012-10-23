@@ -51,7 +51,7 @@ def get_story_titles():
     for line in res:
         name = line['name']
         if name not in titles:
-            titles.append(name)
+            titles.append(str(name))
     return titles
 
 def get_lines(story):
