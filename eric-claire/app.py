@@ -1,12 +1,17 @@
 from flask import Flask, render_template
+from flask import request
 import database
 
 app = Flask(__name__)
 
 @app.route("/",methods=["GET", "POST"])
 def home():
-    return render_template("home.html,title=title")
+    if request.method == "GET":
+        database.connect()
+        titles = database.list_stories()
+        return render_template("home.html",titles=titles)
 
-@app.route("/story",methods=["GET", "POST"])
-def story():
-    return redner_template("display
+
+if __name__ == "__main__":
+    app.debug=True
+    app.run()
