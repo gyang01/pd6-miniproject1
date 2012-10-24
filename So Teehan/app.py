@@ -13,12 +13,12 @@ def home():
 	stories = []
 
 	for valjean in db.stories.findone():
-        stories.append(valjean['story'])
+         stories.append(valjean['story'])
 
         button = request.form["button"]
 
-        if button = "create"
-            storinator.addstory(str(request.form["storyname"]))
+        if button == "create":
+         storinator.addstory(str(request.form["storyname"]))
 
-        if button = "go"
+        if button == "go":
             return render_template("storypage.html")
