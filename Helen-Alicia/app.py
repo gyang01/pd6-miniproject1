@@ -8,22 +8,21 @@ import unicodedata
 import databasing
 
 app = Flask(__name__)
-app.secret_key = 'some_secret'
 
-auth = databasing.auth()
-
-allTitles = databasing.get_titles()
+allTitles = []
 currTitle = ''
 currLines = []
 
 @app.route("/", methods=['GET', 'POST'])
 def homepage():
+    databasing.auth()
     global allTitles, currTitle, currLines
     if request.method=="GET":
+        allTitles = databasing.get_titles()
         return render_template("homepage.html", allTitles=allTitles)
     else:
-        story = request.form['story']
-        newStory = request.form['newStory']
+        story = str(request.form['story'])
+        newStory = str(request.form['newStory'])
 
         button=request.form['button']
         if button=='go':
@@ -43,24 +42,23 @@ def homepage():
                 databasing.add_title(story)
                 currTitle = story
                 currLines = databasing.get_lines(story)
-                return redirect(url_for('story'))
+                return redirect(url_for('addPage'))
 
 @app.route("/story", methods=['GET', 'POST'])
-def story():
+def addPage():
     global allTitles, currTitle, currLines
-    currTitle = currTitle.encode('utf8')
     if request.method=="GET":
-        return render_template("story.html", currTitle=currTitle, currLines=currLines)
+        return render_template("addPage.html", currTitle=currTitle, currLines=currLines)
     else:
         newLine = request.form['newLine']
         button = request.form['button']
         if button=='new':
             if not newLine:
                 flash('Please enter a new line!')
-                return redirect(url_for('story'))
+                return redirect(url_for('addPage'))
             else:               
                 databasing.add_line(currStory, newLine)
-                return redirect(url_for('story'))
+                return redirect(url_for('addPage'))
         elif button=='back':
             return redirect(url_for('homepage'))
 
