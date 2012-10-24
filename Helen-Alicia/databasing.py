@@ -14,10 +14,11 @@ def auth():
     collection = db['HA']
 
 # adds a story title
-def add_title(title, line):    
+def add_title(title):    
     global collection
-    collection.insert({'title': title, 'lines': [line]})
-    print collection.find_one({'title': title})['title'].encode('utf8') + ' - ' + collection.find_one({'title': title})['lines'][0].encode('utf8')
+    collection.insert({'title': title, 'lines': []})
+    print collection.find_one({'title': title})['title'].encode('utf8')
+    return 0
 
 # get a list of all the story titles
 def get_titles():
@@ -43,27 +44,33 @@ def get_lines(title):
 
 # insert a new line into a story
 def add_line(title, line):
-  lines1 = collection.find_one({'title': title})['lines']
-  lines1.append(line)
-  collection.update({'title': title}, {'title': title, 'lines': lines1})
-  print 'added new line to ' + title
+    global collection
+    lines1 = collection.find_one({'title': title})['lines']
+    lines1.append(line)
+    collection.update({'title': title}, {'title': title, 'lines': lines1})
+    print 'added new line to ' + title
+    
+# drop all titles
+def drop_all_titles():
+    global collection
+    collection.drop()
 
 # testing
-auth()
+#auth()
 
-add_title('story1', 'S1L1') 
-add_title('story2', 'S2L1')
+#add_title('story1') 
+#add_title('story2')
 
-get_titles()
+#get_titles()
 
-get_lines('story1')
-get_lines('story2')
+#get_lines('story1')
+#get_lines('story2')
 
-add_line('story1', 'S1L2')
-add_line('story2', 'S2L2')
+#add_line('story1', 'S1L1')
+#add_line('story2', 'S2L1')
 
-get_lines('story1')
-get_lines('story2')
+#get_lines('story1')
+#get_lines('story2')
 
-collection.drop()
+#drop_all_titles()
 
