@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home</title>
+</head>
+<body>
+<h1>
+Storinator
+</h1>
+<br>
+<h2>
+By Daniel Teehan and Patrick So
+</h2>
+<form name="input" action="" method="POST">
+<br>
+New Story Name
+<br>
+<input type="text" name="storyname">
+<button type="submit" name="create">Create</button>
+<br>
+Choose a story
+<br>
+<select>
+{% for valjean in stories %}
+	<option>{{valjean}}</option>
+	
+</select>
+<br>
+<button type="submit" name="go">Go</button>
+<input type="reset">
+</body>
+</html>
