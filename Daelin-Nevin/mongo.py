@@ -13,42 +13,31 @@ def startup():
 	db = con.admin
 	global res
 	res = db.authenticate("ml7","ml7")
-	db = con["z-pd6"]
+	db = con["DaNe"]
 	global col
-	col = db["DaNe"]
+	col = db["DaNestories"]
 	res = col.find()
 
 def addstory(name):
 	global col
-	res = col.find()
+	res = col.find({"name":name})
 	for entry in res:
-		if entry["name"] == name:
-			return
+		return
 	story = {"name": name, "line":"0", "text":name}
 	col.insert(story)
 
 def addline(story, line):
 	global col
-	res = col.find()
+	res = col.find({"name":story})
 	ln = 0
 	for entry in res:
-		if entry["name"] == story:
-			ln+= 1
+		ln+= 1
 	newline = {"name":story, "line":str(ln), "text":line}
 	col.insert(newline)
 
 def get_story(story):
-	res = col.find()
-	ret = []
-	for entry in res:
-		if entry["name"] == story:
-			ret.append(entry)
-	return ret
+	res = col.find({"name":story})
+	return res
 
 def get_stories():
-	res = col.find()
-	ret = [];
-	for entry in ret:
-		if entry["line"] == "0":
-			ret.append(entry)
-	return ret
+	return col.find({"line":"0"})
