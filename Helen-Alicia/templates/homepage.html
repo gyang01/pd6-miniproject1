@@ -1,41 +1,49 @@
-<!DOCTYPE html>
+<!doctype HTML>
+
+<html lang="en">
+
 <html>
   <head>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />     
   </head>
 
   <body>
 
-  <h1>Storinator</h1>
+  <h1>Storyinator</h1>
 
-  <form action="" method="POST">
-    <select name="stories" name="stories">
-      {% for story in stories %}
-      <option value=story>story</option>
+  <form action="" method="post">
+    <select name="stories">
+      {% for story in allTitles %}
+      <option value="story">story</option>
       {% endfor %}
-      </select>
+    </select>
+    
     <br>
-    <input type=submit name=button value="go"></input>
+
+    <input type="submit" name="button" value="go"></input>
 
     <br><br>
-    New Story: <input type=text name="newStory"></input>
-    <br>
-    <input type=submit name=button value="create"></input>
-e="stories">
-      {% for story in stories %}
-      <option value=story>story</option>
-      {% endfor %}
-      </select>
-    <br>
-    <input type=submit name=button value="go"></input>
 
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    
     <br><br>
-    New Story: <input type=text name="newStory"></input>
+
+    New Story: <input type="text" name="newStory"></input>
     <br>
-    <input type=submit name=button value="create"></input>
+
+    <input type="submit" name="button" value="create"></input>
+
     <br>
   </form>
-
+  
   </body>
 
 </html>

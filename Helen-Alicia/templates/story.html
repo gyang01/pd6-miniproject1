@@ -1,21 +1,37 @@
-<!DOCTYPE html>
+<!doctype HTML>
+
+<html lang="en">
+
 <html>
   <head>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
   </head>
 
   <body>
 
-  <h1>{% Story %}</h1>
+  <h1>{{ currTitle }}</h1>
 
-  {% for line in story %}
-  <p>line
-    {% endfor %}
+  {% for line in currLines %}
+  <p>{{ line }}</p>
+  {% endfor %}
 
-    <form action="" method="POST">
-        <p>Next Line: <input type=text name=newLine>
-        <p><input type=submit value=new>
-    </form>
+  <form action="" method="post">
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    
+    <p>Next Line: <input type="text" name="newLine">
+    <p><input type="submit" value="new" name="new">
+    <p><input type="submit" value="back" name="back">
+      
+  </form>
 
   </body>
 
