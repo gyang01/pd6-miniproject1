@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route("/",methods=['GET','POST'])
 def home():
     if request.method=="GET":
-        return render_template("webage.html")
+        return render_template("home.html")
     else:
         button=request.form['button']
         if button=='Create!':
@@ -19,7 +19,7 @@ def home():
         elif:
             if button=='Read!':
                 otitle=request.form['otitle']
-                resp=make_response(render_template("webpage.html"))
+                resp=make_response(render_template("home.html"))
                 resp.set_cookie('title', otitle)
                 return redirect(url_for(story))
             return redirect(url_for(home))
