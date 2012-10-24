@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<form action="" method="post">
+  <html lang="en">
+    <head>
+      <BODY bgcolor= "#FF9191">
+	<meta>
+    </head>
+    <body>
+      <p>
+	<center><a href="http://imgur.com/hlEaC"><img src="http://i.imgur.com/hlEaC.gif" alt=""/></a></center>
+      <p style="text-align: left;">
+	<font size="" face="Georgia">Experience a new way to tell stories with <b>Storyinator 2.0</b>!
+	  <p>
+	    Begin by selecting a story below or creating a new one!
+	    <br>
+</br>
+<font size="+2">
+  Select a <b>STORY</b>
+  <p>
+    <select name="otitle">
+      {% for item in titles %}
+      <option value = "{{item}}">{{item}}</option>
+      {% endfor %}
+    </select>
+    <form>
+      <input value="Read!" name="button" type="submit">
+    </form>
+    <br>
+</br>
+Create a <b>STORY</b>
+<form>
+  <p>
+    <input name="ntitle" type="text" >
+    <input value="Create!" name="button"  type="submit">
+</form>
+</font>
+    </body>
+  </html>
+  
