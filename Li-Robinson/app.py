@@ -15,8 +15,9 @@ def home():
         if button == "Go":
             storyname = str(request.form["story_menu"])
             #print storyname #the above does indeed work
-            #return redirect(url_for(story(storyname))) #not sure this will work 
-            return render_template("home.html",titles=util.get_story_titles())
+            lines = util.get_lines(storyname)
+            return render_template("home.html",storyname,lines)
+        
         elif button == "Create":
             storyname = request.form["new_story"]
             util.add_story(storyname)
@@ -24,13 +25,17 @@ def home():
             return render_template("home.html",titles=titles)
             #return redirect(url_for(home)) #no this should NOT be a redirect
 
-@app.route("/story",methods=['GET','POST'])
-def story(storyname):
-    util.auth()
-    if request.method == 'GET':
-        pass
-    else:
-        pass
+        else: # button is a story name
+            storyname = button
+            newline = request.form["next_line"]
+
+#@app.route("/story",methods=['GET','POST'])
+#def story(storyname):
+#    util.auth()
+#    if request.method == 'GET':
+#        pass
+#    else:
+#        pass
 
 
 if __name__ == "__main__":

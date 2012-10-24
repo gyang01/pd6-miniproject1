@@ -10,6 +10,7 @@
   <h1>The Storyinator<h1>
 
 <form action="" method="POST">
+{% if titles %}
 <select name="story_menu">
 {% for t in titles %}
 <option value="{{t}}">{{t}}</option>
@@ -20,6 +21,21 @@
 
 <p>New Story: <input type="text" name="new_story">
 <p><input type="submit" name="button" value="Create">
+{% endif %}
+
+{% if lines %}
+
+<b>{{ storyname }}</b>
+
+{% for line in lines %}
+<p> {{ line }} </p>
+<p>
+{% endfor %}
+
+<p>Next line: <input type="text" name="next_line">
+<p><input type="submit" name="button" value="{{ storyname }}">
+
+{% endif %}
 
 </form>
 
