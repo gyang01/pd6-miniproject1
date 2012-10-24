@@ -26,6 +26,10 @@ def story_page(story):
         db.add_line(story, request.form["add_line_field"])
     return render_template("story.html", lines=db.get_lines(story))
 
+@app.route("/drop/stories")
+def drop_page():
+    db.drop_stories()
+    return redirect(url_for("index"))
 
 if __name__ == "__main__":
     app.run()
