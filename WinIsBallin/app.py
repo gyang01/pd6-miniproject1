@@ -8,11 +8,11 @@ app = Flask(__name__)
 
 
 
-@app.route("/")
+@app.route("/", methods = ['GET', 'POST'])
 def home():
-    if requst.method == "GET":
+    if request.method == "GET":
         return render_template('home.html', stuff="stuff")
-
+    
 if __name__ == '__main__':
     app.run()
     app.debug = True
