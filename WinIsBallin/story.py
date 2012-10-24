@@ -65,5 +65,5 @@ if __name__ == "__main__":
 
     printStory('Story2')
 
-    col.drop()
+    #col.drop()
 
