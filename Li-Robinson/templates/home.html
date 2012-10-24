@@ -11,13 +11,15 @@
 
 <form action="" method="POST">
 {% if titles %}
+<p>Select a story to edit or delete!</p>
 <select name="story_menu">
 {% for t in titles %}
 <option value="{{t}}">{{t}}</option>
 {% endfor %}
 </select>
 
-<input type="submit" name="button" value="Go">
+<p><input type="submit" name="button" value="Go">
+<p><input type="submit" name="button" value="Delete Story">
 
 <p>New Story: <input type="text" name="new_story">
 <p><input type="submit" name="button" value="Create">
@@ -25,7 +27,7 @@
 
 {% if lines %}
 
-<b>{{ storyname }}</b>
+<h2><b>{{ storyname }}</b></h2>
 
 {% for line in lines %}
 <p> {{ line }} </p>
@@ -33,7 +35,9 @@
 {% endfor %}
 
 <p>Next line: <input type="text" name="next_line">
-<p><input type="submit" name="button" value="{{ storyname }}">
+<p>Submit your line: <input type="submit" name="button" value="{{ storyname }}">
+
+<p><input type="submit" name="button" value="Back">
 
 {% endif %}
 
