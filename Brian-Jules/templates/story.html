@@ -1,0 +1,11 @@
+{% extends "default.html" %}
+{% block title %}{{ story }}{% endblock title %}
+{% block body %}
+    {% for line in lines %}
+        <p>{{ line }}</p>
+    {% endfor %}
+    <form id="add_line_form" method="POST" action="">
+        <textarea name="add_line_field" rows="4" cols="80"></textarea>
+        <input type="submit" value="Add Line">
+    </form>
+{% endblock body %}
