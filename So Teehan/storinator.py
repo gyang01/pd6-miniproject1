@@ -1,7 +1,3 @@
-                                                                     
-                                                                     
-                                                                     
-                                             
 from pymongo import Connection
 Connection=Connection('mongo.stuycs.org')
 db = Connection.admin
@@ -10,11 +6,14 @@ db = Connection['SoTe-pd6']
 db.stories.remove()
 def addstory(story):
     entry= {"story":story, "text":[]}
+    for x in db.stories.find():
+        if (x['story']==story):
+            return
     db.stories.save(entry)
-
-
+ 
 addstory('the worst thing ever invented')
 addstory('i dont know really')
+addstory('arms and a man i sing')
 addstory('arms and a man i sing')
 
 def addcontent(story, line):

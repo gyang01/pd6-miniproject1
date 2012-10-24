@@ -17,10 +17,10 @@ def home():
 	else:
 		button = request.form["button"]
 		if button == "Go":
+			story = str(request.form["storyselection"])
 			return redirect(url_for("story"))
 		if button == "Add":
-			story = str(request.form["storyname"])
-			mongo.addstory(story)
+			mongo.addstory(str(request.form["storyname"]))
 			return render_template("home.html", stories = mongo.get_stories())
 
 @app.route("/story", methods = ["GET", "POST"])
@@ -38,4 +38,4 @@ def story():
 			return redirect(url_for("home"))
 
 if __name__ == "__main__":
-app.run(debug = True)
+	app.run(debug = True)
