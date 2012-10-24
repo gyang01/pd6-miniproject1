@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Story</title>
+<h1>
+{{story}}
+</h1>
+</head>
+{%for line in lines%}
+<h2>
+{{line}}
+</h2>
+{%endfor%}
+<form method = "POST">
+<h3>
+<input type="text" name="line" /input>
+</h3>
+<input type = "submit" name = "button" value = "Submit" /input>
+<input type = "submit" name = "button" value = "Cancel" /input>
+</form>
+</html>
