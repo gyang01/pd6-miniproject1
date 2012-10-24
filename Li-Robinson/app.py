@@ -8,7 +8,6 @@ def home():
     util.auth()
     if request.method == 'GET':
         titles = util.get_story_titles()
-        #print titles
         return render_template("home.html",titles=titles)
     else:
         button = request.form["button"]
@@ -17,6 +16,12 @@ def home():
             #print storyname #the above does indeed work
             lines = util.get_lines(storyname)
             return render_template("home.html",storyname=storyname,lines=lines)
+        
+        elif button == "Delete Story":
+            storyname = str(request.form["story_menu"])
+            util.del_story(storyname)
+            titles = util.get_story_titles()
+            return render_template("home.html",titles=titles)
 
         elif button == "Back":
              titles = util.get_story_titles()
