@@ -37,7 +37,8 @@ def addline(story, line):
 
 def get_story(story):
 	res = col.find({"name":story})
-	return res
+	return [x["text"] for x in res]
 
 def get_stories():
-	return col.find({"line":"0"})
+	res = col.find({"line":"0"})
+	return [x["name"] for x in res]
