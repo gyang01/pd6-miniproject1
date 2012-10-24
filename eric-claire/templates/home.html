@@ -1,0 +1,18 @@
+<!doctype HTML>
+
+<h1>
+Storyinator
+</h1>
+<h4>by Eric Cerny and Claire Hripcsak</h4>
+
+<body>
+<form action="" method="POST">
+<select>
+{% for title in titles %}
+<option value={{"title"}}>{{title}}</option>
+{% endfor %}
+</select>
+<p>
+New story: <input type="text" name="newStory"><br>
+<input type="submit" name="button" value="Go">
+</form>

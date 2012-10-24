@@ -1,10 +1,41 @@
-{% extends 'default.html' %}
-{% block title %}Home{% endblock %}
-{% block body %}
-<p>Started Stories:
-    <form id="story_menu" action="" method="POST">
-      < select name = "story_menu">
-      {% for story in stories%}
-	<p><input type=submit value=thisStory>
-    </form>
-{% endblock body %}
+<!DOCTYPE html>
+<html>
+  <head>
+
+  </head>
+
+  <body>
+
+  <h1>Storinator</h1>
+
+  <form action="" method="POST">
+    <select name="stories" name="stories">
+      {% for story in stories %}
+      <option value=story>story</option>
+      {% endfor %}
+      </select>
+    <br>
+    <input type=submit name=button value="go"></input>
+
+    <br><br>
+    New Story: <input type=text name="newStory"></input>
+    <br>
+    <input type=submit name=button value="create"></input>
+e="stories">
+      {% for story in stories %}
+      <option value=story>story</option>
+      {% endfor %}
+      </select>
+    <br>
+    <input type=submit name=button value="go"></input>
+
+    <br><br>
+    New Story: <input type=text name="newStory"></input>
+    <br>
+    <input type=submit name=button value="create"></input>
+    <br>
+  </form>
+
+  </body>
+
+</html>
