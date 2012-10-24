@@ -33,11 +33,4 @@ class DatabaseConnection(object):
 
 if __name__ == "__main__":
     db = DatabaseConnection()
-    db.add_story("Test")
-    db.add_line("Test", "First line of")
-    db.add_line("Test", "the story where")
-    db.add_line("Test", "we all sing")
-    db.add_story("Test2")
-    print(db.get_lines("Test"))
-    print(db.get_stories())
     db.drop_stories()
