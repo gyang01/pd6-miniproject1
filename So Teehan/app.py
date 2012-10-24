@@ -6,19 +6,17 @@ app.secret_key = os.urandom(24)
 @app.route("/", methods = ["GET", "POST"])
 def home():
 	if request.method == "GET":
-		return render_template("home.html")
+		return render_template("homeminiproj.html")
+storinator.addstory(str(request.form["storyname"]))
+stories=[]
+
+for valjean in db.stories.findone():
+ stories.append(valjean['story'])
+
+button = request.form["button"]
+
         
-	
+         
 
-	stories = []
-
-	for valjean in db.stories.findone():
-         stories.append(valjean['story'])
-
-        button = request.form["button"]
-
-        if button == "create":
-         storinator.addstory(str(request.form["storyname"]))
-
-        if button == "go":
-            return render_template("storypage.html")
+        #if button == "go":
+         #   return render_template("storypage.html")
