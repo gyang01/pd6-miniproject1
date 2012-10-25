@@ -5,15 +5,16 @@
     {% block head %}
     <!--link rel="stylesheet" type="text/css" href="/htmlks/css/kickstart.css" media="all" /> 
     <link rel="stylesheet" type="text/css" href="/htmlks/style.css" media="all" /--> 
+    <style type="text/css">
+      body{background-color:light blue}
+      h1{font-family:cooper black;color:pink;font-size:30px}
+    </style>
     {% endblock %}
   </head> 
   
-  <style type="text/css">
-    <body style="background-color:light blue;">
+    <body>
       {% block body %}
-      <h1 style="font-family:cooper black;color:pink;font-size:30px;"></h1>
       {% endblock %}
     </body>
-  </style>
 
 </html>
