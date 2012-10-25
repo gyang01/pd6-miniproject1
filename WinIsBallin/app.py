@@ -35,7 +35,7 @@ def create():
             return redirect(url_for('home'))
 	
 
-@app.route("/cont")
+@app.route("/cont", methods = ['GET', 'POST'])
 def cont():
     db = story.db()
     stories = db.getStoryNames()
@@ -46,12 +46,21 @@ def cont():
         name = request.form['story'] 
         selectedstory = db.getText(name)
         return render_template("continue.html", stories=stories,selectedstory=selectedstory)
+     
     
-    
-@app.route("/drop")
+@app.route("/drop", methods = ['GET', 'POST'])
 def drop():
     if request.method=="GET":
 	return render_template("drop.html")
+    else:
+        db = story.db()
+        button = request.form['button']
+        if button == "Drop this Story":
+            name = request.form['story']
+            db.remove(name)
+            return render_template("home.html")
+
+
 
 #@app.route("/stories", methods = ['GET', 'POST'])
 #def stories():
@@ -63,14 +72,8 @@ def drop():
   #      title = request.form['titles']
   #      return redirect(url_for('continue.html'))
             
-
-@app.route("/drop")
-def drop():
-    if request.method == 'GET':
-        return render_template('drop.html')
-        
         
 if __name__ == '__main__':
     app.debug = True
     app.run()
-
+    

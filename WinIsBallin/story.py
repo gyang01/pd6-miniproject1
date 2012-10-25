@@ -46,15 +46,16 @@ class db:
     def getText(self, name):
         return self.col.find({'name':name},{'text':1})[0]['text']
 
-
+    def remove(self, name):
+        self.col.remove({'name':name})
 
 if __name__ == "__main__":
     
     mydb = db()
     
-    mydb.newStory("Hello!")
+    mydb.newStory("Hello World!")
     mydb.newStory("Story2")
-    mydb.continueStory("Hello!","hallo")
+    mydb.continueStory("Hello World!","hallo")
     mydb.continueStory("Story2", "There once was a man from australia")
     mydb.continueStory("Story2", "Whose limericks were quite a failure")
     
@@ -77,5 +78,5 @@ if __name__ == "__main__":
     print
     
     text = mydb.getText("Story2")
-    print text
-    #mydb.col.drop()
+   # print text
+    mydb.col.drop()
