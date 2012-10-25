@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    {% block head %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {% endblock %}
+  </head>
+  <body>
+    <h1>Story: {{storytitle}}</h1>
+ <form action="" method="POST">   
+    <!---{% for line in lines %}
+    <br>{{line}}<br>
+    {% endfor %}-->
+
+  <p>Enter A Line:</p>
+  <textarea rows="5" cols="70" name="nextLine"></textarea>
+  <input type="submit" name="button" value="Save"></input>
+  <input type="submit" name="button" value="Back"></input>
+ </form>
+  </body>
+</html>
+

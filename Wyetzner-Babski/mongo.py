@@ -26,12 +26,12 @@ class mongo:
     def getLines(self,title):
         return self.db.stories.find({'title':title})[0]['lines']
 
-if __name__ == '__main__':
-    db1 = mongo()
-    db1.newStory("Pride and Prejudice")
-    db1.newStory("The Picture of Dorian Grey")
-    print db1.getStories()
-    db1.newLine("Pride and Prejudice","It is a truth universally acknowledged")
-    print db1.getLines("Pride and Prejudice")
+#if __name__ == '__main__':
+ #   db1 = mongo()
+  #  db1.newStory("Pride and Prejudice")
+   # db1.newStory("The Picture of Dorian Grey")
+    #print db1.getStories()
+    #db1.newLine("Pride and Prejudice","It is a truth universally acknowledged")
+    #print db1.getLines("Pride and Prejudice")
     
         
