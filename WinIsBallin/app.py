@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
+from flask import url_for,redirect
 
 import story
 
@@ -14,20 +15,35 @@ def home():
         return render_template('home.html', stuff="stuff")
     else:
         button = request.form['button']
-        if button == "Create New Story":
-            return redirect(url_for('createStory'))
-        elif button == "Contribute to Existing Story"
+        if button == "Create a New Story":
+            	return redirect(url_for('create'))
+        elif button == "Continue a Story":
+		return redirect(url_for('cont'))
+	elif button == "Drop a Story":
+		return redirect(url_for('drop'))
     
 
 @app.route("/create", methods = ['GET', 'POST'])
-def createStory():
+def create():
     if request.method == "GET":
         return render_template('create.html')
     else:
         button = request.form['button']
-        if button == "Create":
+        if button == "Create!":
             story.newStory(request.form['title'])
             return redirect(url_for('home'))
+	
+
+@app.route("/cont")
+def cont():
+    if request.method=="GET":
+	stories=["Goodbye", "Cruel World!"]
+	return render_template("continue.html", stories=stories)
+
+@app.route("/drop")
+def drop():
+    if request.method=="GET":
+	return render_template("drop.html")
 
 @app.route("/stories", methods = ['GET', 'POST'])
 def stories():
@@ -42,12 +58,13 @@ def stories():
         if button  == "Select":
             return redirect(url_for('storyadd.html'))
             
-@app.route("/storyadd", methods = ['GET', 'POST'])
-def storyadd():
-    if request.method == 'GET':
+#@app.route("/storyadd", methods = ['GET', 'POST'])
+#def storyadd():
+#    if request.method == 'GET':
         
         
         
 if __name__ == '__main__':
-    app.run()
     app.debug = True
+    app.run()
+
