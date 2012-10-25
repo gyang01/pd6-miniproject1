@@ -10,12 +10,15 @@
 <br />
 <form action="" method="post">
 
-<select name=story size=6 multiple=no>
-	<option>Hello World!<option>
-</select>
+  <select name=story size=6 multiple=no style="width:800px">
+    {% for story in stories %}
+    <option value={{story}}>{{story}}</option>
+    {% endfor %}
+  </select>
 <br />
 <br />
 <input type=submit name=button Value="Drop this Story">
+ <input type=submit name=button Value="Cancel">
 
 </form>
 
