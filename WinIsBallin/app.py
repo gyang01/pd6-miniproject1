@@ -15,8 +15,10 @@ def home():
         return render_template('home.html', stuff="stuff")
     else:
         button = request.form['button']
+<<<<<<< HEAD
         if button == "Create a New Story":
             	return redirect(url_for('create'))
+>>>>>>> 097b3e5d1869d4dbec12796d439990aaf807f13f
         elif button == "Continue a Story":
 		return redirect(url_for('cont'))
 	elif button == "Drop a Story":
@@ -53,10 +55,10 @@ def stories():
         titles = []
         for title in db.getStoryNames():
             titles.append()
-        return render_template('stories.html', titles=titles) 
+        return render_template('continue.html', titles=titles) 
     elif request.method == 'POST':
         title = request.form['titles']
-        return redirect(url_for('storyadd.html'))
+        return redirect(url_for('continue.html'))
             
 #@app.route("/storyadd", methods = ['GET', 'POST'])
 #def storyadd():
