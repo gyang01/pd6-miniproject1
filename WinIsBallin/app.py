@@ -8,7 +8,6 @@ import story
 app = Flask(__name__)
 
 
-
 @app.route("/", methods = ['GET', 'POST'])
 def home():
     if request.method == "GET":
@@ -40,12 +39,14 @@ def cont():
     db = story.db()
     stories = db.getStoryNames()
     if request.method=="GET": 
-	selectedstory=db.getText("Story2")
+	selectedstory=[]
 	return render_template("continue.html", stories=stories,selectedstory=selectedstory)
     else:
-        name = request.form['story'] 
-        selectedstory = db.getText(name)
-        return render_template("continue.html", stories=stories,selectedstory=selectedstory)
+        button = request.form['button']
+        if button == "Add to Story":
+            name = request.form['story'] 
+            selectedstory = db.getText(name)
+            return render_template("continue.html", stories=stories,selectedstory=selectedstory)
      
     
 @app.route("/drop", methods = ['GET', 'POST'])
