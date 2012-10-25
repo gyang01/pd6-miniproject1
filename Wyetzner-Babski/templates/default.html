@@ -9,13 +9,13 @@
   <body>
     <h1>STORYINATOR</h1>
     
-    <form action="" method="POST">
+    <form action="" method="post">
       <p>Select a story:</p>
       <select name="menu">
-	{% for story in stories %}
-	<option value="{{story}}">{{story}}</option>
-		{% endfor %}
-		</select><br>
+{% for story in stories %}
+<option value="story">{{story}}</option>
+{% endfor %}
+</select><br>
   <p><input type="submit" name="button" value="Choose Story"></input></p>
 
 
@@ -25,4 +25,3 @@
     </form>
   </body>
 </html>
-
