@@ -1,12 +1,18 @@
 from flask import Flask
 from flask import render_template
+from flask import request
+
+import story
+
 app = Flask(__name__)
 
-app.debug = True
 
-@app.route("/")
+
+@app.route("/", methods = ['GET', 'POST'])
 def home():
-    return render_template('home.html')
-
+    if request.method == "GET":
+        return render_template('home.html', stuff="stuff")
+    
 if __name__ == '__main__':
     app.run()
+    app.debug = True
