@@ -51,10 +51,11 @@ def cont():
     
 @app.route("/drop", methods = ['GET', 'POST'])
 def drop():
+    db = story.db()
+    stories = db.getStoryNames()
     if request.method=="GET":
-	return render_template("drop.html")
+	return render_template("drop.html", stories=stories)
     else:
-        db = story.db()
         button = request.form['button']
         if button == "Drop this Story":
             name = request.form['story']
