@@ -15,12 +15,15 @@ def home():
         return render_template('home.html', stuff="stuff")
     else:
         button = request.form['button']
-        if button == "Create New Story":
-            return redirect(url_for('create'))
+<<<<<<< HEAD
+        if button == "Create a New Story":
+            	return redirect(url_for('create'))
+>>>>>>> 097b3e5d1869d4dbec12796d439990aaf807f13f
         elif button == "Continue a Story":
-            return redirect(url_for('cont'))
-        elif button == "Drop a Story":
-            return redirect(url_for('drop'))
+		return redirect(url_for('cont'))
+	elif button == "Drop a Story":
+		return redirect(url_for('drop'))
+
 
 @app.route("/create", methods = ['GET', 'POST'])
 def create():
@@ -28,9 +31,22 @@ def create():
         return render_template('create.html')
     else:
         button = request.form['button']
-        if button == "Create":
+        if button == "Create!":
             story.newStory(request.form['title'])
             return redirect(url_for('home'))
+	
+
+@app.route("/cont")
+def cont():
+    if request.method=="GET":
+	stories=[["Goodbye"], ["Cruel World!"]]
+	selectedstory=["Hello World!", "Goodbye!", 1,2,3,4,5,6]
+	return render_template("continue.html", stories=stories,selectedstory=selectedstory)
+
+@app.route("/drop")
+def drop():
+    if request.method=="GET":
+	return render_template("drop.html")
 
 @app.route("/stories", methods = ['GET', 'POST'])
 def stories():
@@ -55,4 +71,4 @@ def drop():
 if __name__ == '__main__':
     app.debug = True
     app.run()
-    
+

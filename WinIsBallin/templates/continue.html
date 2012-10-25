@@ -14,12 +14,14 @@
 <select name=story size=6 multiple=no style="width:800px">
 	<option>Hello World!</option>
 {% for story in stories %}
-	<option value={{story}}>{{story}}</option>
+	<option value={{story[0]}}>{{story[0]}}</option>
 {% endfor %}
 </select>
 
-<div style="width:800px;height:400px;background:orange">
-
+<div style="width:800px;height:400px;background:lightgreen;overflow:auto">
+{% for line in selectedstory %}
+	{{line}}<br />
+{% endfor %}
 </div>
 
 
