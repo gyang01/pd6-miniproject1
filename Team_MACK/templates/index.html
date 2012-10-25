@@ -1,0 +1,17 @@
+{% extends "default.html" %}
+{% block title %}Home{% endblock title %}
+{% block body %}
+    <h1>Story Thingy</h1>
+    <form id="main_menu" action="" method="POST">
+        <select name="story_menu">
+        {% for story in stories %}
+            <option value="{{ story }}">{{ story }}</option>
+        {% endfor %}
+        </select>
+        <input type="submit" value="Go">
+    </form>
+    <form id="add_story_form" action="" method="POST">
+        <input type="text" name="add_story_field">
+        <input type="submit" value="Add Story">
+    </form>
+{% endblock body %}
