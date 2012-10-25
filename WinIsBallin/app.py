@@ -36,9 +36,7 @@ def create():
 def stories():
     if request.method == 'GET':
         db = story.db()
-        titles = []
-        for title in db.getStoryNames():
-            titles.append()
+        titles = db.getStoryNames()
         return render_template('continue.html', titles=titles) 
     elif request.method == 'POST':
         title = request.form['titles']
@@ -47,7 +45,11 @@ def stories():
 #@app.route("/storyadd", methods = ['GET', 'POST'])
 #def storyadd():
 #    if request.method == 'GET':
-        
+
+@app.route("/drop")
+def drop():
+    if request.method == 'GET':
+        return render_template('drop.html')
         
         
 if __name__ == '__main__':
