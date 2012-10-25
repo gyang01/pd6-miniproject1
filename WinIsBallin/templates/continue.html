@@ -22,9 +22,11 @@
   <br/>
   
   <div style="width:800px;height:400px;background:lightgreen;overflow:auto">
+{% if selectedstory %}
     {% for line in selectedstory %}
     {{line}}<br />
     {% endfor %}
+{% endif %}
   </div>
   
   
