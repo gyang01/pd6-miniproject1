@@ -11,10 +11,21 @@ app = Flask(__name__)
 @app.route("/", methods = ['GET', 'POST'])
 def home():
     if request.method == "GET":
+<<<<<<< HEAD
         return render_template('home.html', stuff="stuff")
     button = request.form['button']
     if button == "Create New Story":
 	return redirect(url_for('createStory'))
+=======
+        db = story.db()
+        titles = []
+        for title in db.getStoryNames():
+            titles.append()
+        return render_template('home.html', titles=titles)
+        
+    if request.form['button'] == "Create New Story":
+	return redirect(url_for('createStory')
+>>>>>>> ce207627e7c391c57e03746ac09f5aa66852e1d3
 
 @app.route("/create", methods = ['GET', 'POST'])
 def createStory():
