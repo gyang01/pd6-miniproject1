@@ -1,82 +1,79 @@
-from pymongo import Connection
+from flask import Flask
+from flask import render_template
+from flask import request
+from flask import url_for,redirect
 
-#Comm-link established
-#conn = Connection('mongo.stuycs.org')
+import story
 
-#I am ADMIN
-#db = conn.admin
-#AUTHENTICATION = db.authenticate('ml7','ml7')
+app = Flask(__name__)
 
-#Lets go period 6
-#db = conn['z-pd6']
 
-#Our storybook <3
-#col = db["WinBall's StoryBook"]
 
-class db:
+@app.route("/", methods = ['GET', 'POST'])
+def home():
+    if request.method == "GET":
+        return render_template('home.html', stuff="stuff")
+    else:
+        button = request.form['button']
+        if button == "Create a New Story":
+            return redirect(url_for('create'))
+        elif button == "Continue a Story":
+            return redirect(url_for('cont'))
+	elif button == "Drop a Story":
+            return redirect(url_for('drop'))
+
+
+@app.route("/create", methods = ['GET', 'POST'])
+def create():
+    if request.method == "GET":
+        return render_template('create.html')
+    else:
+        db = story.db()
+        button = request.form['button']
+        if button == "Create!":
+            db.newStory(request.form['title'])
+            return redirect(url_for('home'))
+	
+
+@app.route("/cont", methods = ['GET', 'POST'])
+def cont():
+    db = story.db()
+    stories = db.getStoryNames()
+    if request.method=="GET": 
+	selectedstory=db.getText("Story2")
+	return render_template("continue.html", stories=stories,selectedstory=selectedstory)
+    else:
+        name = request.form['story'] 
+        selectedstory = db.getText(name)
+        return render_template("continue.html", stories=stories,selectedstory=selectedstory)
+     
     
-    def __init__(self):
-        self.conn = Connection('mongo.stuycs.org')
-        self.db = self.conn.admin
-        self.db.authenticate('ml7','ml7')
-        self.db = self.conn['z-pd6']
-        self.col = self.db["WinBall's StoryBook"]
+@app.route("/drop", methods = ['GET', 'POST'])
+def drop():
+    if request.method=="GET":
+	return render_template("drop.html")
+    else:
+        db = story.db()
+        button = request.form['button']
+        if button == "Drop this Story":
+            name = request.form['story']
+            db.remove(name)
+            return render_template("home.html")
+
+
+
+#@app.route("/stories", methods = ['GET', 'POST'])
+#def stories():
+ #   if request.method == 'GET':
+  #      db = story.db()
+  #      titles = db.getStoryNames()
+  #      return render_template('continue.html', titles=titles) 
+  #  elif request.method == 'POST':
+  #      title = request.form['titles']
+  #      return redirect(url_for('continue.html'))
+            
         
-    def newStory(self, name):
-        self.col.save({'name': name, 'lines': 0}) 
-
-    def newStoryStart(self, name, start):
-        self.col.save({'name': name, 'lines': 0, 'text':start}) 
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
     
-    def continueStory(self, name, addition):
-        self.col.update({'name':name}, {'$inc': {'lines':1}})
-        self.col.update({'name':name}, {'$push': {'text':addition}})
-    
-    def printStory(self, name):
-        entries = self.col.find({'name':name},{'text':1})[0]['text']
-        for entry in entries:
-            print entry;
-
-    def getStoryNames(self):
-        names = []
-        for story in self.col.find():
-            names.append(story['name'])
-            return names
-
-    def getText(self, name):
-        return self.col.find({'name':name},{'text':1})[0]['text']
-
-    def remove(self, name):
-        self.col.remove({'name':name})
-
-if __name__ == "__main__":
-    
-    mydb = db()
-    
-    mydb.newStory("Hello World!")
-    mydb.newStory("Story2")
-    mydb.continueStory("Hello World!","hallo")
-    mydb.continueStory("Story2", "There once was a man from australia")
-    mydb.continueStory("Story2", "Whose limericks were quite a failure")
-    
-    test = 5
-    
-    for line in mydb.col.find():
-        print line
-        
-    print
-
-    for name in mydb.getStoryNames():
-        print name
-
-    print
-    print
-
-    mydb.printStory('Story2')
-    
-    print
-    print
-    
-    text = mydb.getText("Story2")
-   # print text
-    mydb.col.drop()
