@@ -4,16 +4,12 @@ conn = Connection("mongo.stuycs.org")
 def connect():
     db = conn.admin
     res = db.authenticate("ml7","ml7")
-    db = conn["eric-claire"]
-    stories = db.first_collection
-#db.drop_collection(stories)
     
 def add_new_story(title):
     db = conn["eric-claire"]
     stories = db.first_collection
-    if stories.find({"title":title}).count() == 0:
-        entry = {"title": title, "sentences": []}
-        stories.save(entry)
+    entry = {"title": title, "sentences": []}
+    stories.insert(entry)
         
 def add_sentence(title, sentence):
     db = conn["eric-claire"]
@@ -37,13 +33,4 @@ def list_stories():
 #        result += "-----\n"
     return result
 
-#add_new_story("eric")
-#add_new_story("eric") #I don't allow dupes
-#add_new_story("claire")
-#add_new_story("fred")
-#add_sentence("thluffy", "hey!")
-#add_sentence("fred", "once upon a time")
-#add_sentence("fred", "I enrolled in ml7")
-#print list_stories()
-#for line in stories.find():
-#    print line
+#connect()
