@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 
+<<<<<<< HEAD
   <head>
     <h1>Drop a Story</h1>
   </head>
@@ -21,4 +22,29 @@
   
   
   
+=======
+<head>
+<h1>Drop a Story</h1>
+</head>
+
+
+
+<br />
+<form action="" method="post">
+
+  <select name=story size=6 multiple=no style="width:800px">
+    {% for story in stories %}
+    <option value={{story}}>{{story}}</option>
+    {% endfor %}
+  </select>
+<br />
+<br />
+<input type=submit name=button Value="Drop this Story">
+ <input type=submit name=button Value="Cancel">
+
+</form>
+
+
+
+>>>>>>> c4bcb2f4cf139a16948184c82932caabdc31e2c0
 </html>
