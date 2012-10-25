@@ -17,7 +17,7 @@
 	<select name = "storychooser">
 	{# if firstlines #}
 	{% for num in range(firstlines|count) %}
-	   <option value = count> {{ firstlines[num] }}</option>
+	   <option value = {{ firstlines[num] }} > {{ firstlines[num] }}</option>
 	{% endfor %}
 	</select>
 	<input type="submit" name="reader" value="Read">

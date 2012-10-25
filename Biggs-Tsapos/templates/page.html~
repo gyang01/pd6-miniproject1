@@ -7,7 +7,7 @@
 	<head/>
 	<body>
 	<h2> 
-		{{ Title }}
+		This should be the first line of the story 
 	</h2>
 		this should be the rest of the lines
 	</body>

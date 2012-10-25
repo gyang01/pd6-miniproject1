@@ -29,6 +29,20 @@ def getLines(name):
     tmpline = stories.find_one({'name':name})['lines']
     return str(tmpline)
 
+def numStories():
+    count = 0
+    tmp = stories.find()
+    for line in tmp:
+        count = count + 1
+    return count
+
+def getFirstLines():
+    firstlines = []
+    tmp = stories.find()
+    for line in tmp:
+        firstlines.append(line['name'])
+    return firstlines
+
 #addStory('Hello my name is')
 #addLine('el oh el','Hello my name is')
 #clearStories()
