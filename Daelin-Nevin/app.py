@@ -6,18 +6,18 @@ import mongo
 app = Flask(__name__)
 
 mongo.startup()
-global story	
+global storyname	
 
 @app.route("/", methods = ["GET", "POST"])
 def home():
-	global story
-	story = ""
+	global storyname
+	storyname = ""
 	if request.method == "GET":
 		return render_template("home.html", stories = mongo.get_stories())
 	else:
 		button = request.form["button"]
 		if button == "Go":
-			story = str(request.form["storyselection"])
+			storyname = str(request.form["storyselection"])
 			return redirect(url_for("story"))
 		if button == "Add":
 			mongo.addstory(str(request.form["storyname"]))
@@ -26,15 +26,15 @@ def home():
 @app.route("/story", methods = ["GET", "POST"])
 def story():
 	if request.method == "GET":
-		return render_template("story.html", story = story, lines = (mongo.get_story(story))[1:])
+		return render_template("story.html", story = storyname, lines = (mongo.get_story(storyname))[1:])
 	else:
 		button = request.form["button"]
 		if button == "Submit":
-			mongo.addline(story, str(request.form["line"]))
-			return render_template("story.html", story = story, lines = (mongo.get_story(story))[1:])
+			mongo.addline(storyname, str(request.form["line"]))
+			return render_template("story.html", story = storyname, lines = (mongo.get_story(storyname))[1:])
 		if button == "Cancel":
-			global story
-			story = ""
+			global storyname
+			storyname = ""
 			return redirect(url_for("home"))
 
 if __name__ == "__main__":
