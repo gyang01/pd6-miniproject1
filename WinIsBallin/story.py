@@ -22,52 +22,47 @@ class db:
         self.db = self.conn['z-pd6']
         self.col = self.db["WinBall's StoryBook"]
         
-
-    def newStory(name):
+    def newStory(self, name):
         self.col.save({'name': name, 'lines': 0}) 
 
-    def newStoryStart(name, start):
+    def newStoryStart(self, name, start):
         self.col.save({'name': name, 'lines': 0, 'text':start}) 
     
-    def continueStory(name, addition):
+    def continueStory(self, name, addition):
         self.col.update({'name':name}, {'$inc': {'lines':1}})
         self.col.update({'name':name}, {'$push': {'text':addition}})
     
-    def printStory(name):
+    def printStory(self, name):
         entries = self.col.find({'name':name},{'text':1})[0]['text']
         for entry in entries:
             print entry;
 
-    def getStoryNames():
+    def getStoryNames(self):
         names = []
         for story in self.col.find():
             names.append(story['name'])
             return names
 
-    def getText(name):
+    def getText(self, name):
         return self.col.find({'name':name},{'text':1})[0]['text']
-    
-
-
-
 
 
 
 if __name__ == "__main__":
     
     mydb = db()
-    """
-    mydb.newStory("Hello World!")
+    
+    mydb.newStory("Hello!")
     mydb.newStory("Story2")
-    mydb.continueStory("Hello World!","hallo")
+    mydb.continueStory("Hello!","hallo")
     mydb.continueStory("Story2", "There once was a man from australia")
     mydb.continueStory("Story2", "Whose limericks were quite a failure")
     
     test = 5
-
+    
     for line in mydb.col.find():
         print line
-
+        
     print
 
     for name in mydb.getStoryNames():
@@ -78,6 +73,4 @@ if __name__ == "__main__":
 
     mydb.printStory('Story2')
 
-    col.drop()
-    """
-    print "WE DID IT"
+    mydb.col.drop()
