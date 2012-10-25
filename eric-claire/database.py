@@ -4,7 +4,12 @@ conn = Connection("mongo.stuycs.org")
 def connect():
     db = conn.admin
     res = db.authenticate("ml7","ml7")
-    
+
+def drop_all():
+    db = conn["eric-claire"]
+    stories = db.first_collection
+    stories.remove()
+
 def add_new_story(title):
     db = conn["eric-claire"]
     stories = db.first_collection

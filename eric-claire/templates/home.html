@@ -7,21 +7,21 @@ Storyinator
 
 <body>
 <form action="" method="POST">
-<select>
-{% if titles %}
 
+{% if titles %}
+<select>
 {% for title in titles %}
 
 <option value={{"title"}}>{{title}}</option>
 
 {% endfor %}
-
-{% endif %}
 </select>
 
 <br><input type="submit" name="button" value="View story">
+{% endif %}
 
 <p>
 New story: <input type="text" name="newStory"><br>
 <input type="submit" name="button" value="Create">
+<input type="submit" name="button" value="Drop all stories">
 </form>

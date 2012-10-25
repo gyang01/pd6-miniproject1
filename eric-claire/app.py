@@ -17,7 +17,10 @@ def home():
             database.add_new_story(newtitle)
             titles = database.list_stories()
             return render_template("home.html",titles=titles)
-            
+        elif button == "Drop all stories":
+            database.drop_all()
+            titles=database.list_stories()
+            return render_template("home.html",titles=titles)
 
 
 if __name__ == "__main__":
