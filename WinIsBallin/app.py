@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import render_template
-from flask import request
+from flask import url_for,request
 
 import story
 
@@ -43,12 +43,13 @@ def stories():
         title = request.form['titles']
         return redirect(url_for('storyadd.html'))
             
-@app.route("/storyadd", methods = ['GET', 'POST'])
-def storyadd():
-    if request.method == 'GET':
+#@app.route("/storyadd", methods = ['GET', 'POST'])
+#def storyadd():
+#    if request.method == 'GET':
         
         
         
 if __name__ == '__main__':
-    app.run()
     app.debug = True
+    app.run()
+    
