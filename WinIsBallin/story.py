@@ -72,5 +72,10 @@ if __name__ == "__main__":
     print
 
     mydb.printStory('Story2')
-
-    mydb.col.drop()
+    
+    print
+    print
+    
+    text = mydb.getText("Story2")
+    print text
+    #mydb.col.drop()

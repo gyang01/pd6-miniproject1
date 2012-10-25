@@ -15,14 +15,12 @@ def home():
         return render_template('home.html', stuff="stuff")
     else:
         button = request.form['button']
-<<<<<<< HEAD
         if button == "Create a New Story":
-            	return redirect(url_for('create'))
->>>>>>> 097b3e5d1869d4dbec12796d439990aaf807f13f
+            return redirect(url_for('create'))
         elif button == "Continue a Story":
-		return redirect(url_for('cont'))
+            return redirect(url_for('cont'))
 	elif button == "Drop a Story":
-		return redirect(url_for('drop'))
+            return redirect(url_for('drop'))
 
 
 @app.route("/create", methods = ['GET', 'POST'])
@@ -30,37 +28,41 @@ def create():
     if request.method == "GET":
         return render_template('create.html')
     else:
+        db = story.db()
         button = request.form['button']
         if button == "Create!":
-            story.newStory(request.form['title'])
+            db.newStory(request.form['title'])
             return redirect(url_for('home'))
 	
 
 @app.route("/cont")
 def cont():
-    if request.method=="GET":
-	stories=[["Goodbye"], ["Cruel World!"]]
-	selectedstory=["Hello World!", "Goodbye!", 1,2,3,4,5,6]
+    db = story.db()
+    stories = db.getStoryNames()
+    if request.method=="GET": 
+	selectedstory=db.getText("Story2")
 	return render_template("continue.html", stories=stories,selectedstory=selectedstory)
-
+    else:
+        name = request.form['story'] 
+        selectedstory = db.getText(name)
+        return render_template("continue.html", stories=stories,selectedstory=selectedstory)
+    
+    
 @app.route("/drop")
 def drop():
     if request.method=="GET":
 	return render_template("drop.html")
 
-@app.route("/stories", methods = ['GET', 'POST'])
-def stories():
-    if request.method == 'GET':
-        db = story.db()
-        titles = db.getStoryNames()
-        return render_template('continue.html', titles=titles) 
-    elif request.method == 'POST':
-        title = request.form['titles']
-        return redirect(url_for('continue.html'))
+#@app.route("/stories", methods = ['GET', 'POST'])
+#def stories():
+ #   if request.method == 'GET':
+  #      db = story.db()
+  #      titles = db.getStoryNames()
+  #      return render_template('continue.html', titles=titles) 
+  #  elif request.method == 'POST':
+  #      title = request.form['titles']
+  #      return redirect(url_for('continue.html'))
             
-#@app.route("/storyadd", methods = ['GET', 'POST'])
-#def storyadd():
-#    if request.method == 'GET':
 
 @app.route("/drop")
 def drop():
