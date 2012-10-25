@@ -11,7 +11,7 @@
 
 <form action="" method="POST">
 {% if titles %}
-<p>Select a story to edit or delete!</p>
+<p><h2>Select a story to edit or delete!<h2>
 <select name="story_menu">
 {% for t in titles %}
 <option value="{{t}}">{{t}}</option>
@@ -19,7 +19,7 @@
 </select>
 
 <p><input type="submit" name="button" value="Go">
-<p><input type="submit" name="button" value="Delete Story">
+<input type="submit" name="button" value="Delete Story">
 
 <p>New Story: <input type="text" name="new_story">
 <p><input type="submit" name="button" value="Create">
