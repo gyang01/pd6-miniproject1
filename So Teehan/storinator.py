@@ -1,13 +1,17 @@
 from pymongo import Connection
+global db
+global res
+global col
+global Connection
+Connection=Connection("mongo.stuycs.org")
 def con():
-    Connection=Connection('mongo.stuycs.org')
     global db
     global res
     global col
+    global Connection
     db = Connection.admin
     res=db.authenticate('ml7','ml7')
     db = Connection['SoTe-pd6']
-    db.stories.remove()
 def addstory(story):
     entry= {"story":story, "text":[]}
     for x in db.stories.find():
@@ -36,6 +40,14 @@ def access_story(story):
             mod = str(i)
             ans= ans+ " " + str(i) 
     print ans
+
+def get_story(story):
+    for javert in db.stories.find({'story':story}):
+        ans = story
+        for i in javert['text']:
+            mod = str(i)
+            ans= ans+ " " + str(i) 
+    return ans
  
 
 #for line in db.stories.find():

@@ -4,24 +4,35 @@
 Storyinator
 </h1>
 <h4>by Eric Cerny and Claire Hripcsak</h4>
-
 <body>
+
 <form action="" method="POST">
-<select>
 {% if titles %}
 
+<select name="view_one">
 {% for title in titles %}
 
 <option value={{"title"}}>{{title}}</option>
 
 {% endfor %}
-
-{% endif %}
 </select>
 
 <br><input type="submit" name="button" value="View story">
-
-<p>
-New story: <input type="text" name="newStory"><br>
-<input type="submit" name="button" value="Create">
+<input type="submit" name="button" value="Drop story">
+<p>New story: <input type="text" name="newStory">
+<br><input type="submit" name="button" value="Create">
 </form>
+
+</body>
+
+{% endif %}
+
+{% if title %}
+
+<h2>{{ title }}</h2>
+
+{% for line in lines %}
+<p> {{ line }}
+{% endfor %}
+
+{% endif %}
