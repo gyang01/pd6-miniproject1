@@ -8,7 +8,6 @@ app = Flask(__name__)
 currentStory = ''
 
 
-
 @app.route('/')
 def start():
     return redirect(url_for('home'))
@@ -21,6 +20,7 @@ def home():
     else:
         if request.form.has_key('reader'):
             currentStory=request.form['storychooser']
+            print currentStory
             return redirect(url_for('page'))
         else:
              name=request.form['storystarter']
@@ -33,9 +33,15 @@ def page():
     if request.method=='GET':
         return render_template('page.html',Title=currentStory,restOfLines=util.getLines(currentStory))
     else:
-        pass
+        if request.form.has_key('submit'):
+            newLine=request.form['newLineBox']
+            util.addLine(newLine,currentStory)
+            return redirect(url_for('page'))
+        else:
+            return redirect(url_for('home'))
        
 if __name__ == '__main__':
     app.debug = True
     app.run()
-#
+
+

@@ -9,9 +9,12 @@
 	<h2> 
 		{{ Title }}
 	</h2>
-		{{ restOfLines }}
-	</body>
-	<form action="" method="POST"
-	<input type = "text" name = "newLineBox" size "150">
+		{{ restOfLines|safe }}
+	<form action="" name="newLine" method="POST">
+		<input type = "text" name = "newLineBox" size="75">
+		<input type = "submit" name = "submit" value = "Submit">
+		<br>
+		<input type = "submit" name = "back" value = "Back">
 	</form>
+	</body>
 </html>
