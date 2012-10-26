@@ -14,26 +14,40 @@
 	  <p>
 	    Begin by selecting a story below or creating a new one!
 	    <br>
-</br>
-<font size="+2">
-  Select a <b>STORY</b>
-  <p>
-    <select name="otitle">
-      {% for item in titles %}
-      <option value = "{{item}}">{{item}}</option>
-      {% endfor %}
-    </select>
-    <form>
-      <input value="Read!" name="button" type="submit">
-	  <input type="submit" value="Create!" name="button">
-    </form>
-    <br>
+	    <font size="+2">
+	      </br>
+	      Select a <b>STORY</b>
+	      <p>
+		{% if titles %}
+		<select name="otitle">
+		  {% for item in titles %}
+		  <option value = "{{item}}">{{item}}</option>
+		  {% endfor %}
+		</select>
+		<input value="Read!" name="button" type="submit">
+		<br>
+		{% else %}
+		<font size="-0.5">
+		  <i>Sorry. Our archives are currently empty. Why don't you start a story now?</i>
+		  <p>
+		</font>
+		{% endif %}
 </br>Create a <b>STORY</b>
-
-<form>
-<input type="text" name="newtitle">
-</form>
-</font>
+	      <p><input type="text" name="newtitle">
+		<input type="submit" value="Create!" name="button">
+		<br>
+		{% if titles %}
+		<br>
+		<i>Don't like a story? Just DROP it!</i>
+	      <p>
+		<select name="drop">
+		  {% for item in titles %}
+		  <option value = "{{item}}">{{item}}</option>
+		  {% endfor %}
+		</select>
+		<input type="submit" value="Drop Story" name="button">
+		{% endif %}
+	    </font>
     </body>
   </html>
 </form>
