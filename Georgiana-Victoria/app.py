@@ -1,28 +1,32 @@
 from flask import Flask
-from flask import request, make_response
+from flask import request
 from flask import render_template
+from flask import url_for,redirect
 import db
-from flask import url_for,redirect,flash, escape
 
 app = Flask(__name__)
 
 @app.route("/",methods=['GET','POST'])
 def home():
-    if request.method=="GET":
-        return render_template("home.html")
-    else:
-        button=request.form['button']
-        if button=='Create!':
-            title=request.form['ntitle']
-            db.add_story(title)
-            return redirect(url_for(home))
-        elif:
-            if button=='Read!':
-                otitle=request.form['otitle']
-                resp=make_response(render_template("home.html"))
-                resp.set_cookie('title', otitle)
-                return redirect(url_for(story))
-            return redirect(url_for(home))
+	db.auth()
+	if request.method == 'GET':
+		titles=db.getTitles()
+		return render_template("home.html",titles=titles)
+	else:
+		button=request.form["button"]
+		if button == "Create!":
+			newname=str(request.form["newtitle"])
+			db.add_story(newname)
+			titles=db.getTitles()
+			return redirect(url_for('home'))
+		else:
+			if button=='Read!':
+				selected=request.form.get("otitle","")
+				titles=db.getTitles()
+				return redirect(url_for('home'))
+			return redirect(url_for('home'))
+	#titles=db.getTitles()
+	#return render_template("home.html",titles=titles)
             
 if __name__=="__main__":
     app.debug=True
