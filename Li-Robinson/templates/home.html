@@ -32,10 +32,10 @@
 
 {% if lines %}
 
-<h2><b>{{ storyname }}</b></h2>
+<h2><b><u>{{ storyname }}</u></b></h2>
 
 {% for line in lines %}
-<p> {{ line }} </p>
+<p> {{ line|safe }} </p>
 <p>
 {% endfor %}
 

@@ -31,7 +31,7 @@ def home():
 def page():
     global currentStory
     if request.method=='GET':
-        return render_template('page.html',Title=currentStory)
+        return render_template('page.html',Title=currentStory,restOfLines=util.getLines(currentStory))
     else:
         pass
        
