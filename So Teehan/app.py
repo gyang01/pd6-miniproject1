@@ -6,14 +6,37 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 @app.route("/", methods = ["GET", "POST"])
 def home():
+    
+    
  if request.method == "GET":
   return render_template("homeminiproj.html")
-        sorinator.con()
-        storinator.addstory(str(request.form["storyname"]))
+ else:
+        storinator.con()
         storyarray= storinator.getstories()
+        button = request.form["button"]
+        if button == "create" and len(str(request.form["storyname"])) > 0:
+            storinator.addstory(str(request.form["storyname"]))
+            return render_template("homeminiproj.html")
+        if button == "go":
+            storypick = str(request.form["storypick"])
+            return redirect(url_for("storypage"))
+
+@app.route("/", methods = ["GET", "POST"])
+def storypage():
+ if request.method == "GET":
+    return render_template("storypage.html")
+ else:
+     button2 = request.form["button2"]
+     storycont = storinator.get_story(storypick)
+    if button2 == "addstuff":
+        newline = str(request.form["newline"])
+        storinator.addcontent(storypick,newline)
+        return render_template("storypage.html")
+    if button2 == "goback":
+        return redirect(url_for("home"))
+            
         
-        #button = request.form["button"]
+if __name__ == "__main__":
+	app.run(debug = True)        
         
         
-        #if button == "go":
-         #   return render_template("storypage.html")

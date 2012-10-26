@@ -36,6 +36,14 @@ def access_story(story):
             mod = str(i)
             ans= ans+ " " + str(i) 
     print ans
+
+def get_story(story):
+    for javert in db.stories.find({'story':story}):
+        ans = story
+        for i in javert['text']:
+            mod = str(i)
+            ans= ans+ " " + str(i) 
+    return ans
  
 
 #for line in db.stories.find():
