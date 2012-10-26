@@ -1,13 +1,17 @@
 from pymongo import Connection
+global db
+global res
+global col
+global Connection
+Connection=Connection("mongo.stuycs.org")
 def con():
-    Connection=Connection('mongo.stuycs.org')
     global db
     global res
     global col
+    global Connection
     db = Connection.admin
     res=db.authenticate('ml7','ml7')
     db = Connection['SoTe-pd6']
-    db.stories.remove()
 def addstory(story):
     entry= {"story":story, "text":[]}
     for x in db.stories.find():

@@ -1,7 +1,6 @@
 from pymongo import Connection
 
 Conn = Connection('mongo.stuycs.org')
-
 db = Conn.admin
 res = db.authenticate('ml7','ml7')
 db = Conn['pd6-bigzam']
@@ -12,8 +11,12 @@ def addStory(name):
 
 def addLine(line,name):
     tmpline = stories.find_one({'name':name})['lines']
-    tmpline = tmpline + '\n' + line
+    tmpline = tmpline + '<br/>' + line
     stories.update({'name':name},{'name':name,'lines':tmpline})
+
+def getNumLines(name):
+    tmp = stories.find_one({'name':name})['lines']
+    return len(tmp)
 
 def showStories():
     tmp = stories.find()
@@ -27,7 +30,7 @@ def clearStories():
 
 def getLines(name):
     tmpline = stories.find_one({'name':name})['lines']
-    return str(tmpline)
+    return tmpline
 
 def numStories():
     count = 0
@@ -43,8 +46,10 @@ def getFirstLines():
         firstlines.append(line['name'])
     return firstlines
 
-#addStory('Hello my name is')
-#addLine('el oh el','Hello my name is')
-#clearStories()
-#print getLines('Hello my name is')
-#showStories()
+if __name__ == "__main__":
+    #addStory('Hello my name is')
+    #addLine('el oh el','hello')
+    clearStories()
+    #print getLines('Hello my name is')
+    #showStories()
+    #print getNumLines('hello')
