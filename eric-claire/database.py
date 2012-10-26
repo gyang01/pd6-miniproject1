@@ -9,7 +9,7 @@ def remove_one(title):
     db = conn["eric-claire"]
     stories = db.first_collection
     to_delete = []
-    lines = collection.find()
+    lines = stories.find()
     for line in lines:
         if line["title"] == title:
             to_delete.append({"_id":line["_id"]})
@@ -42,6 +42,7 @@ def get_lines(title):
     stories = db.first_collection
     for line in stories.find():
         if line["title"]==title:
+            #print line["sentences"]
             return line["sentences"]
 
 def list_stories():

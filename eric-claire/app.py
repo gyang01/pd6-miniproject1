@@ -17,16 +17,19 @@ def home():
             database.add_new_story(newtitle)
             titles = database.list_stories()
             return render_template("home.html",titles=titles)
-        elif button == "View Story":
+        elif button == "View story":
             title = str(request.form["view_one"])
-            print title
             lines = database.get_lines(title)
+            print lines
             return render_template("home.html",title=title,lines=lines)
         elif button == "Drop story":
-            database.remove_one() ###come back to this later
+            title = request.form["view_one"]
+            database.remove_one(title) ###come back to this later
             titles=database.list_stories()
             return render_template("home.html",titles=titles)
-
+        elif button == "Back":
+            titles = database.list_stories()
+            return render_template("home.html",titles=titles)
 
 if __name__ == "__main__":
     app.debug=True
