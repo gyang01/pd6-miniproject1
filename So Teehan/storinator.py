@@ -30,7 +30,6 @@ def addcontent(story, line):
         array = valjean['text']
         array.append(line)
         db.stories.update({'story':story}, {'story': story,'text':array})
-
 def access_story(story):
     for javert in db.stories.find({'story':story}):
         ans = story
@@ -39,7 +38,7 @@ def access_story(story):
             print str(i)
             mod = str(i)
             ans= ans+ " " + str(i) 
-    print ans
+    return ans
 
 def get_story(story):
     for javert in db.stories.find({'story':story}):
