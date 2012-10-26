@@ -1,6 +1,7 @@
 <!doctype HTML>
 
 <form action="" method="POST">
+
 {% if not lines %}
 
 <h1>
@@ -37,9 +38,9 @@ Storyinator
 <p> {{ line }}
 {% endfor %}
 
-<br>Add your line: <input type="text" name="newLine">
+<p>Add a line: <input type="text" name="newLine" size=35>
 <input type="submit" name="button" value="Add line">
-<input type="submit" name="button" value="Back">
+<br><input type="submit" name="button" value="Back">
 
 </body>
 {% endif %}
