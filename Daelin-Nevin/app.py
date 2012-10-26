@@ -27,6 +27,7 @@ def home():
 @app.route("/story", methods = ["GET", "POST"])
 def story():
 	if storyname == "":
+		global storyname
 		storyname = "Once upon a time"
 	if request.method == "GET":
 		return render_template("story.html", story = storyname, lines = (mongo.get_story(storyname))[1:])
