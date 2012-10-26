@@ -8,10 +8,10 @@ DEBUG = True
 #init
 app = Flask(__name__)
 app.config.from_object(__name__)
-db = DatabaseConnection()
+db = startConnection().mack
 
 @app.route("/", methods=["GET", "POST"])
-def index():
+def selection():
     if request.method == "POST":
         if "story_menu" in request.form:
             return redirect(url_for("story_page", story=request.form["story_menu"]))
@@ -19,16 +19,16 @@ def index():
             story_name = request.form["add_story_field"]
             if story_name:
                 addStory(db, story_name)
-    return render_template("index.html", stories=getStories(db))
+    return render_template("select.html", stories=getStories(db))
 
 @app.route("/<story>", methods=["GET", "POST"])
-def storyPage(story):
+def story(story):
     if request.method == "POST":
         addLine(db, story, request.form["add_line_field"])
     return render_template("story.html", lines=getStory(db, story))
 
 @app.route("/drop/stories")
-def dropPage():
+def dropcurr():
     removeStories(db)
     return redirect(url_for("index"))
 
