@@ -23,20 +23,21 @@ def getstories():
     array = []
     for x in db.stories.find():
         array.append(x['story'])
-    print array
+    #print array
     return array
 def addcontent(story, line):
     for valjean in db.stories.find({'story':story}):
         array = valjean['text']
         array.append(line)
         db.stories.update({'story':story}, {'story': story,'text':array})
+
 def access_story(story):
     for javert in db.stories.find({'story':story}):
         ans = story
         for i in javert['text']:
-            print i
-            print str(i)
-            mod = str(i)
+            #print i
+            #print str(i)
+            #mod = str(i)
             ans= ans+ " " + str(i) 
     return ans
 
