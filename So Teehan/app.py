@@ -5,8 +5,8 @@ import storinator
 app = Flask(__name__)
 storinator.con()
 global storyarray
-global storryname
-app.secret_key = os.urandom(24)
+global storyname
+
 @app.route("/", methods = ["GET", "POST"])
 def home():
  global storyarray
@@ -22,23 +22,26 @@ def home():
             storyarray=storinator.getstories()
             return render_template("homeminiproj.html", storyarray=storinator.getstories())
         if button == "go":
-            storypick = str(request.form["storypick"])
+            storyname = str(request.form["storypick"])
             return redirect(url_for("storypage"))
+
 @app.route("/storypage", methods = ["GET", "POST"])
 def storypage():
- global storyname
- if request.method == "GET":
-    return render_template("storypage.html", storypick=storyname, storycont=(storinator.access_story(storyname)))
- else:
-     button2 = request.form["button2"]
-     storycont = storinator.get_story(storypick)
-     if button2 == "Add":
-         newline = str(request.form["newline"])
-         storinator.addcontent(storypick,newline)
-         return render_template("storypage.html")
-     if button2 == "Go Back":
-         return redirect(url_for("home"))
+    global storyname
+    if request.method == "POST":
+        return render_template("storypage.html", storypick=storyname, storycont=(storinator.access_story(storyname)))
+    else:
+        button2 = request.form["button2"]
+        storycont = storinator.get_story(storypick)
+        if button2 == "Add":
+            newline = str(request.form["newline"])
+            storinator.addcontent(storypick,newline)
+            return render_template("storypage.html")
+        if button2 == "Go Back":
+            return redirect(url_for("home"))
             
         
 if __name__ == "__main__":
- app.run(debug = True)  
+	app.run(debug = True)        
+        
+        
