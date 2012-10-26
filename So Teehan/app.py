@@ -28,11 +28,11 @@ def storypage():
  else:
      button2 = request.form["button2"]
      storycont = storinator.get_story(storypick)
-    if button2 == "addstuff":
+    if button2 == "Add":
         newline = str(request.form["newline"])
         storinator.addcontent(storypick,newline)
         return render_template("storypage.html")
-    if button2 == "goback":
+    if button2 == "Go Back":
         return redirect(url_for("home"))
             
         
