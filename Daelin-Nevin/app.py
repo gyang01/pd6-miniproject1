@@ -34,6 +34,8 @@ def story():
 	else:
 		button = request.form["button"]
 		if button == "Submit":
+			if storyname not in mongo.get_stories():
+				mongo.addstory(storyname)
 			mongo.addline(storyname, str(request.form["line"]))
 			return render_template("story.html", story = storyname, lines = (mongo.get_story(storyname))[1:])
 		if button == "Cancel":
