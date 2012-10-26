@@ -8,6 +8,7 @@ import unicodedata
 import databasing
 
 app = Flask(__name__)
+app.secret_key = 'some_secret'
 
 allTitles = []
 currTitle = ''
@@ -19,41 +20,51 @@ def homepage():
     global allTitles, currTitle, currLines
     if request.method=="GET":
         allTitles = databasing.get_titles()
+        print(allTitles)
+        allTitles.append('')
         return render_template("homepage.html", allTitles=allTitles)
     else:
-        story = str(request.form['story'])
-        newStory = str(request.form['newStory'])
+        story=request.form['stories']
+        print("got story!" + story)
+        newStory=request.form['newStory']
+        print("got new story!" + newStory)
 
         button=request.form['button']
         if button=='go':
-            if not story:
+            if story == '':
+                print("pressed go but no story")
                 flash('Please select a story!')
                 return redirect(url_for('homepage'))
             else:
+                print("pressed go and has story")
                 currTitle = story
                 currLines = databasing.get_lines(story)
-                return redirect(url_for('story'))
+                return redirect(url_for('addPage'))
         elif button=='create':
-            if not newStory:
+            if newStory == "new story":
+                print("clicked create!")
                 flash('Please enter a new story title!')
                 return redirect(url_for('homepage'))
             else:
                 #check if title already exists (add method to databasing)
+                print("else!")
                 databasing.add_title(story)
                 currTitle = story
+                print(currTitle)
                 currLines = databasing.get_lines(story)
                 return redirect(url_for('addPage'))
 
-@app.route("/story", methods=['GET', 'POST'])
+@app.route("/addPage", methods=['GET', 'POST'])
 def addPage():
+    databasing.auth()
     global allTitles, currTitle, currLines
     if request.method=="GET":
         return render_template("addPage.html", currTitle=currTitle, currLines=currLines)
     else:
-        newLine = request.form['newLine']
-        button = request.form['button']
+        newLine=request.form['newLine']
+        button=request.form['button']
         if button=='new':
-            if not newLine:
+            if newLine == "new line":
                 flash('Please enter a new line!')
                 return redirect(url_for('addPage'))
             else:               
@@ -64,6 +75,6 @@ def addPage():
 
 if __name__=="__main__":
     app.debug=True 
-    app.run(port=7000)
+    app.run(port=5000)
             
 
