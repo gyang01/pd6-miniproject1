@@ -1,7 +1,8 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-  <h1>%Title%/h1>
+  <h1>Stories</h1>
 </head>
 
 <BODY bgcolor="#000000">
@@ -9,33 +10,27 @@
 
 <br />
 <form action="" method="POST">
-  <b>Text:</b>
+  <b>Titles:</b>
   <br />
   <select name=story size=6 multiple=no style="width:800px">
     {% for story in stories %}
-    <option value={{story}}>{{text}}</option>
+    <option value={{story}}>{{story}}</option>
     {% endfor %}
   </select>
   
   <br/>
-  <input type=submit name=button Value="Delete Last Line" 
+  <input type=submit name=button Value="Select Story" 
 	 background-color:#FFFFFF>
-  <br/>
-  <br/>
-  <b>Delete Specific Line:</b>
   <br/>
 
-  <b>Line Number:</b>
-  <input type=textbox name=newline Value="">
+  
   <br />
-  <input type=submit name=button Value="Delete" 
-	 background-color:#FFFFFF>
   <br />
-  <b>New Line:</b>
+  <b>New Story Name:</b>
   <br />
   <input type=textbox name=newline Value="">
   <br />
-  <input type=submit name=button Value="Add Line">
+  <input type=submit name=button Value="Add Story">
   <br />
   <br/>
   <br />
@@ -47,4 +42,3 @@
 
 
 </html>
-
