@@ -11,22 +11,21 @@ Storinator
 <h2>
 By Daniel Teehan and Patrick So
 </h2>
-<form name="input" action="" method="POST">
+<form name="input" method="POST">
 <br>
 New Story Name
 <br>
 <input type="text" name="storyname">
-<button type="submit" name="create">Create</button>
+<input type="submit" name="button" value="create"></input>
 <br>
 Choose a story
 <br>
 <select>
-{% for valjean in stories %}
-	<option>{{valjean}}</option>
-	
+{% for valjean in storyarray %}
+	<option name="storypick" value={{valjean}}>{{valjean}}</option>
+{% endfor %}
 </select>
 <br>
-<button type="submit" name="go">Go</button>
-<input type="reset">
+<input type="submit" name="button" value="go"></input>
 </body>
 </html>

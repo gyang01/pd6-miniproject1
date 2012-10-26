@@ -4,13 +4,14 @@
 
 <title>Story-nator</title>
 </head>
+<body>
 <form method = "POST">
 <h1>
 Choose a story:
 </h1>
 <select name = "storyselection">
 {%for story in stories%}
-  <option value = {{story}}>{{story}}</option>
+  <option> {{story}}</option>
 {%endfor%}
 </select>
 <input type = "submit" name = "button" value = "Go" /input>
@@ -23,4 +24,5 @@ Add a new one:
 <input type="text" name="storyname" /input>
 <input type = "submit" name = "button" value = "Add" /input>
 </form>
+</body>
 </html>

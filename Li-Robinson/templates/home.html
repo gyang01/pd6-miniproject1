@@ -10,16 +10,41 @@
   <h1>The Storyinator<h1>
 
 <form action="" method="POST">
+{% if titles %}
+<p><h2>Select a story to edit or delete!<h2>
 <select name="story_menu">
 {% for t in titles %}
 <option value="{{t}}">{{t}}</option>
 {% endfor %}
 </select>
 
-<input type="submit" name="button" value="Go">
+<p><input type="submit" name="button" value="Go">
+<input type="submit" name="button" value="Delete Story">
+{% endif %}
+
+{% if not lines %}
 
 <p>New Story: <input type="text" name="new_story">
 <p><input type="submit" name="button" value="Create">
+
+{% endif %}
+
+
+{% if lines %}
+
+<h2><b><u>{{ storyname }}</u></b></h2>
+
+{% for line in lines %}
+<p> {{ line|safe }} </p>
+<p>
+{% endfor %}
+
+<p>Next line: <input type="text" name="next_line">
+<p>Submit your line: <input type="submit" name="button" value="{{ storyname }}">
+
+<p><input type="submit" name="button" value="Back">
+
+{% endif %}
 
 </form>
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <h1>Continue a Story</h1>
+</head>
+
+
+
+<br />
+<form action="" method="POST">
+  <b>Stories:</b>
+  <br />
+  <select name=story size=6 multiple=no style="width:800px">
+    {% for story in stories %}
+    <option value={{story}}>{{story}}</option>
+    {% endfor %}
+  </select>
+  
+  <br/>
+  <input type=submit name=button Value="Show text">
+  <br/>
+  
+  <div style="width:800px;height:400px;background:lightgreen;overflow:auto">
+    {% for line in selectedstory %}
+    {{line}}<br />
+    {% endfor %}
+  </div>
+  
+  
+  <br />
+  <br />
+  <input type=textbox name=newline Value="">
+  <br />
+  <br />
+  <input type=submit name=button Value="Add to Story">
+  <input type=submit name=button Value="Cancel">
+  
+</form>
+
+
+
+</html>

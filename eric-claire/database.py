@@ -4,16 +4,28 @@ conn = Connection("mongo.stuycs.org")
 def connect():
     db = conn.admin
     res = db.authenticate("ml7","ml7")
+
+def remove_one(title):
     db = conn["eric-claire"]
     stories = db.first_collection
-#db.drop_collection(stories)
-    
+    to_delete = []
+    lines = stories.find()
+    for line in lines:
+        if line["title"] == title:
+            to_delete.append({"_id":line["_id"]})
+    for story in to_delete:
+        stories.remove(story)
+
+def remove_all():
+    db = conn["eric-claire"]
+    stories = db.first_collection
+    stories.remove()
+
 def add_new_story(title):
     db = conn["eric-claire"]
     stories = db.first_collection
-    if stories.find({"title":title}).count() == 0:
-        entry = {"title": title, "sentences": []}
-        stories.save(entry)
+    entry = {"title": title, "sentences": []}
+    stories.insert(entry)
         
 def add_sentence(title, sentence):
     db = conn["eric-claire"]
@@ -24,8 +36,15 @@ def add_sentence(title, sentence):
             tmp.append(sentence)
             stories.update({"title":title}, {"title":title, "sentences":tmp})
             return
-    print "Story not found: "+title
-        
+
+def get_lines(title):
+    db = conn["eric-claire"]
+    stories = db.first_collection
+    for line in stories.find():
+        if line["title"]==title:
+            #print line["sentences"]
+            return line["sentences"]
+
 def list_stories():
     db = conn["eric-claire"]
     stories = db.first_collection
@@ -37,13 +56,4 @@ def list_stories():
 #        result += "-----\n"
     return result
 
-#add_new_story("eric")
-#add_new_story("eric") #I don't allow dupes
-#add_new_story("claire")
-#add_new_story("fred")
-#add_sentence("thluffy", "hey!")
-#add_sentence("fred", "once upon a time")
-#add_sentence("fred", "I enrolled in ml7")
-#print list_stories()
-#for line in stories.find():
-#    print line
+#connect()

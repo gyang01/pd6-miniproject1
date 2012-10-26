@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			The Storynator
+		</title>
+	</head>
+	<body>
+	<h2> The Storynator! </h2>
+	<div align = "center">
+	<form name = "Submitter" action="" method="POST">
+	<input type = "text" name = "storystarter" size = "75">
+	<input type="submit" name = "submit" value="Submit">
+	</form>
+	<br>
+	<form name = "ToRead" action="" method="POST">
+	<select name = "storychooser">
+	{% for num in range(firstlines|count) %}
+	   <option value = {{ firstlines[num] }}> {{ firstlines[num] }}</option>
+	{% endfor %}
+	</select>
+	<input type="submit" name="reader" value="Read">
+	</form>
+	</div>
+	</body>
+</html>
+
+	

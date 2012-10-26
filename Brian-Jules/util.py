@@ -22,7 +22,10 @@ class DatabaseConnection(object):
     def add_line(self, name, line):
         self.stories = self.db["Stories"]
         self.stories.update({"name" : name}, {"$push": {"body" : line}})
-    
+   
+    def get_stories(self):
+        return [story["name"] for story in self.stories.find()]
+
     def get_lines(self, name):
         self.stories = self.db["Stories"]
         return self.stories.find_one({"name" : name})["body"]
@@ -30,9 +33,4 @@ class DatabaseConnection(object):
 
 if __name__ == "__main__":
     db = DatabaseConnection()
-    db.add_story("Test")
-    db.add_line("Test", "First line of")
-    db.add_line("Test", "the story where")
-    db.add_line("Test", "we all sing")
-    print(db.get_lines("Test"))
     db.drop_stories()

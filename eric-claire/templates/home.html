@@ -1,18 +1,45 @@
 <!doctype HTML>
 
+<form action="" method="POST">
+{% if not lines %}
+
 <h1>
 Storyinator
 </h1>
 <h4>by Eric Cerny and Claire Hripcsak</h4>
-
 <body>
-<form action="" method="POST">
-<select>
+
+{% if titles %}
+<select name="view_one">
 {% for title in titles %}
-<option value={{"title"}}>{{title}}</option>
+
+<option value="{{title}}">{{title}}</option>
+
 {% endfor %}
 </select>
-<p>
-New story: <input type="text" name="newStory"><br>
-<input type="submit" name="button" value="Go">
+
+<br><input type="submit" name="button" value="View story">
+<input type="submit" name="button" value="Drop story">
+{% endif %}
+
+<p>New story: <input type="text" name="newStory">
+<br><input type="submit" name="button" value="Create">
 </form>
+
+</body>
+{% endif %}
+
+{% if lines %}
+<body>
+<h1>{{title}}</h1>
+
+{% for line in lines %}
+<p> {{ line }}
+{% endfor %}
+
+<br>Add your line: <input type="text" name="newLine">
+<input type="submit" name="button" value="Add line">
+<input type="submit" name="button" value="Back">
+
+</body>
+{% endif %}
