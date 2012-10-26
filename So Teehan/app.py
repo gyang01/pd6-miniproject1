@@ -28,7 +28,7 @@ def home():
 @app.route("/storypage", methods = ["GET", "POST"])
 def storypage():
     global storyname
-    if request.method == "POST":
+    if request.method == "GET":
         return render_template("storypage.html", storypick=storyname, storycont=(storinator.access_story(storyname)))
     else:
         button2 = request.form["button2"]
