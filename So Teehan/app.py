@@ -26,14 +26,14 @@ def storypage():
  if request.method == "GET":
     return render_template("storypage.html")
  else:
-     button2 = request.form["button2"]
-     storycont = storinator.get_story(storypick)
-    if button2 == "Add":
-        newline = str(request.form["newline"])
-        storinator.addcontent(storypick,newline)
-        return render_template("storypage.html")
-    if button2 == "Go Back":
-        return redirect(url_for("home"))
+         button2 = request.form["button2"]
+         storycont = storinator.get_story(storypick)
+        if button2 == "Add":
+            newline = str(request.form["newline"])
+            storinator.addcontent(storypick,newline)
+            return render_template("storypage.html")
+        if button2 == "Go Back":
+            return redirect(url_for("home"))
             
         
 if __name__ == "__main__":
