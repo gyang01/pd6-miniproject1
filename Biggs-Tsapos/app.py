@@ -4,6 +4,7 @@ from flask import request
 from flask import url_for, redirect, flash,session
 from flask import *
 import util
+import time
 app = Flask(__name__)
 currentStory = ''
 
@@ -20,16 +21,19 @@ def home():
     else:
         if request.form.has_key('reader'):
             currentStory=request.form['storychooser']
-            print currentStory
             return redirect(url_for('page'))
-        else:
-             name=request.form['storystarter']
-             util.addStory(name)
-             return redirect(url_for('home'))
+        if request.form.has_key('clear'):
+            util.clearStories()
+            return redirect(url_for('home'))
+        if request.form.has_key('submit'):
+            name=request.form['storystarter']
+            util.addStory(name)
+            return redirect(url_for('home'))
 
 @app.route("/page/",methods=['GET','POST'])
 def page():
     global currentStory
+    global timex
     if request.method=='GET':
         return render_template('page.html',Title=currentStory,restOfLines=util.getLines(currentStory))
     else:
