@@ -16,10 +16,12 @@
 	<form name = "ToRead" action="" method="POST">
 	<select name = "storychooser">
 	{% for num in range(firstlines|count) %}
-	   <option value = {{ firstlines[num] }}> {{ firstlines[num] }}</option>
+	{% set current = firstlines[num] %}
+	   <option value = "{{ current }}"> {{ current }}</option>
 	{% endfor %}
 	</select>
 	<input type="submit" name="reader" value="Read">
+	<input type="submit" name="clear" value="Clear Stories">
 	</form>
 	</div>
 	</body>

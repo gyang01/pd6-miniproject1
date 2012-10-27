@@ -22,10 +22,13 @@ def home():
             currentStory=request.form['storychooser']
             print currentStory
             return redirect(url_for('page'))
-        else:
-             name=request.form['storystarter']
-             util.addStory(name)
-             return redirect(url_for('home'))
+        if request.form.has_key('clear'):
+            util.clearStories()
+            return redirect(url_for('home'))
+        if request.form.has_key('submit'):
+            name=request.form['storystarter']
+            util.addStory(name)
+            return redirect(url_for('home'))
 
 @app.route("/page/",methods=['GET','POST'])
 def page():
