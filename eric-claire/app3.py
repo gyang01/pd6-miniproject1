@@ -17,38 +17,29 @@ def home():
         if button == "Create":
             newtitle = request.form.get("newStory", "Untitled")
             database.add_new_story(newtitle)
+            lines = database.get_lines(newtitle)
             current_story = newtitle
-            return redirect("/"+current_story)
+            return render_template("home.html",title=newtitle,lines=lines)
         elif button == "View story":
             title = str(request.form["view_one"])
             current_story = title
-            return redirect("/"+current_story)
+            lines = database.get_lines(title)
+            return render_template("home.html",title=title,lines=lines)
         elif button == "Drop story":
             title = request.form["view_one"]
             database.remove_one(title)
-            titles = database.list_stories()
+            titles=database.list_stories()
             return render_template("home.html",titles=titles)
-
-@app.route("/"+"<storyname>",methods=["GET","POST"])
-def story(storyname):
-    global current_story
-    database.connect()
-    if request.method == "GET":
-        title = current_story
-        lines = database.get_lines(title)
-        return render_template("home.html",title=title,lines=lines)
-    else:
-        button = request.form["button"]
-        if button == "Add line":
-            newLine = request.form.get("newLine")
+        elif button == "Add line":
+            newLine = request.form.get("newLine", "")
             title = current_story
             database.add_sentence(title,newLine)
             lines = database.get_lines(title)
             return render_template("home.html",title=title,lines=lines)
         elif button == "Back":
-            return redirect("/")
-
+            titles = database.list_stories()
+            return render_template("home.html",titles=titles)
 
 if __name__ == "__main__":
-    app.debut=True
+    app.debug=True
     app.run()
