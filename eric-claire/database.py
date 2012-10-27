@@ -21,13 +21,24 @@ def remove_all():
     stories = db.first_collection
     stories.remove()
 
-def add_new_story(title="Untitled"):
+def add_new_story(basetitle):
     db = conn["eric-claire"]
     stories = db.first_collection
+    if basetitle == "":
+        basetitle = "Untitled"
+    title=basetitle
+    a=0
+    info = [line for line in stories.find()]
+    titles = [str(line["title"]) for line in info]
+    while title in titles:
+        title = basetitle
+        title = title + " "+ str(a)
+        a=a+1
     entry = {"title": title, "sentences": [""]}
     stories.insert(entry)
+    return title
         
-def add_sentence(title, sentence=""):
+def add_sentence(title, sentence):
     db = conn["eric-claire"]
     stories = db.first_collection
     for line in stories.find():

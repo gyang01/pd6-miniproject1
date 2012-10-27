@@ -15,9 +15,8 @@ def home():
     else:
         button = request.form["button"]
         if button == "Create":
-            newtitle = request.form.get("newStory", "Untitled")
-            database.add_new_story(newtitle)
-            current_story = newtitle
+            newtitle = request.form.get("newStory")
+            current_story = database.add_new_story(newtitle)
             return redirect("/"+current_story)
         elif button == "View story":
             title = str(request.form["view_one"])
