@@ -16,11 +16,11 @@ def auth():
     col = db['DLWS']
 
 def addStory(title):
-    global col
-    col.insert({'title': title, 'lines':[title]})
+    auth()
+    col.insert({'title': title, 'lines':[]})
 
 def addLine(title, line):
-    global col
+    auth()
     res = col.find_one({'title': title})
     if res:
         storyLines = res['lines']
@@ -28,10 +28,12 @@ def addLine(title, line):
         col.update({'title': title}, {'title': title, 'lines': storyLines})
 
 def getStory(title):
+    auth()
     res = col.find_one({'title': title})
     return res
 
 def getAllStories():
+    auth()
     res = col.find()
     result = []
     for story in res:
@@ -39,20 +41,28 @@ def getAllStories():
     return result
 
 def getAllStoryTitles():
+    auth()
     titles = []
     for story in getAllStories():
         titles.append(story['title'])
     return titles
     
 def getStoryLines(title):
+    auth()
     return getStory(title)['lines']
 
 def getAllStoryLines():
+    auth()
     allLines = []
     for story in getAllStoryTitles():
         for line in getStoryLines(story):
             allLines.append(line)
     return allLines
+
+
+
+addStory('hi')
+addLine('hi', 'I like thluffy')
 
 #def test():
 #    auth()
