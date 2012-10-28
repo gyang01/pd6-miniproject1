@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 {% extends 'base.html' %}
 {% block head %}
     {{ super() }}
@@ -8,34 +10,18 @@
 
 <form action="" method="POST">
 {% if titles %}
-<p><h1> Select the story </h1>
+<p><h1> Select a story to work with </h1>
 <select name ="stories">
-<option value="{{title}}">{{titles}}</option>
+{% for title in titles %}
+  <option> {{title}}</option>
 {% endfor %}
 </select>
-
 <input type="submit" name="button" value="Ok">
-
 <input type="submit" name="button" value="Drop Stories">
 {% endif %}
-{% if not storyLines %}
+<p>Or Add a new story</p>
 <p>New Story: <input type="text" name="New Story">
-<p><input type="submit" name="button" value="New">
-{% endif %}
-
-{% if storyLines %}
-
-<h1> {{ titleStory }} </h1>
-
-{% for l in storyLines %}
-<p>{{ line|safe }}</p>
-
-{% endfor %}
-
-<p>Line you want to add: <input type="text" name="Add Line">
-
-<input type="submit" name="button" value="Add the line">
-
+<p><input type="submit" name="button" value="Add New Story">
 {% endif %}
 
 </form>
