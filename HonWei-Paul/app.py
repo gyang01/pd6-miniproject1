@@ -22,9 +22,11 @@ def home():
 		elif button=="Drop it!":
 			whoostory.dropspecstory(request.form['chosenstory'])
 			return redirect(url_for('home'))
-		return redirect(url_for('story', name = request.form['chosenstory']))
+		name = request.form['chosenstory']
+		return redirect(url_for('story', name = name))
 		
 #huh
+
 @app.route("/story/<name>",methods = ["GET", "POST"])
 def story(name = None):
 	if request.method == "GET":
@@ -38,36 +40,10 @@ def story(name = None):
 			return redirect(url_for('home'))
 		else:
 			a= request.form['yay']
-			if len(a) >0:
+			if len(a) > 0:
 				whoostory.addline(name,a)
 			return redirect(url_for('story', name = name))
 
-#	else:
-
-'''#Users can only rate one person at a time - scroll choice option
-@app.route("/titleused",methods = ["GET", "POST"])
-def rate():
-	if request.method == "GET":
-		return render_template("titleused.html", q=q, group=utils.get_mygroup(user)) 
-	elif 'user' not in session:
-		flash('Please log in')
-		return redirect(url_for('login'))
-	else:
-		button=request.form['button']
-		if button=='Save':
-			myemail=unicodedata.normalize('NFKD',session['user']).encode('ascii','ignore')
-			yoemail=request.form["ratee"] 
-			rates=[]
-			i=0
-			for i in range(4):
-				rates.append(request.form[str(i)])
-			print rates
-			utils.saveRes(myemail,yoemail,rates)
-			return redirect(url_for('rate'))
-		elif button=='Cancel':
-			return redirect(url_for('home'))
-		return redirect(url_for('rate'))
-'''
 if __name__=="__main__":
 	app.debug=True
 	app.run(port=5000)

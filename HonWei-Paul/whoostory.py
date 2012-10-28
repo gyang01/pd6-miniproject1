@@ -21,6 +21,10 @@ def getstorytext(name):
         a[b] = str(a[b])
     return a
 
+def getstoryID(name):
+    a = str(getstory(name)[u'_id'])
+    return a
+    
 def addline(name,line):
     stories.update({'Title':name}, {'$push': {'Storytext':line}})
 
