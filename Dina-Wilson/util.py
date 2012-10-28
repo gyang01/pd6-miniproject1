@@ -54,18 +54,18 @@ def getAllStoryLines():
             allLines.append(line)
     return allLines
 
-def test():
-    auth()
-    addStory('hi')
-    print col.find_one()
-    addLine('hi', 'I like thluffy')
-    res=col.find_one({'title': 'hi'})
-    print res['lines']
-    addStory('bye')
-    addLine('bye', 'I like thluffy more')
-    print getStoryLines('bye')
-    print getAllStoryTitles()
-    print getAllStoryLines()
-    col.drop()
+#def test():
+#    auth()
+#    addStory('hi')
+#    print col.find_one()
+#    addLine('hi', 'I like thluffy')
+#    res=col.find_one({'title': 'hi'})
+ #   print res['lines']
+  #  addStory('bye')
+#    addLine('bye', 'I like thluffy more')
+ #   print getStoryLines('bye')
+  #  print getAllStoryTitles()
+  #  print getAllStoryLines()
+  #  col.drop()
     
-test()
+#test()
