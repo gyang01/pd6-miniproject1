@@ -21,13 +21,21 @@ def home():
              story = str(request.form["story"])
              return redirect(url_for("story"))
          if button == "Add":
-             util.addstory(str(request.form["New Story"]))
+             util.addstory(str(request.form["NewStory"]))
              return render_template("home.html", titles = util.getAllStoryTitles())
              
 
 @app.route("/story", methods = ["GET", "POST"])
 def story():
-    pass
+    if NewStory == "":
+        NewStory = "Wow you suck you didn't give a title"
+    if request.method == "GET":
+        return render_template("story.html", story = story, StoryLines = util.getStoryLines(story))
+    if request.method == "POST":
+        a = request.form["button"]
+        if a == AddTheLine:
+            util.addLine(story, AddLine)
+            return render_template("home.html", titles = util.getAllStoryTitles())
 
 if __name__ == "__main__":
 	app.run(debug = True)
