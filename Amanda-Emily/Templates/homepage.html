@@ -12,10 +12,11 @@
 <a href="http://tinypic.com?ref=fc63va" target="_blank"><img src="http://i49.tinypic.com/fc63va.gif" border="0" alt="Image and video hosting by TinyPic"></a>
 </p>
 <h3>Select a story</h3>
-<select>
-  <option>story1</option>  ###these options will have to come from the database somehow
-  <option>story2</option>
-  <option>story3</option>
+<select name = "story">
+<% for story in stories|sort%>
+	<option value="{{story}}">
+	{{story}}</option>
+{%endfor%}
 </select>
 <button type="submit" class="btn">Go</button> ###redirects user to another html page like in the demo version which I will code later
 <section id="comments">
