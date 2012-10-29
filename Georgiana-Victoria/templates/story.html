@@ -7,12 +7,29 @@
 	<meta>
     </head>
     <body>
-<p>
-{{title}}
-<br>
-
-</br>
-<p>{% for item in lines %}
-<p>{{item}}
-
-
+      <p>
+	<font size="+4" face="cursive">
+	  <p style="text-align:center;"><b><i>{{title}}</i></b><p>
+	</font>
+	<font face="Georgia" size="+1">
+	  <style>
+	    p{text-indent:2.0em;}
+	  </style>
+	  {% if lines %}
+	  {% for item in lines %}
+	  <p align="center">{{item}}</p>
+	  {% endfor %}
+	  {% else %}
+	  <p align="center"><i>Aww...this story hasn't been written yet.</i>
+	    {% endif %}
+	    <br>	    </br>
+	  <p align="left">
+	  <p><font size="+2" face="cursive">Help {% if lines %} finish {% else %}write {% endif %} this <b>story</b>!</font>
+	  <p><textarea name="line" type="text" placeholder="Add new line here!" cols="50" rows="4" border:double 12px #33CCFF></textarea>
+	    <input type="submit" value="Add" name="button">
+	    <br>
+	  <p><input type="submit" value="Back" name="button">
+	</font>
+    </body>
+  </html>
+</form>
