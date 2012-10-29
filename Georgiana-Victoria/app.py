@@ -19,10 +19,10 @@ def home():
 			db.add_story(newname)
 			titles=db.getTitles()
 			return redirect(url_for('home'))
-		#elif button=='Read!':
-		#	selected=request.form.get("otitle","")
-		#	titles=db.getTitles()
-		#	return redirect(url_for('home')) #story.html TBC
+		elif button=='Read!':
+			selected=request.form.get("otitle","")
+			titles=db.getTitles()
+			return redirect(url_for('story',s=selected)) #story.html TBC
 		elif button=='Drop Story':
 			selected=request.form.get("drop","")
 			db.remove_story(selected)
