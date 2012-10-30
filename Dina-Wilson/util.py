@@ -17,7 +17,7 @@ def auth():
 
 def addStory(title):
     auth()
-    col.insert({'title': title, 'lines':[]})
+    col.insert({'title': title, 'lines':[title]})
 
 def addLine(title, line):
     auth()
