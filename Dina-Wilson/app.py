@@ -14,15 +14,19 @@ def home():
     global story
     story = ""
     if request.method=="GET":
-        return render_template("home.html", titles = util.getAllStoryTitles())
+        return render_template("home.html", giveTitles = util.getAllStoryTitles())
     if request.method=="POST":
          button = request.form["button"]
          if button == "Ok":
-             story = str(request.form["story"])
-             return redirect(url_for("story"))
+             story = str(request.form["storySelection"])
+             return render_template("base.html", titleStory = story, giveLines = util.getStoryLines(story))
          if button == "Add":
-             util.addstory(str(request.form["NewStory"]))
-             return render_template("home.html", titles = util.getAllStoryTitles())
+             story = request.form["NewStory"]
+             util.addStory(story)
+             return render_template("home.html", giveTitles = util.getAllStoryTitles())
+         if button == "DropStories":
+             util.dropStories()
+             return render_template("home.html", givetTitles = util.getAllStoryTitles())
              
 
 @app.route("/story", methods = ["GET", "POST"])
@@ -38,4 +42,5 @@ def story():
             return render_template("home.html", titles = util.getAllStoryTitles())
 
 if __name__ == "__main__":
-	app.run(debug = True)
+    app.run(debug = True)
+        
