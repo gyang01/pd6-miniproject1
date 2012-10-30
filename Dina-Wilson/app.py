@@ -19,27 +19,19 @@ def home():
          button = request.form["button"]
          if button == "Ok":
              story = str(request.form["storySelection"])
-             return render_template("base.html", titleStory = story, giveLines = util.getStoryLines(story))
+             return render_template("home.html", titleStory = story, giveLines = util.getStoryLines(story))
          if button == "Add":
              story = request.form["NewStory"]
              util.addStory(story)
              return render_template("home.html", giveTitles = util.getAllStoryTitles())
          if button == "DropStories":
              util.dropStories()
-             return render_template("home.html", givetTitles = util.getAllStoryTitles())
-             
+             return render_template("home.html", giveTitles = util.getAllStoryTitles())
+         if button:
+             util.addLine(button,request.form["NextLine"])
+             return render_template("home.html", giveTitles = util.getAllStoryTitles())
 
-@app.route("/story", methods = ["GET", "POST"])
-def story():
-    if NewStory == "":
-        NewStory = "Wow you suck you didn't give a title"
-    if request.method == "GET":
-        return render_template("story.html", story = story, StoryLines = util.getStoryLines(story))
-    if request.method == "POST":
-        a = request.form["button"]
-        if a == AddTheLine:
-            util.addLine(story, AddLine)
-            return render_template("home.html", titles = util.getAllStoryTitles())
+             
 
 if __name__ == "__main__":
     app.run(debug = True)
