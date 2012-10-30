@@ -9,22 +9,41 @@
 {% block body %}
 
 <form action="" method="POST">
-{% if titles %}
-<p><h1> Select a story to work with </h1>
-<select name ="story">
-{% for title in titles %}
-  <option> {{title}}</option>
+{% if giveTitles %}
+<p><h1>Select a story to work on!<h1>
+<select name="storySelection">
+{% for title in giveTitles %}
+<option>{{title}}</option>
 {% endfor %}
 </select>
-<input type="submit" name="button" value="Ok">
-<input type="submit" name="button" value="DropStories">
-{% endif %}
-<p><h1>Or Add a new story</h1></p>
-<p>New Story: <input type="text" name="NewStory">
-<p><input type="submit" name="button" value="AddNewStory">
 
+<p><input type="submit" name="button" value="Ok">
+<p><input type="submit" name="button" value="DropStories">
+{% endif %}
+
+{% if not giveLines %}
+
+<p>You can create a new Story: <input type="text" name="NewStory">
+<p><input type="submit" name="button" value="Add">
+
+{% endif %}
+
+
+{% if giveLines %}
+
+<h2><b><u>{{ titleStory }}</u></b></h2>
+
+{% for line in giveLines %}
+<p> {{ line|safe }} </p>
+<p>
+{% endfor %}
+
+<p>Continue the Story: <input type="text" name="NextLine">
+<p><input type="submit" name="button" value="{{ storyname }}">
+
+{% endif %}
 
 </form>
 
-{% endblock body %}
 
+{% endblock body %}
