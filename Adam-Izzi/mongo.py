@@ -1,11 +1,11 @@
 from pymongo import Connection
 
-def connect():
-	conn = Connection('mongo.stuycs.org')
-	db = conn.admin
-	res = db.authenticate("ml7", "ml7")
-	db = conn["z-pd6-Adam-Izzi"]
-	return db
+class db:
+	def __init__(self):
+		self.connection = Connection('mongo.stuycs.org')
+		self.db = self.connection.admin
+		self.db.authenticate('ml7','ml7')
+		self.db = self.connection['z-demo-mini-pd6']
 
 #this adds a new story called "title"
 def addStory(self, title):
