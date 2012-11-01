@@ -16,7 +16,8 @@ def home():
 		button=request.form["button"]
 		if button == "Create!":
 			newname=str(request.form["newtitle"])
-			db.add_story(newname)
+			if len(newname)>0:
+				db.add_story(newname)
 			titles=db.getTitles()
 			return redirect(url_for('home'))
 		elif button=='Read!':
@@ -41,20 +42,22 @@ def story(s="default story"):
 		button=request.form['button']
 		if button=="Add":
 			nline=str(request.form.get("line",""))
-			print nline
-			db.add_line(s, nline)
-			print "test"
+			#print nline
+			if len(nline)>0:
+				db.add_line(s, nline)
+			#print "test"
 			#lines=db.getLines(s)
 			return redirect(url_for('story', s=s))
 		elif button=="Back":
 			return redirect(url_for("home"))
-	lines=db.getLines(s)
-	return render_template("story.html",lines=lines,title=s)
+		lines=db.getLines(s)
+		return render_template("story.html",lines=lines,title=s)
 	
-
-
+	
+	
 if __name__=="__main__":
 	app.debug=True
 	app.run()
+	
 	
 	
