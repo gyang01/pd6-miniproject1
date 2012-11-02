@@ -17,6 +17,10 @@
 {% endfor %}
 </select>
 
+{% if giveNumber > 1 %}
+<p>You can scramble all of your stories into a different one: <input type="submit" name="button" value="scramble">
+{% endif %}
+
 <p><input type="submit" name="button" value="Ok">
 <p><input type="submit" name="button" value="DropStories">
 {% endif %}
