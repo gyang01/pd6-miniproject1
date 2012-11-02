@@ -33,7 +33,8 @@ def home():
             name=request.form['storystarter']
             if name.replace(' ','') != '':
                 util.addStory(name)
-                return redirect(url_for('home'))
+                currentStory = name
+                return redirect(url_for('page'))
             else:
                 filler = ["filler","otherstuff"]
                 return redirect(url_for('home'))            
