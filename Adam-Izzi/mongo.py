@@ -1,36 +1,36 @@
 from pymongo import Connection
 
-def connect():
-	conn = Connection('mongo.stuycs.org')
-	db = conn.admin
-	res = db.authenticate("ml7", "ml7")
-	db = conn["z-pd6-Adam-Izzi"]
-	return db
+class db:
+	def __init__(self):
+		self.connection = Connection('mongo.stuycs.org')
+		self.db = self.connection.admin
+		self.db.authenticate('ml7','ml7')
+		self.db = self.connection['z-demo-mini-pd6']
 
 #this adds a new story called "title"
-def addStory(title):
-	db = connect()
-	db.stories.save({"title": title, "lines": []})
+def addStory(self, title):
+	self.db.stories.insert({'title': title, 'lines': []})
 
-#this adds line to the story
-def addLine(title, line):
-	db = connect()
-	story = db.find({"title": title})
-	story[lines].append(line)
-	stories.remove({"title": title})
-	stories.insert(story)
+#this essentially deletes stories
+def dropStoreis(self):
+	self.db.stories.drop()
 
 #this gets all the stories in stories
 def getStories():
-	db = connect()
-	storylist = []
-	for story in stories.find():
-		if "title" in story.keys():
-			storylist.append(story["title"])
-	return storylist
+	return [x['title'] for x in self.db.stories.find()]
+
+#this adds line to the story
+def addLine(self, story, line):
+	clct = self.db.stories
+	s = [x for x in clct.find({'title': story})]
+	if len(s) != 1:
+		return
+	d = s[0]
+	print d[]
+	d['lines'].append(line)
+	clct.update({'title': story}, d)
 
 #this gets all lines added to the story
-def getLines(title):
-	db = connect()
-	for story in stories.find({"title": title}):
-		return story["lines"]
+def getLines(self, story):
+	clct = self.db.stories
+	return clct.find({'title': story})[0]['lines']

@@ -1,27 +1,50 @@
+<!DOCTYPE html>
+
 {% extends 'base.html' %}
 {% block head %}
     {{ super() }}
-<style>
-</style>
+<style> </style>
 {% endblock head %}
 
 {% block body %}
 
 <form action="" method="POST">
-<select name="stories">
-{% for title in titles %}
-<option value="{{t}}">{{t}}</option>
+{% if giveTitles %}
+<p>Select a story to work on:
+<select name="storySelection">
+{% for title in giveTitles %}
+<option>{{title}}</option>
 {% endfor %}
 </select>
 
-<input type="submit" name="button" value="Ok">
+<p><input type="submit" name="button" value="Ok">
+<p><input type="submit" name="button" value="DropStories">
+{% endif %}
 
-<p>New Story: <input type="text" name="New Story">
-<p><input type="submit" name="button" value="New">
+{% if not giveLines %}
+
+<p>You can create a new Story: <input type="text" name="NewStory">
+<p><input type="submit" name="button" value="Add">
+
+{% endif %}
+
+
+{% if giveLines %}
+
+<h2><b>{{ titleStory }}</b></h2>
+
+{% for line in giveLines %}
+<p> {{ line|safe }} </p>
+<p>
+{% endfor %}
+
+<p>Continue the Story by writing the next line and then pressing the
+button: <input type="text" name="NextLine">
+<input type="submit" name="button" value="{{ titleStory }}">
+
+{% endif %}
 
 </form>
 
 
 {% endblock body %}
-
-

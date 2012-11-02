@@ -19,6 +19,7 @@
 	      Select a <b>STORY</b>
 	      <p>
 		{% if titles %}
+		
 		<select name="otitle">
 		  {% for item in titles %}
 		  <option value = "{{item}}">{{item}}</option>
@@ -26,6 +27,15 @@
 		</select>
 		<input value="Read!" name="button" type="submit">
 		<br>
+		<!--		
+		<font size ="+1">
+		  {% for item in titles %}
+		  <ul>
+		    <li><a href="http://127.0.0.1:5000/story/{{item}}">{{item}}</a></li>
+		  </ul>
+		  {% endfor %}
+		</font>
+		-->
 		{% else %}
 		<font size="-0.5">
 		  <i>Sorry. Our archives are currently empty. Why don't you start a story now?</i>
@@ -48,6 +58,7 @@
 		<input type="submit" value="Drop Story" name="button">
 		{% endif %}
 	    </font>
+	    <script src="js/bootstrap.min.js"></script>
     </body>
   </html>
 </form>

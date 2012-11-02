@@ -2,30 +2,28 @@
 <form action="" method="post">
 <html lang = "en">
 <head>
-<BODY bgcolor="#a7daf2">
-<meta>
-<title> Twitter Bootstrap Version2.0 inline form layout
-example</title>
-<meta name = "description" content ="Twitter Bootstrap Version2.0>
-<link href="twitter-bootstrap-v2/docs/assets/css/bootstrap.css"
-rel="stylesheet">
+<title> Hi my name is Hon Wei Khor and I love Taylor Swift</title>
+<link rel="stylesheet" type="test/css" href="../static/styles.css"/>
 </head>
-<body>
-<p>
-<p style="text-align: center;">
-<font size ="20"> Olden Stories</font>
-</p>
-
+<BODY>
+<center><img src = "http://imgur.com/SiuCk.png"></a>
 <form class="well form-inline">
+<br>
+<input type="submit" name="button" value="Back to Homepage">
+<h1>{{story}}</h1>
+{% for l in lines%}
+	{{l}}
+	<br>
+{% endfor%}
+<br>
+<textarea ID="tb1" TYPE="Text" name = "yay" placeholder="Your new line here!">
+</textarea>
+<br>
+<input type="submit" name="button" value="Enter that line!">
+<br>
+<br>
+<br>
 
- 
-<input type=hidden name=user value={{myemail}}>
-<form name="input" action="html_form_action.asp" method="get"> <br>
-<input type="text" name="FirstName" value="">
-<input type="submit" value="Add Line">
-
- <p><input type=submit name=button value="Back">
-</form> 
 </form>
 </body>
 </html>

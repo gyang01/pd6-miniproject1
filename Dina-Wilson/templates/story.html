@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+{% block head %}
+    {{ super() }}
+<style> </style>
+{% endblock head %}
+
+{% block body %}
+{% if storyLines %}
+
+<h1> {{ titleStory }} </h1>
+
+{% for l in storyLines %}
+<p>{{ line|safe }}</p>
+
+{% endfor %}
+
+<p>Line you want to add: <input type="text" name="AddLine">
+
+<input type="submit" name="button" value="AddTheLine">
+
+{% endif %}
+
+{% endblock body %}

@@ -56,7 +56,7 @@ def getLines(title):
 	lines = []
 	for line in res:
 		if line['title'] == title:
-			lines.append(line['lines'])
+			lines=line['lines']
 	return lines
 
 def getAll():

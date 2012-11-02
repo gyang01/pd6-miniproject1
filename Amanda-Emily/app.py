@@ -13,16 +13,17 @@ def home():
 	else: #what to do if the user submits a new story
 		button=request.form['button']
 		if button=='Submit':
-			title=request.form['title']
+			title=request.form['name']
 			db.add_story(title)
 			return redirect(url_for(home))
 		elif: #what to do if the user picks a story in progress
 			if button=='Go':
-			title=request.form['title'] #not sure if I should refer to this as title/will this cause any conflicts?
+			title=request.form['name'] #not sure if I should refer to this as title/will this cause any conflicts?
 			return redirect(url_for((story))
-		return redirect(url_for(home)) #after the story is saved with the save button, idk what to do about the cancel button  
+		return redirect(url_for(home)) 
+                       
 	
 	
 if __name__=="__main__":
 	app.debug=True
-	app.run()
+	app.run(port=6000)
