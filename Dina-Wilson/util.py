@@ -59,6 +59,21 @@ def getAllStoryLines():
             allLines.append(line)
     return allLines
 
+def getLine(title, number):
+    auth()
+    i = 0
+    for line in getStoryLines(title):
+        if number == i:
+            return line
+        else:
+            i = i + 1
+
+def getNumberLines(title):
+    i = 0
+    for line in getStoryLines(title):
+        i = i + 1
+    return i
+
 def dropStories():
     global connection
     global db
