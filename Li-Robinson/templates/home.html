@@ -1,8 +1,6 @@
 {% extends 'default.html' %}
 {% block head %}
     {{ super() }}
-<style>
-</style>
 {% endblock head %}
 
 {% block body %}
@@ -18,14 +16,14 @@
 {% endfor %}
 </select>
 
-<p><input type="submit" name="button" value="Go">
+<br><input type="submit" name="button" value="Go">
 <input type="submit" name="button" value="Delete Story">
 {% endif %}
 
 {% if not lines %}
 
 <p>New Story: <input type="text" name="new_story">
-<p><input type="submit" name="button" value="Create">
+<br><input type="submit" name="button" value="Create">
 
 {% endif %}
 
