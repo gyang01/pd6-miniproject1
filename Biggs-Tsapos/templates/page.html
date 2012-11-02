@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html>
 	<head>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
 	<!-- <meta http-equiv="refresh" content="5">  -->
 		<title>
 			{{ Title }}
 		</title>
 	<head/>
 	<body>
-	<h2> 
+	<h1> 
+	<div class="titlestyle">
 		{{ Title }}
-	</h2>
+	</div>
+	<div class="thluffy">                                                                       
+ 	<img src="{{ url_for('static', filename='thluffy.png') }}" width="125px" height="125px">
+	</div>
+	</h1>
+		{% if (restOfLines|count) != 0 %}
+		<div class="text">
 		{{ restOfLines|safe }}
-	<form action="" name="newLine" method="POST">
-		<input type = "text" name = "newLineBox" size="75">
-		<input type = "submit" name = "submit" value = "Submit">
+		</div>
 		<br>
+		{% else %}
+		<div class="italicstyle">
+		This story has not yet begun.
+		</div>
+		{% endif %}
+		<br>
+	<form action="" name="newLine" method="POST">
+		<div class="placeholder">
+		<textarea name = "newLineBox" rows="4" cols="75" autofocus="autofocus" placeholder="Add to the story" spellcheck="true"></textarea>
+		</div>
+		<br>
+		<input type = "submit" name = "submit" value = "Submit">
 		<input type = "submit" name = "back" value = "Back">
 	</form>
+	<div class="author">
+	By Nathaniel Biggs & Zambeta Tsapos
+	</div>
 	</body>
 </html>

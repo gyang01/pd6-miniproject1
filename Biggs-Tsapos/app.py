@@ -7,6 +7,7 @@ import util
 import time
 app = Flask(__name__)
 currentStory = ''
+filler = []
 
 
 @app.route('/')
@@ -16,8 +17,11 @@ def start():
 @app.route("/home/",methods=['GET','POST'])
 def home():
     global currentStory
+    global filler
     if request.method=='GET':
-        return render_template('home.html',count=util.numStories(),firstlines=util.getFirstLines())
+        tmp = filler
+        filler = []
+        return render_template('home.html',count=util.numStories(),firstlines=util.getFirstLines(),checker=tmp)
     else:
         if request.form.has_key('reader'):
             currentStory=request.form['storychooser']
@@ -27,8 +31,12 @@ def home():
             return redirect(url_for('home'))
         if request.form.has_key('submit'):
             name=request.form['storystarter']
-            util.addStory(name)
-            return redirect(url_for('home'))
+            if name.replace(' ','') != '':
+                util.addStory(name)
+                return redirect(url_for('home'))
+            else:
+                filler = ["filler","otherstuff"]
+                return redirect(url_for('home'))            
 
 @app.route("/page/",methods=['GET','POST'])
 def page():
