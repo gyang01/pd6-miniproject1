@@ -5,11 +5,11 @@
 
 {% block body %}
 
-  <h1>The Storyinator<h1>
+<h1>The Storyinator</h1>
 
 <form action="" method="POST">
 {% if titles %}
-<p><h2>Select a story to edit or delete!<h2>
+<p><h2>Select a story to edit or delete!</h2>
 <select name="story_menu">
 {% for t in titles %}
 <option value="{{t}}">{{t}}</option>
@@ -33,7 +33,7 @@
 <h2><b><u>{{ storyname }}</u></b></h2>
 
 {% for line in lines %}
-<p> {{ line|safe }} </p>
+<p> {{ line|safe }}
 <p>
 {% endfor %}
 
