@@ -11,7 +11,7 @@ def addStory(name):
 
 def addLine(line,name):
     tmpline = stories.find_one({'name':name})['lines']
-    tmpline = tmpline + '<br/>' + line
+    tmpline = tmpline + '<br/> <br/>' + line
     stories.update({'name':name},{'name':name,'lines':tmpline})
 
 def getNumLines(name):
