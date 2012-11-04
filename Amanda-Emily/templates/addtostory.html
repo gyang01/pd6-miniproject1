@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang = "en">
+<font face= "Georgia">
+<head>
+<BODY bgcolor="00E8BA">
+</head>
+<body>
+<h1>
+  {{name}}
+</h1>
+<p2>
+ {% for line in body%}
+ {{line}}<br>
+ {% endfor %}
+</p2>
+<form action= "addtostory" method="POST">
+<input type="hidden"  name="story" width=80 value="Titleofstoryuserisworkingon"/>
+Next Line:<br>
+ <textarea rows="4" cols="80" comments">
+</textarea>
+<br>
+<input type=submit name=button value="save"></input>
+<input type=submit name=button value="cancel"></input>
+
+</form>
+</body>
+</html>
