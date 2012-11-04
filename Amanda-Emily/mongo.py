@@ -1,7 +1,6 @@
 from pymongo import Connection
 
 Connection = Connection('mongo.stuycs.org')
-global connection, db, res, collection
 def beg():
   db = Connection.admin
   res= db.authenticate('ml7','ml7')
@@ -9,7 +8,7 @@ def beg():
   collection = db['stories']
 
 def addstory(name):
-  global collection
+  collection = db['stories']
   db = Connection['AmandaEmily']
   collection.insert( {'name': name, 'body':[] } ) 
   
@@ -31,7 +30,7 @@ def getAllTitles():
   print allTitles
 
 def addLine(name, line):
-  global collection
+  collection = db['stories']
   res = collection.find_one({'name':name})
   if res:
     newlines=res['body']
@@ -47,3 +46,4 @@ if __name__ == "__main__":
   addstory('Once upon a time there was')
   print getAllTitles()
   collection.drop()
+ 

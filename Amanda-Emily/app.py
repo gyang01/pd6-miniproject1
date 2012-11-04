@@ -18,22 +18,23 @@ def home():
 			return render_template("homepage.html", stories = mongo.getAllTitles())
                 elif(button=='Go'): 
                         name=str(request.form['name'])
-                        return render_template("addstory.html", comments = mongo.getStory(name))
+                        return render_template("addtostory.html", comments = mongo.getStory(name))
                 
                         
                        
 	
 @app.route("/", methods=['GET', 'POST'])
-def addstory():
+def addtostory():
            if request.method=="POST":
                    button= request.form['button']
                    if button=="save":
                         line = str(request.form["comments"])
                         name = str(request.form["name"])
                         mongo.addLine(name, line)
-                        return render_template("addstory.html", name = name, comments = mongo.getStory(name))
+                        return render_template("addtostory.html", name = name, comments = mongo.getStory(name))
                    if button=="cancel":
                            return redirect(url_for(home))
            
 if __name__=="__main__":
+        app.debug = True
 	app.run(port=5000)

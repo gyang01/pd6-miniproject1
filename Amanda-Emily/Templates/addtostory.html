@@ -6,15 +6,17 @@
 </head>
 <body>
 <h1>
-The title of the story the user clicked goes here
+  {{name}}
 </h1>
 <p2>
-The next sentences continue here
+ {% for comment in comments%}
+ {{comment}}<br>
+ {% endfor %}
 </p2>
-<form method="POST">
+<form action= "addtostory" method="POST">
 <input type="hidden"  name="story" width=80 value="Titleofstoryuserisworkingon"/>
 Next Line:<br>
- <textarea rows="4" cols="80" name="newline">
+ <textarea rows="4" cols="80" comments">
 </textarea>
 <br>
 <input type=submit name=button value="save"></input>
