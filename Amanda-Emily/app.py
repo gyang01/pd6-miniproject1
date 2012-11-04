@@ -36,5 +36,4 @@ def addstory():
                            return redirect(url_for(home))
            
 if __name__=="__main__":
-	app.debug=True
-	app.run(port=6000)
+	app.run(port=5000)
