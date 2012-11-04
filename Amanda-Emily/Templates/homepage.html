@@ -15,9 +15,8 @@
 </p>
 <h3>Select an existing story:</h3>
 <select name = "story">
-<% for story in stories|sort%>
-	<option value="{{story}}">
-	{{story}}</option>
+<% for story in stories>
+	<option value="{{story}}"> {{story}}</option>
 {%endfor%}
 </select>
 <br>
