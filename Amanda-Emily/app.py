@@ -8,17 +8,16 @@ app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-	if request.method=="GET":
-		return render_template("homepage.html", stories = mongo.getAllTitles())
+	if request.method=='GET':
+                return render_template("homepage.html", names = mongo.getAllTitles())
 	if request.method=="POST":
 		button=request.form["button"]
-		if button=='Submit':
-			name=request.form['name']
-			mongo.addstory(name)
-			return render_template("homepage.html", stories = mongo.getAllTitles())
+		if button=='submit':
+			mongo.addstory(str(request.form['name']))
+			return render_template("homepage.html", names = mongo.getAllTitles())
                 elif(button=='Go'): 
-                        name=str(request.form['name'])
-                        return render_template("addtostory.html", comments = mongo.getStory(name))
+                        name=str(request.form['select'])
+                        return render_template("addtostory.html", body = mongo.getStory(name))
                 
                         
                        
@@ -28,10 +27,10 @@ def addtostory():
            if request.method=="POST":
                    button= request.form['button']
                    if button=="save":
-                        line = str(request.form["comments"])
+                        line = str(request.form["body"])
                         name = str(request.form["name"])
                         mongo.addLine(name, line)
-                        return render_template("addtostory.html", name = name, comments = mongo.getStory(name))
+                        return render_template("addtostory.html", name = name, body = mongo.getStory(name))
                    if button=="cancel":
                            return redirect(url_for(home))
            

@@ -9,8 +9,8 @@
   {{name}}
 </h1>
 <p2>
- {% for comment in comments%}
- {{comment}}<br>
+ {% for line in body%}
+ {{line}}<br>
  {% endfor %}
 </p2>
 <form action= "addtostory" method="POST">
