@@ -1,6 +1,6 @@
 {% extends "default.html" %}
 {% block title %}Home{% endblock title %}
-{% block body %}
+{% block container %}
     <h1>Storyinator</h1>
     {% if stories %}
         <form id="main_menu" action="" method="POST">
@@ -16,4 +16,4 @@
         <input type="text" name="add_story_field">
         <input type="submit" value="Add Story">
     </form>
-{% endblock body %}
+{% endblock container %}
