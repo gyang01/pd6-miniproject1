@@ -42,6 +42,20 @@ def default():
                 mongo.mongo.newLine(storytitle,nl)
                 return render_template("default.html", storytitle=storytitle)
 
+@app.route("/story/<storytitle>",methods=['GET','POST'])
+def story(story=""):
+    if request.method=='GET':
+        lines=mongo.mongo.getLines(storytitle)
+        return render_template("story.html",storytitle=storytitle,lines=lines)
+    else:
+        b = request.form.get('button',"")
+        storytitle = request.form.get('story',"")
+        newLine = request.form.get("nextLine","")
+        if b == "Back":
+            return redirect("/")
+        else:
+            mongo.mongo.addLine(storytitle,newLine)
+            return redirect("/story/%s"%(storytitle))
         
 
 if __name__ == "__main__":
