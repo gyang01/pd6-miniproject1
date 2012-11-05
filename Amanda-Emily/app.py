@@ -16,7 +16,7 @@ def home():
 			mongo.addstory(str(request.form['name']))
 			return render_template("homepage.html", names = mongo.getAllTitles())
                 elif(button=='Go'): 
-                        name=str(request.form['select'])
+                        name=str(request.form['name'])
                         return render_template("addtostory.html", body = mongo.getStory(name))
                 
                         
