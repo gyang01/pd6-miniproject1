@@ -9,14 +9,14 @@
   {{name}}
 </h1>
 <p2>
- {% for comment in comments%}
- {{comment}}<br>
+ {% for line in body%}
+ {{line}}<br>
  {% endfor %}
 </p2>
 <form action= "addtostory" method="POST">
-<input type="hidden"  name="story" width=80 value="Titleofstoryuserisworkingon"/>
+<input type="hidden"  name="name" width=80 value="name">
 Next Line:<br>
- <textarea rows="4" cols="80" comments">
+ <textarea rows="4" cols="80" name ="name" value = {{name}}>
 </textarea>
 <br>
 <input type=submit name=button value="save"></input>

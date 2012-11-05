@@ -2,6 +2,7 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask import url_for,redirect
+from pymongo import Connection
 
 import story
 
@@ -39,15 +40,15 @@ def cont():
     db = story.db()
     stories = db.getStoryNames()
     if request.method=="GET": 
-	selectedstory=[]
-	return render_template("continue.html", stories=stories,selectedstory=selectedstory)
+	#selectedstory=db.getText("Story2")
+	return render_template("continue.html", stories=stories)
     else:
-        button = request.form['button']
-        if button == "Add to Story":
+	button = request.form['button']
+	if button == "Show text":
             name = request.form['story'] 
             selectedstory = db.getText(name)
             return render_template("continue.html", stories=stories,selectedstory=selectedstory)
-     
+    
     
 @app.route("/drop", methods = ['GET', 'POST'])
 def drop():
