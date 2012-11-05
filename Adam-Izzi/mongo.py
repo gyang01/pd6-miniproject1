@@ -34,3 +34,7 @@ def addLine(self, story, line):
 def getLines(self, story):
 	clct = self.db.stories
 	return clct.find({'title': story})[0]['lines']
+
+if __name__=="__main__":
+	addStories('The best story ever')
+	addLine('It goes like this')
