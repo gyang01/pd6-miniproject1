@@ -1,4 +1,4 @@
-from flask import Flask,render_template, url_for,redirect,request
+from pymongo import Connection 
 
 class db:
 	def __init__(self):
@@ -32,5 +32,5 @@ def getLines(self, story):
 	return clct.find({'title': story})[0]['lines']
 
 if __name__=="__main__":
-	addStories('The best story ever')
-	addLine('It goes like this')
+	#addStories('The best story ever')
+	#addLine('It goes like this')
