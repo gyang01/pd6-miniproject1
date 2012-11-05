@@ -1,11 +1,11 @@
-from pymongo import Connection
+from flask import Flask,render_template, url_for,redirect,request
 
 class db:
 	def __init__(self):
 		self.connection = Connection('mongo.stuycs.org')
 		self.db = self.connection.admin
 		self.db.authenticate('ml7','ml7')
-		self.db = self.connection['z-demo-mini-pd6']
+		self.db = self.connection['z-pd6']
 
 #this adds a new story called "title"
 def addStory(self, title):
@@ -22,13 +22,9 @@ def getStories():
 #this adds line to the story
 def addLine(self, story, line):
 	clct = self.db.stories
-	s = [x for x in clct.find({'title': story})]
-	if len(s) != 1:
-		return
-	d = s[0]
-	print d[]
-	d['lines'].append(line)
-	clct.update({'title': story}, d)
+	s = [x for x in clct.find({'title': story})][0]
+	clct.remove({'_id':story['_id']})
+	clct.insert(s)
 
 #this gets all lines added to the story
 def getLines(self, story):
