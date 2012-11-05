@@ -12,7 +12,7 @@ def addStory(self, title):
 	self.db.stories.insert({'title': title, 'lines': []})
 
 #this essentially deletes stories
-def dropStoreis(self):
+def dropStories(self):
 	self.db.stories.drop()
 
 #this gets all the stories in stories
