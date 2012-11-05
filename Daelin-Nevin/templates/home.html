@@ -6,6 +6,7 @@
 </head>
 <body>
 <form method = "POST">
+{%if stories%}
 <h1>
 Choose a story:
 </h1>
@@ -18,8 +19,9 @@ Choose a story:
 <h2>
 Or...
 </h2>
+{%endif%}
 <h3>
-Add a new one:
+Add a new tale:
 </h3>
 <input type="text" name="storyname" /input>
 <input type = "submit" name = "button" value = "Add" /input>

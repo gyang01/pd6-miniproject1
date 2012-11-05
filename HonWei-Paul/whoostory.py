@@ -18,9 +18,13 @@ def getstory(name):
 def getstorytext(name):
     a = getstory(name)[u'Storytext']
     for b in range(0,len(a)):
-	a[b] = str(a[b])
+        a[b] = str(a[b])
     return a
 
+def getstoryID(name):
+    a = str(getstory(name)[u'_id'])
+    return a
+    
 def addline(name,line):
     stories.update({'Title':name}, {'$push': {'Storytext':line}})
 
@@ -30,3 +34,8 @@ def getalltitles():
     for d in a:
         b.append(str(d[u'Title']))
     return b
+def dropstories():
+	stories.drop()
+	
+def dropspecstory(title):
+	stories.remove({'Title':title})

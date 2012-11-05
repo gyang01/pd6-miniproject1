@@ -24,7 +24,7 @@ def index():
 def story_page(story):
     if request.method == "POST":
         db.add_line(story, request.form["add_line_field"])
-    return render_template("story.html", lines=db.get_lines(story))
+    return render_template("story.html", story=story, lines=db.get_lines(story))
 
 @app.route("/drop/stories")
 def drop_page():

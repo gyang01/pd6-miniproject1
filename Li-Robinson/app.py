@@ -14,12 +14,16 @@ def home():
         if button == "Go":
             storyname = str(request.form["story_menu"])
             #print storyname #the above does indeed work
-            lines = util.get_lines(storyname)
+            if storyname:
+                lines = util.get_lines(storyname)
+            else:
+                lines = []
             return render_template("home.html",storyname=storyname,lines=lines)
         
         elif button == "Delete Story":
             storyname = str(request.form["story_menu"])
-            util.del_story(storyname)
+            if storyname:
+                util.del_story(storyname)
             titles = util.get_story_titles()
             return render_template("home.html",titles=titles)
 
@@ -29,7 +33,8 @@ def home():
         
         elif button == "Create":
             storyname = request.form["new_story"]
-            util.add_story(storyname)
+            if storyname:
+                util.add_story(storyname)
             titles = util.get_story_titles()
             return render_template("home.html",titles=titles)
             #return redirect(url_for(home)) #no this should NOT be a redirect
@@ -37,7 +42,8 @@ def home():
         else: # button is a story name
             storyname = button
             newline = request.form["next_line"]
-            util.add_line(storyname,newline)
+            if storyname and newline:
+                util.add_line(storyname,newline)
             lines = util.get_lines(storyname)
             return render_template("home.html",storyname=storyname,lines=lines)
 

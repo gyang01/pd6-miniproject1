@@ -9,7 +9,6 @@ import story
 app = Flask(__name__)
 
 
-
 @app.route("/", methods = ['GET', 'POST'])
 def home():
     if request.method == "GET":
@@ -53,8 +52,18 @@ def cont():
     
 @app.route("/drop", methods = ['GET', 'POST'])
 def drop():
+    db = story.db()
+    stories = db.getStoryNames()
     if request.method=="GET":
-	return render_template("drop.html")
+	return render_template("drop.html", stories=stories)
+    else:
+        button = request.form['button']
+        if button == "Drop this Story":
+            name = request.form['story']
+            db.remove(name)
+            return render_template("home.html")
+
+
 
 #@app.route("/stories", methods = ['GET', 'POST'])
 #def stories():
@@ -66,10 +75,8 @@ def drop():
   #      title = request.form['titles']
   #      return redirect(url_for('continue.html'))
             
-
-        
         
 if __name__ == '__main__':
     app.debug = True
     app.run()
-
+    

@@ -1,27 +1,70 @@
+<!DOCTYPE html>
+
 {% extends 'base.html' %}
 {% block head %}
     {{ super() }}
-<style>
-</style>
+<style> </style>
 {% endblock head %}
+
+
+
 
 {% block body %}
 
+
 <form action="" method="POST">
-<select name="stories">
-{% for title in titles %}
-<option value="{{t}}">{{t}}</option>
+{% if giveTitles %} 
+
+
+<p>Select a story to work on:
+<select name="storySelection">
+{% for title in giveTitles %}
+<option>{{title}}</option>
 {% endfor %}
 </select>
 
-<input type="submit" name="button" value="Ok">
+{% if giveNumber > 1 %}
+<p>You can scramble all of your stories into a different one: <input type="submit" name="button" value="scramble">
+{% endif %}
 
-<p>New Story: <input type="text" name="New Story">
-<p><input type="submit" name="button" value="New">
+<p><input type="submit" name="button" value="Ok">
+<p><input type="submit" name="button" value="DropStories">
+
+
+{% endif %}
+
+
+
+{% if not giveLines %}
+
+
+{% if not scrambledStory %}
+<p>You can create a new Story: <input type="text" name="NewStory">
+<p><input type="submit" name="button" value="Add">
+{% endif %}
+
+{% if scrambledStory %}
+<h2><b>{{ scrambledStoryTitle }}</b></h2>
+<p> {% for line in scrambledStory %}
+<p> {{ line|safe }}</p>
+{% endfor %}
+
+{% endif %}
+
+
+{% endif %}
+
+{% if giveLines %}
+<h2><b>{{ titleStory }}</b></h2>
+{% for line in giveLines %}
+<p> {{ line|safe }} </p>
+<p>
+{% endfor %}
+<h2>Write the next line: <input type="text" name="NextLine"></h2>
+<h2>And press the button: <input type="submit" name="button" value="{{ titleStory }}">
+{% endif %}
 
 </form>
 
 
 {% endblock body %}
-
-
