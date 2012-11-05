@@ -11,19 +11,18 @@
 <form action="" method="POST">
   <b>Stories:</b>
   <br />
-  <select name=story size=6 multiple=no style="width:800px">
+  <select name="story">
     {% for story in stories %}
     <option value={{story}}>{{story}}</option>
     {% endfor %}
   </select>
-  
   <br/>
   <input type=submit name=button Value="Show text">
   <br/>
   
   <div style="width:800px;height:400px;background:lightgreen;overflow:auto">
-{% if selectedstory %}
-    {% for line in selectedstory %}
+{% if storytext %}
+    {% for line in storytext %}
     {{line}}<br />
     {% endfor %}
 {% endif %}
