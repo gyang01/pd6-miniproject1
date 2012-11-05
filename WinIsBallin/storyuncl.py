@@ -17,7 +17,7 @@ def newStory(name):
 def getStories():
 	stories = []
 	for line in col.find():
- 		stories.append(line['name'])
+ 		stories.append(str(line['name']))
 	return stories
 
 def getStory(name):
@@ -27,6 +27,8 @@ def getText(story):
 	return getStory(story)['text']
 
 def addLine(story, newline):
+	#if(getText(story)[0] == "Not Started Yet"):
+		#col.update({'name': story}, {'text': newline})
 	col.update({'name': story}, {'$push': {'text': newline}})
 	return getStory(story)
 
@@ -36,10 +38,10 @@ def dropone(story):
 def dropall():
 	col.remove()
 
-#print addLine("asdf", "Hello!")
 
 
-#col.drop()
+
+col.remove({'text': "hello"})
 #col.save({'name': "asdf", 'lines': 0, 'text': ["Not Yet Started"]})
 
 

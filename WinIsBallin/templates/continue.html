@@ -8,6 +8,7 @@
 
 
 <br />
+{% if stories|length > 0 %}
 <form action="" method="POST">
   <b>Stories:</b>
   <br />
@@ -27,7 +28,8 @@
     {% endfor %}
 {% endif %}
   </div>
-  
+
+
   
   <br />
   <br />
@@ -36,8 +38,12 @@
   <br />
   <input type=submit name=button Value="Add to Story">
   <input type=submit name=button Value="Cancel">
-  
 </form>
+{% endif %}
+{% if stories|length == 0 %}
+<h2> You Have No Stories! Please Create One. </h2>
+<a href="/">Go Back</a>
+{% endif %}
 
 
 

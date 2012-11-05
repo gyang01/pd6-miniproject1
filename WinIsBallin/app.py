@@ -34,6 +34,8 @@ def create():
     if button == "Create!":
         storyuncl.newStory(request.form['title'])
         return redirect(url_for('home'))
+    if button == "Cancel":
+        return redirect(url_for('home'))
 	
 
 @app.route("/cont", methods = ['GET', 'POST'])
