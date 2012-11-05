@@ -30,7 +30,7 @@ def default():
                 mongo.mongo.newStory(m,ns)
                 stories = mongo.mongo.getStories(m)
                 return render_template("default.html", stories=stories)
-        elif b == "Back":#not sure why this doesn't want to work
+        """elif b == "Back":#not sure why this doesn't want to work
             stories = mongo.mongo.getStories(m)
             return render_template("default.html", stories=stories)
         elif b == "Save":#same here
@@ -40,7 +40,7 @@ def default():
                 nl = str(request.form["newStory"])
                 storytitle = str(request.form["menu"])
                 mongo.mongo.newLine(storytitle,nl)
-                return render_template("default.html", storytitle=storytitle)
+                return render_template("default.html", storytitle=storytitle)"""
 
 @app.route("/story/<storytitle>",methods=['GET','POST'])
 def story(story=""):
@@ -54,7 +54,7 @@ def story(story=""):
         if b == "Back":
             return redirect("/")
         else:
-            mongo.mongo.addLine(storytitle,newLine)
+            mongo.mongo.newLine(storytitle,newLine)
             return redirect("/story/%s"%(storytitle))
         
 
