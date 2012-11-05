@@ -17,12 +17,12 @@ def home():
 			return render_template("homepage.html", names = mongo.getAllTitles())
                 elif(button=='Go'): 
                         name=str(request.form['name'])
-                        return render_template("addtostory.html", body = mongo.getStory(name))
+                        return render_template("addtostory.html", name = name, body = mongo.getStory(name))
                 
                         
                        
 	
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/addtostory", methods=['GET', 'POST'])
 def addtostory():
            if request.method=="POST":
                    button= request.form['button']
