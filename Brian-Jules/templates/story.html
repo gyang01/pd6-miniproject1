@@ -1,6 +1,6 @@
 {% extends "default.html" %}
 {% block title %}{{ story }}{% endblock title %}
-{% block body %}
+{% block container %}
     <h1>{{ story }}</h1>
     {% for line in lines %}
         <p>{{ line|safe }}</p>
@@ -9,4 +9,4 @@
         <textarea name="add_line_field" rows="4" cols="80"></textarea>
         <input type="submit" value="Add Line">
     </form>
-{% endblock body %}
+{% endblock container %}
