@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang = "en">
+<font face="Georgia">
+<head>
+<BODY bgcolor="00E8BA">
+</head>
+<body>
+<p>
+<p style="text-align: center;">
+<font size ="20">Write a unique story with the</font>
+</p>
+<p>
+<p style="text-align: center;">
+<a href="http://tinypic.com?ref=fc63va" target="_blank"><img src="http://i49.tinypic.com/fc63va.gif" border="0" alt="Image and video hosting by TinyPic"></a>
+</p>
+<form action="" method= "POST">
+{% if names %}
+<h3>Select an existing story:</h3>
+<select name = "name">
+{% for name in names | sort %}
+	<option value="{{name}}"> {{name}}</option>
+{% endfor %}
+<br>
+</select>
+<input type="submit" name="button" value= "Go">
+ {% endif %}
+ </form>
+
+<h3>Don't see a story you want to add to? Create your own!</h3>
+   <form action="" method ="POST" > 
+   Add Title  of Story: <input type = "text" name = "name"><br>
+	<input type="submit" name="button" value="submit"> <br> 
+    </form>
+</body>
+</html>

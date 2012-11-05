@@ -23,7 +23,7 @@ class db:
         self.col = self.db["WinBall's StoryBook"]
         
     def newStory(self, name):
-        self.col.save({'name': name, 'lines': 0}) 
+        self.col.insert({'name': name, 'lines': 0}) 
 
     def newStoryStart(self, name, start):
         self.col.save({'name': name, 'lines': 0, 'text':start}) 
