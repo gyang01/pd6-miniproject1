@@ -1,5 +1,6 @@
 from util import *
-from flask import Flask, render_template, session, url_for, request, escape, redirect, g
+from flask import Flask
+from flask import render_template, url_for, request, escape, redirect, g
 from database import *
 
 #configuration
