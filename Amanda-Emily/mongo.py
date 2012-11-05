@@ -27,7 +27,7 @@ def getAllTitles():
   res = collection.find()
   for x in res:
     allTitles.append(str(x['name']))
-  print allTitles
+  return allTitles
 
 def addLine(name, line):
   collection = beg()
