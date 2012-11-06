@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<form action="" method="post">
+<html lang = "en">
+<head>
+<title> Hi my name is Hon Wei Khor and I love Taylor Swift</title>
+<link rel="stylesheet" type="test/css" href="../static/styles.css"/>
+</head>
+<BODY>
+<center><img src = "http://imgur.com/SiuCk.png"></a>
+<form class="well form-inline">
+<br>
+<input type="submit" name="button" value="Back to Homepage">
+<h1>{{story}}</h1>
+{% for l in lines%}
+	{{l}}
+	<br>
+{% endfor%}
+<br>
+<textarea ID="tb1" TYPE="Text" name = "yay" placeholder="Your new line here!">
+</textarea>
+<br>
+<input type="submit" name="button" value="Enter that line!">
+<br>
+<br>
+<br>
+
+</form>
+</body>
+</html>

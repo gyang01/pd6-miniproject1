@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Story-nator</title>
+</head>
+<body>
+<form method = "POST">
+{%if stories%}
+<h1>
+Choose a story:
+</h1>
+<select name = "storyselection">
+{%for story in stories%}
+  <option> {{story}}</option>
+{%endfor%}
+</select>
+<input type = "submit" name = "button" value = "Go" /input>
+<h2>
+Or...
+</h2>
+{%endif%}
+<h3>
+Add a new tale:
+</h3>
+<input type="text" name="storyname" /input>
+<input type = "submit" name = "button" value = "Add" /input>
+</form>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<html>
+
+<head>
+  <h1>%Title%/h1>
+</head>
+
+<BODY bgcolor="#000000">
+<BODY TEXT="#FFFFFF">
+
+<br />
+<form action="" method="POST">
+  <b>Text:</b>
+  <br />
+  <select name=story size=6 multiple=no style="width:800px">
+    {% for story in stories %}
+    <option value={{story}}>{{text}}</option>
+    {% endfor %}
+  </select>
+  
+  <br/>
+  <input type=submit name=button Value="Delete Last Line" 
+	 background-color:#FFFFFF>
+  <br/>
+  <br/>
+  <b>Delete Specific Line:</b>
+  <br/>
+
+  <b>Line Number:</b>
+  <input type=textbox name=newline Value="">
+  <br />
+  <input type=submit name=button Value="Delete" 
+	 background-color:#FFFFFF>
+  <br />
+  <b>New Line:</b>
+  <br />
+  <input type=textbox name=newline Value="">
+  <br />
+  <input type=submit name=button Value="Add Line">
+  <br />
+  <br/>
+  <br />
+  <br />
+  <input type=submit name=button Value="Back">
+  
+</form>
+
+
+
+</html>
+

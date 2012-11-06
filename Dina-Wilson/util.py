@@ -16,11 +16,11 @@ def auth():
     col = db['DLWS']
 
 def addStory(title):
-    global col
+    auth()
     col.insert({'title': title, 'lines':[title]})
 
 def addLine(title, line):
-    global col
+    auth()
     res = col.find_one({'title': title})
     if res:
         storyLines = res['lines']
@@ -28,10 +28,12 @@ def addLine(title, line):
         col.update({'title': title}, {'title': title, 'lines': storyLines})
 
 def getStory(title):
+    auth()
     res = col.find_one({'title': title})
     return res
 
 def getAllStories():
+    auth()
     res = col.find()
     result = []
     for story in res:
@@ -39,33 +41,64 @@ def getAllStories():
     return result
 
 def getAllStoryTitles():
+    auth()
     titles = []
     for story in getAllStories():
         titles.append(story['title'])
     return titles
     
 def getStoryLines(title):
+    auth()
     return getStory(title)['lines']
 
 def getAllStoryLines():
+    auth()
     allLines = []
     for story in getAllStoryTitles():
         for line in getStoryLines(story):
             allLines.append(line)
     return allLines
 
-def test():
+def getLine(title, number):
     auth()
-    addStory('hi')
-    print col.find_one()
-    addLine('hi', 'I like thluffy')
-    res=col.find_one({'title': 'hi'})
-    print res['lines']
-    addStory('bye')
-    addLine('bye', 'I like thluffy more')
-    print getStoryLines('bye')
-    print getAllStoryTitles()
-    print getAllStoryLines()
+    i = 0
+    for line in getStoryLines(title):
+        if number == i:
+            return line
+        else:
+            i = i + 1
+
+def getNumberLines(title):
+    i = 0
+    for line in getStoryLines(title):
+        i = i + 1
+    return i
+
+def dropStories():
+    global connection
+    global db
+    global res
+    global col
+    connection = Connection('mongo.stuycs.org')
+    db = connection.admin
+    res = db.authenticate ('ml7', 'ml7')
+    db = connection['z-pd6']
+    col = db['DLWS']
     col.drop()
+
+
+#def test():
+#    auth()
+#    addStory('hi')
+#    print col.find_one()
+#    addLine('hi', 'I like thluffy')
+#    res=col.find_one({'title': 'hi'})
+ #   print res['lines']
+  #  addStory('bye')
+#    addLine('bye', 'I like thluffy more')
+ #   print getStoryLines('bye')
+  #  print getAllStoryTitles()
+  #  print getAllStoryLines()
+  #  col.drop()
     
-test()
+#test()

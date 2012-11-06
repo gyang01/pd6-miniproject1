@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<form action="" method="post">
+<html lang = "en">
+<head>
+<title> Hi my name is Hon Wei Khor and I love Taylor Swift</title>
+<link rel="stylesheet" type="test/css" href="../static/styles.css"/>
+</head>
+<BODY>
+<p>
+<center><img src = "http://imgur.com/vR7eC.png"></a>
+<p>
+<form class="well form-inline">
+	{% if storylist|length>0 %}
+	Existing stories: 
+	<select name = "chosenstory">
+		{% for i in storylist|sort%}
+			<option value={{i}}>{{i}}</option>
+		{% endfor %}
+	</select>
+	<input type="submit" name="button" value="Go to dat story!">
+	<br>
+	<input type="submit" name="button" value="Drop it!">
+	
+	<br><br>
+	Or...
+	<br><br>
+	{% endif %}
+	Enter an unused title for a new story: <input type="text" class="input-small" name = "nustory" placeholder="New Story">
+	<input type="submit" name="button" value="...and make it!">
+	<br>
+	<br>
+	<input type="submit" name="button" value="DROP THE BASS!(Deletes all stories)">
+</form>
+</body>
+</html>

@@ -14,7 +14,7 @@ def connect():
 #    New story
 def addStory(title, line):    
      global collection
-     collection.insert({'title': title, 'text': [line]})
+     collection.insert({'title': title, 'text': line})
 
 #    Returns a list of stories
 def getStories():
@@ -31,19 +31,21 @@ def getStories():
 def getText(story):
      global collection
      text = collection.find_one({'title': story})['text']
-     for line in text:
-          print line
      return text
 
 #    Adds a line to a story
 def addLine(story, line):
      text = getText(story)
-     text.append(line)
+     text = text+'\n'+line
      collection.update({'title': story}, {'text': text})
      
 connect()
 addStory('Story1','Sam eats an apple.')
+print 'STORY1:'
+print getText('Story1')
 addStory('Story2','The apple eats Sam.')
+print 'STORY2:'
+print getText('Story2')
 addLine('Story2','He was delicious.')
 getStories()
 getText('Story1')

@@ -8,7 +8,7 @@ if __name__ == "__main__":
 	mongo.addline("tale of something", "at sometime")
 	for story in mongo.get_stories():
 		print story
-	print
+	print "\n\n\n"
 	for line in  mongo.get_story("tale of something"):
 		print line
 	

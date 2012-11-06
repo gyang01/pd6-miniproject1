@@ -1,0 +1,21 @@
+
+body {
+	font-family: "Arial", sans-serif;
+	font-size: 90%;
+	color: #FF0094;
+    background-color: #FFFFFF;
+	}
+h1 {
+	font-family: "Brush Script MT","Courier", "Arial", sans-serif;
+	font-size: 600%;
+	color: #FF0000;
+	}
+textarea{
+	height: 100px;
+	width: 500px;
+	background-color: pink;
+	font-family: "Brush Script MT","Courier", "Arial", sans-serif;
+	font-size: 20px;
+	color: black;
+	
+	}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <h1>Stories</h1>
+</head>
+
+<BODY bgcolor="#000000">
+<BODY TEXT="#FFFFFF">
+
+<br />
+<form action="" method="POST">
+  <b>Titles:</b>
+  <br />
+  <select name=story size=6 multiple=no style="width:800px">
+    {% for story in stories %}
+    <option value={{story}}>{{story}}</option>
+    {% endfor %}
+  </select>
+  
+  <br/>
+  <input type="submit" name="button" Value="Select Story" 
+	 background-color:#FFFFFF>
+  <br/>
+
+  
+  <br />
+  <br />
+  <b>New Story Name:</b>
+  <br />
+  <input type=textbox name=newline Value="">
+  <br />
+  <input type="submit" name="button" Value="Add Story">
+Enter an unused title for a new story: <input type="text" class="input-small" name = "nustory" placeholder="New Story">
+	<input type="submit" name="button" value="...and make it!">
+  <br />
+  <br/>
+  <br />
+  <br />
+  <input type="submit" name="button" Value="Back">
+  
+</form>
+
+
+
+</html>

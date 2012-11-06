@@ -1,0 +1,11 @@
+**pd6-miniproject1**
+
+Helen Nie and Alicia Vargas-Morawetz
+
+*databasing.py*
+
+   * auth: authenticates user
+   * add_title: adds a title and first line for a new story
+   * get_titles: returns all current stories in a list
+   * get_lines: returns all lines of a story
+   * add_line: adds a new line to an existing story

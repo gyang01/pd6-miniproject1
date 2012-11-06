@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			The Storynator		
+		</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+	</head>
+	<body>
+	<h1> <div class="titlestyle">
+		The Storynator!   
+	</div>
+	<div class="thluffy">                                                                       
+ 	<img src="{{ url_for('static', filename='thluffy.png') }}" width="125px" height="125px">
+	</div>
+	</h1>
+	<div class="bodystyle">
+	<form name = "Submitter" action="" method="POST">
+	<textarea name = "storystarter" rows="1" cols ="75" autofocus="autofocus" placeholder="Begin your own story" spellcheck="true"></textarea>
+	{% if (checker|count) > 1 %}
+	<div class="italicstyle">
+	You must provide a name for the story.
+	</div>
+	{% endif %}
+	<br>
+	<input type="submit" name = "submit" value="Submit">
+	</form>
+	<br>
+	<form name = "ToRead" action="" method="POST">
+	<div class="message">
+	Choose which story you would like to read.
+	</div>
+	<br>
+	<select name = "storychooser" class="widen">
+	{% for num in range(firstlines|count) %}
+	{% set current = firstlines[num] %}
+	   <option value = "{{ current }}"> {{ current }}</option>
+	{% endfor %}
+	</select>
+	{% if (firstlines|count) > 0 %}
+	<input type="submit" name="reader" value="Read">
+	{% else %}
+	<input type="submit" name="reader" value="Read" disabled="disabled">
+	{% endif %}
+	<input type="submit" name="clear" value="Clear Stories">
+	</form>
+	<div class="author">
+	By Nathaniel Biggs & Zambeta Tsapos
+	</div>
+	</body>
+	</div>
+</html>
+
+	
