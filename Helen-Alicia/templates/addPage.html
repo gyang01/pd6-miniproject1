@@ -12,10 +12,11 @@
   <h1>{{ currTitle }}</h1>
 
   {% for line in currLines %}
-  <p>{{ line }}</p>
+  {{ line }}
+  <br><br>
   {% endfor %}
 
-  <form action="" method="post">
+  <form method="POST">
 
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -27,9 +28,9 @@
     {% endif %}
     {% endwith %}
     
-    <p>Next Line: <input type="text" name="newLine" value="new line">
-    <p><input type="submit" value="new" name="new">
-    <p><input type="submit" value="back" name="back">
+    <p>Next Line: <input type="text" name="newLine">
+    <p><input type="submit" value="new" name="button">
+    <p><input type="submit" value="back" name="button">
       
   </form>
 
