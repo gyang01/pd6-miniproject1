@@ -36,7 +36,7 @@ def getText(story):
 #    Adds a line to a story
 def addLine(story, line):
      text = getText(story)
-     text = text+'\n'+line
+     text.append(line)
      collection.update({'title': story}, {'text': text})
      
 connect()
