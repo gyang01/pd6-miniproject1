@@ -13,6 +13,5 @@ Helen Nie and Alicia Vargas-Morawetz
 
 *templates*
 
-   * default.html
    * story.html
    * homepage.html

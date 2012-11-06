@@ -1,4 +1,3 @@
-from util import *
 from flask import Flask
 from flask import render_template, url_for, request, escape, redirect, g
 from database import *
