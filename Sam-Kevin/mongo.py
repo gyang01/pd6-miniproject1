@@ -1,53 +1,39 @@
 from pymongo import *
 
-global connection, db, res, collection
+connection = Connection('mongo.stuycs.org')
 
 def connect():
-     global connection, db, res, collection   
-     
-     connection = Connection('mongo.stuycs.org')
      db = connection.admin
      res = db.authenticate('ml7', 'ml7')
-     db = connection['z-pd6']
-     collection = db['sk']
 
 #    New story
-def addStory(title, line):    
-     global collection
-     collection.insert({'title': title, 'text': line})
+def addStory(title):    
+     db = connection['z-pd6']
+     stories = db.first_collection
+     story = {'title':title, 'text':['']}
+     stories.insert(story)
 
 #    Returns a list of stories
 def getStories():
-     global collection
-     text = collection.find()
-     stories = []
-     for line in text:
-          story = line['title'].encode('utf8')
-          stories.append(story)
-     print stories
-     return stories
+     db = connection['z-pd6']
+     stories = db.first_collection
+     titles = [story['title'] for story in stories.find()]
+     return titles
 
 #    Returns the text of a story
-def getText(story):
-     global collection
-     text = collection.find_one({'title': story})['text']
-     return text
+def getText(title):
+     db = connection['z-pd6']
+     stories = db.first_collection
+     for line in stories.find():
+          if line['title']==title:
+               return line['text']
 
 #    Adds a line to a story
-def addLine(story, line):
-     text = getText(story)
-     text.append(line)
-     collection.update({'title': story}, {'text': text})
-     
-connect()
-addStory('Story1','Sam eats an apple.')
-print 'STORY1:'
-print getText('Story1')
-addStory('Story2','The apple eats Sam.')
-print 'STORY2:'
-print getText('Story2')
-addLine('Story2','He was delicious.')
-getStories()
-getText('Story1')
-getText('Story2')
-collection.drop()
+def addLine(title, text):
+     db = connection['z-pd6']
+     stories = db.first_collection
+     for line in stories.find():
+          if line['title']==title:
+               story = line['text']
+               story.append(text)
+               stories.update({'title':title},{'title':title, 'text':story})
