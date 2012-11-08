@@ -4,16 +4,37 @@ import db
 app = Flask(__name__)
 
 @app.route("/",methods=['GET','POST'])
-def home():
-    mydb=db.db()
+
+def storynatorHome():
+    #global title
     if request.method=='GET':
-         return render_template("storynatorHome.html")
-    else:
-        if request.method=='POST':
-            if request.form["button"]=="Create":
-                mydb.addStory(str(request.form['title']))
-                return render_template("storynatorHome.html", titles = db.getStories())
-            if request.form["button"]=="Go":
-                title = request.form(str(request.form['title']))
-                return render_template("storypage.html", title = title, lines = db.getLines(title))
-        
+         return render_template("storynatorHome.html", titles = db.getStories())
+    if request.method=='POST':
+        if request.form["button"]=="Select":
+            title = str(request.form["storyPicked"])
+            lines = db.getLines(title)
+            return render_template("storypage.html", title = title, lines = lines)
+        if request.form["button"]=="Drop":
+            db.dropStory(str(request.form["storyPicked"]))
+            return render_template("storynatorHome.html", titles = db.getStories())
+        if request.form["button"]=="Create":
+            db.addStory(str(request.form["newTitle"]))
+            return render_template("storynatorHome.html", titles = db.getStories())
+
+@app.route("/story",methods=['GET','POST'])
+def storypage():
+    global title
+    if request.method=='GET':
+        lines = db.getLines(title)
+        return render_template("storypage.html", title = title, lines = lines)
+    if request.method=='POST':
+        if request.form["button"]=="Save":
+            line = str(request.form["newLine"])
+            db.addLine(title, line)
+            lines = db.getLines(title)
+            return render_template("storypage.html", title = title, lines = lines)
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
+
