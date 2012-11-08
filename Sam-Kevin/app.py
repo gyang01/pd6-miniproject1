@@ -1,53 +1,39 @@
-from pymongo import *
+from flask import *
 
-global connection, db, res, collection
+#import mongo
 
-def connect():
-     global connection, db, res, collection   
-     
-     connection = Connection('mongo.stuycs.org')
-     db = connection.admin
-     res = db.authenticate('ml7', 'ml7')
-     db = connection['z-pd6']
-     collection = db['sk']
+global Story
+app = Flask(__name__)
+app.secret_key = 'blah1orblah2'
 
-#    New story
-def addStory(title, line):    
-     global collection
-     collection.insert({'title': title, 'text': line})
+global story
+@app.route("/")
+def start():
+    return redirect(url_for('login'))
 
-#    Returns a list of stories
-def getStories():
-     global collection
-     text = collection.find()
-     stories = []
-     for line in text:
-          story = line['title'].encode('utf8')
-          stories.append(story)
-     print stories
-     return stories
+@app.route("/login/",methods=['GET','POST'])
+def login():
+    if request.method=='GET':
+#        story = util.getStories;
+        return render_template("login.html")#,story=story)
+    else:
+        button=request.form['button']
+        if button == "GO":
+# story = Textfield[story]
+            return redirect('/home/'+story)
 
-#    Returns the text of a story
-def getText(story):
-     global collection
-     text = collection.find_one({'title': story})['text']
-     return text
 
-#    Adds a line to a story
-def addLine(story, line):
-     text = getText(story)
-     text = text+'\n'+line
-     collection.update({'title': story}, {'text': text})
-     
-connect()
-addStory('Story1','Sam eats an apple.')
-print 'STORY1:'
-print getText('Story1')
-addStory('Story2','The apple eats Sam.')
-print 'STORY2:'
-print getText('Story2')
-addLine('Story2','He was delicious.')
-getStories()
-getText('Story1')
-getText('Story2')
-collection.drop()
+@app.route("/home/<story>/",methods=['GET','POST'])
+def home(story):
+    if request.method=='GET':
+#        story=getStory();
+        return render_template("home.html")#,story=story)
+    else:
+        button=request.form['button']
+        if button == 'Back':
+            session.pop('user',None)
+            return redirect('/login/')
+
+if __name__=="__main__":
+    app.debug=True
+    app.run()

@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 
-link rel="stylesheet" type="text/css" href="style1.css"
+<link rel="stylesheet" type="text/css" href="style1.css">
 
-<form>
-	New Story: <input type=text name="newname"></input>
+<html>
+<h1>ADAM AND IZZI'S UBER-STORYINATOR!</h1>
+
+<form method = "POST">
+	{% if 0<stories|length %}
+	<select>
+		{% for s in stories %}
+		<option>{{s}}</option>
+		{% endfor %}
+	</select>
+	{% endif %}
+	<ul>
+	{% if 0<stories|length %}
+	{% for s in stories  %}
+	<li><a href="/story/{{s}}">{{s}}</a></li>
+	{% endfor %}
+	</ul>
+	<input type=submit name=button value="Go"></input>
+	{% endif %}
 	<br>
-	<input type=submit name=button value="create"></input>
+
+	New Story: <input type=text name="newname" ></input>
+	<br>
+	<input type=submit name=button value="Create"></input>
 	<br>
 </form>
+
+<style type="text/css">
+	h1{font-family: Arial; color: navy; background-color: lime}
+	form{background-color: beige}
+</style>
+</html>

@@ -14,11 +14,7 @@
   <form action="" method="post">
     <select name="stories">
       {% for story in allTitles %}
-      {% if story == '' %}
-      <option selected="selected">{{ story }}</option>
-      {% else %}
-      <option value={{ story }}>{{ story }}</option>
-      {% endif %}
+      <option>{{ story }}</option>
       {% endfor %}
     </select>
     
@@ -40,7 +36,7 @@
     
     <br><br>
 
-    <p>New Story: <input type="text" name="newStory" value="new story">
+    New Story: <input type="text" name="newStory"></input>
     <br>
 
     <p><input type="submit" name="button" value="create">
