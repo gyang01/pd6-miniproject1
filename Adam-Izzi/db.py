@@ -13,7 +13,7 @@ def addStory(title):
 	stories = conn()
 	stories.insert({'title': title, 'lines': []})
 
-#this essentially deletes stories
+#this deletes a story
 def dropStory(title):
 	stories = conn()
 	stories.remove(stories.find_one({'title': title}))
@@ -23,7 +23,7 @@ def getStories():
 	stories = conn()
 	return [x['title'] for x in stories.find()]
 
-#this adds line to the story
+#this adds a line to the story
 def addLine(title, line):
 	stories = conn()
 	stories.update({'title': title}, {'$push': {'lines': line}})
@@ -36,6 +36,6 @@ def getLines(title):
 if __name__=="__main__":
 	#addStory('The best story ever')
 	#addLine('The best story ever','It goes like this')
-	dropStory('The best story ever')
+	dropStory('storytime')
 	print getStories()
 	#print getLines('The best story ever')
