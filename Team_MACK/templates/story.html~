@@ -31,9 +31,11 @@
   <br/>
   <br />
   <br />
-
-<form METHOD="LINK" ACTION="select.html">
-<input TYPE="submit" VALUE="Back">
+  <input type=submit name=button Value="Back">
+  
 </form>
 
+
+
+</html>
 
