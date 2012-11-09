@@ -22,11 +22,20 @@ def selection():
                 addStory(db, story_name)
     return render_template("select.html", stories=getStories(db))
 
-@app.route("/<story>", methods=["GET", "POST"])
+@app.route("/<story>", methods=["GET", "POST", "LINK"])
 def story_page(story):
+    a = 0
     if request.method == "POST":
         addLine(db, story, request.form["add_line_field"])
-    return render_template("story.html", lines=getStory(db, story))
+        a = 1
+    if request.method == "LINK":
+        a = 2
+        print a
+    if (a < 2):
+        return render_template("story.html", lines=getStory(db, story))
+    else:
+        return render_template("select.html", stories=getStories(db))
+
 
 @app.route("/drop/stories")
 def dropcurr():
