@@ -31,7 +31,17 @@ def story_page(story):
 @app.route("/drop/stories")
 def dropcurr():
     removeStories(db)
-    return redirect(url_for("index"))
+    return redirect(url_for("selection"))
+
+@app.route("/drop/story")
+def dropthis(story):
+    removeStory(db, story)
+    return redirect(url_for("selection"))
+
+@app.route("/drop/story/line")
+def dropline(story, index):
+    removeLine(db, story, index)
+    return redirect(url_for("story_page", story = story))
 
 if __name__ == "__main__":
-    app.run()
+    app.run()   
