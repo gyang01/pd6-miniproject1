@@ -4,7 +4,7 @@ Conn = Connection('mongo.stuycs.org')
 def conn():	
 	db = Conn.admin
 	res = db.authenticate('ml7','ml7')
-	db = Conn['z-pd6']
+	db = Conn['pd6-izzam']
 	stories = db.stories
 	return stories
 
