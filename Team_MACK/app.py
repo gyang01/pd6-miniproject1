@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, url_for, request, escape, redirect, g
+from flask import render_template, url_for, request, escape, redirect
 from database import *
 
 #configuration
@@ -21,20 +21,20 @@ def selection():
             if story_name:
                 addStory(db, story_name)
     return render_template("select.html", stories=getStories(db))
+    if request.method == "GET":
+        return render_template("select.html", stories=getStories(db))   
 
-@app.route("/<story>", methods=["GET", "POST", "LINK"])
+@app.route("/<story>", methods=["GET", "POST"])
 def story_page(story):
-    a = 0
     if request.method == "POST":
-        addLine(db, story, request.form["add_line_field"])
-        a = 1
-    if request.method == "LINK":
-        a = 2
-        print a
-    if (a < 2):
+        button=request.form.get('button', None)
+        if (button=="Add Line"):
+            addLine(db, story, request.form.get('newLine',""))
+            return render_template("story.html", lines=getStory(db, story))
+        elif (button=="back"):
+            return redirect(url_for('/'))
+    if request.method == "GET":
         return render_template("story.html", lines=getStory(db, story))
-    else:
-        return render_template("select.html", stories=getStories(db))
 
 
 @app.route("/drop/stories")
@@ -53,4 +53,9 @@ def dropline(story, index):
     return redirect(url_for("story_page", story = story))
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     app.run()   
+=======
+    app.debug=True
+    app.run()
+>>>>>>> back button still doesn't work

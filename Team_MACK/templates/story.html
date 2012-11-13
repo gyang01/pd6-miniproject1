@@ -5,7 +5,7 @@
 
 <BODY bgcolor="#000000">
 <BODY TEXT="#FFFFFF">
-
+<body>
 <br />
 <form action="" method="POST">
   <b>Text:</b>
@@ -15,25 +15,20 @@
         <p>{{ line|safe }}</p>
     {% endfor %}
   
-  <br/>
-  <input type=submit name=button Value="Delete Last Line" 
-	 background-color:#FFFFFF>
-  <br/>
+
   <br/>
   <br />
   <b>New Line:</b>
   <br />
-    <form id="add_line_form" method="POST" action="">
-        <textarea name="add_line_field" rows="4" cols="80"></textarea>
-        <input type="submit" value="Add Line">
-    </form>
+<form method = "POST">
+
+    <p><input type="text" name="newLine">
+    <p><input type="submit" value="Add Line" name="button">
   <br />
   <br/>
-  <br />
-  <br />
+    <p><input type="submit" value="back" name="button">
 
-<form METHOD="LINK" action="">
-<input TYPE="submit" VALUE="Back">
-</form>
-
+    </form>
+</body>
+</html>
 
