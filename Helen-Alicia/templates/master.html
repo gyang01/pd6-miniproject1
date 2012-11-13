@@ -1,0 +1,27 @@
+<!doctype HTML>
+
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='masterStyle.css') }}">
+</head>
+
+<body>
+  <h1><img src="{{url_for('static', filename='logo.jpg') }}" alt="logo">
+    Storyinator</h1>
+
+  <h2 id="pgName">{% block pgName %}{% endblock %}</h2>
+
+  <div id="content">{% block content %}{% endblock %}</div>
+
+  <div id="footer">
+    <p><a class="one" href="http://stuycs-ml7.github.com//">ml7 Homepage</a></p>
+    <p><a class="one" href="https://github.com/organizations/stuycs-ml7/teams/242945">ml7 github Homepage</a></p>
+  </div>
+  
+</body>
+
+</html>
+
+
+

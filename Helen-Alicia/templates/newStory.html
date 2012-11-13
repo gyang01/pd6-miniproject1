@@ -1,0 +1,38 @@
+<!doctype HTML>
+
+{% extends "master.html" %}
+
+{% block pgName %}</br></br>{{ currTitle }}{% endblock %}
+
+{% block content %}
+
+  {% for line in currLines %}
+  {{ line }}
+  <br><br>
+  {% endfor %}
+
+  <form method="POST">
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    
+    <p>Next Line: <input type="text" name="newLine">
+    <p><input type="submit" value="new" name="button">
+    <p><input type="submit" value="back" name="button">
+    
+      </br></br>
+      </br></br>
+
+  </form>
+
+</body>
+
+</html>
+{% endblock %}

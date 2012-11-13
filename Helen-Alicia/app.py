@@ -27,30 +27,37 @@ def homepage():
    
         button=request.form.get('button', None)
         if button=='go':
-            currTitle = story
-            return redirect(url_for('addPage'))
+            if story == '':
+                flash ("There are no existing stories!")
+                return redirect(url_for('homepage'))
+            else:
+                currTitle = story
+                return redirect(url_for('newStory'))
         elif button=='create':
             if databasing.exists(newStory):
                 flash("story already exists!")
                 return redirect(url_for('homepage'))
+            elif newStory == '':
+                flash ("Please enter a new story title!")
+                return redirect(url_for('homepage'))
             else:
                 databasing.add_title(newStory)
                 currTitle = newStory
-                return redirect(url_for('addPage'))
+                return redirect(url_for('newStory'))
 
 @app.route("/addPage", methods=['GET', 'POST'])
-def addPage():
+def newStory():
     global allTitles, currTitle
     if request.method=="GET":
         currLines = databasing.get_lines(currTitle)
-        return render_template("addPage.html", currTitle=currTitle, currLines=currLines)
+        return render_template("newStory.html", currTitle=currTitle, currLines=currLines)
     else:
         newLine=request.form.get('newLine', "")
         button=request.form.get('button', None)
 
         if button=='new':
             databasing.add_line(currTitle, newLine)
-            return redirect(url_for('addPage'))
+            return redirect(url_for('newStory'))
         elif button=='back':
             return redirect(url_for('homepage'))
 

@@ -1,15 +1,10 @@
 <!doctype HTML>
 
-<html lang="en">
+{% extends "master.html" %}
 
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />     
-  </head>
+{% block pgName %}</br>Home Page</br>{% endblock %}
 
-  <body>
-
-  <h1>Storyinator</h1>
+{% block content %}
 
   <form action="" method="post">
     <select name="stories">
@@ -41,9 +36,8 @@
 
     <p><input type="submit" name="button" value="create">
 
-    <br>
+    </br></br>
+    </br></br>
   </form>
-  
-  </body>
 
-</html>
+{% endblock %}

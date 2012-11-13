@@ -1,15 +1,10 @@
 <!doctype HTML>
 
-<html lang="en">
+{% extends "master.html" %}
 
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-  </head>
+{% block pgName %}</br></br>{{ currTitle }}{% endblock %}
 
-  <body>
-
-  <h1>{{ currTitle }}</h1>
+{% block content %}
 
   {% for line in currLines %}
   {{ line }}
@@ -31,9 +26,12 @@
     <p>Next Line: <input type="text" name="newLine">
     <p><input type="submit" value="new" name="button">
     <p><input type="submit" value="back" name="button">
-      
+    
+      </br></br>
+
   </form>
 
-  </body>
+</body>
 
 </html>
+{% endblock %}
