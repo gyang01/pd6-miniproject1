@@ -9,36 +9,33 @@
 <BODY TEXT="#FFFFFF">
 
 <br />
-<form action="" method="POST">
-  <b>Titles:</b>
-  <br />
-  <select name=story size=6 multiple=no style="width:800px">
-    {% for story in stories %}
-    <option value={{story}}>{{story}}</option>
-    {% endfor %}
-  </select>
-  
-  <br/>
-  <input type=submit name=button Value="Select Story" 
-	 background-color:#FFFFFF>
-  <br/>
 
-  
+ {% if stories %}
+        <form id="main_menu" action="" method="POST">
+            <select name="story_menu">
+            {% for story in stories %}
+                <option value="{{ story }}">{{ story }}</option>
+            {% endfor %}
+            </select>
+            <input type="submit" value="Go">
+        </form>
+    {% endif %}
+
+
   <br />
   <br />
+	<input type="submit" name="button" value="Delete Selected Story">
+  <br />
+  <br />
+
   <b>New Story Name:</b>
   <br />
-  <input type=textbox name=newline Value="">
+  <br />  <br />
   <br />
-  <input type=submit name=button Value="Add Story">
-  <br />
-  <br/>
-  <br />
-  <br />
-  <input type=submit name=button Value="Back">
-  
+Enter an unused title for a new story: 
+    <form id="add_story_form" action="" method="POST">
+    <input type="text" class="input-small" name = "add_story_field" placeholder="New Story">
+	<input type="submit" name="button" value="Add Story">
 </form>
 
 
-
-</html>

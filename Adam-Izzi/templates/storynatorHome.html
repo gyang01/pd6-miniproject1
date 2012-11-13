@@ -3,27 +3,26 @@
 <link rel="stylesheet" type="text/css" href="style1.css">
 
 <html>
-<h1>ADAM AND IZZI'S UBER-STORYINATOR!</h1>
+<h1>ADAM AND IZZI'S UBER-STORYNATOR!</h1>
 
 <form method = "POST">
-	{% if 0<stories|length %}
-	<select>
-		{% for s in stories %}
-		<option>{{s}}</option>
+        {% if 0<titles|length %}
+        Select (or drop) an already existing story:
+        <br>
+        <select name = "storyPicked">
+	{% for title in titles %}
+		<option value = "{{title}}">{{title}}</option>
 		{% endfor %}
 	</select>
-	{% endif %}
-	<ul>
-	{% if 0<stories|length %}
-	{% for s in stories  %}
-	<li><a href="/story/{{s}}">{{s}}</a></li>
-	{% endfor %}
-	</ul>
-	<input type=submit name=button value="Go"></input>
+	<br>
+	<input type=submit name=button value="Select"></input>
+	<input type=submit name=button value="Drop"></input>
 	{% endif %}
 	<br>
-
-	New Story: <input type=text name="newname" ></input>
+	<br>
+	Create a new story!
+	<br>
+	Title: <input type=text name="newTitle"></input>
 	<br>
 	<input type=submit name=button value="Create"></input>
 	<br>

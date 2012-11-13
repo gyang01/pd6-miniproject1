@@ -1,36 +1,41 @@
 from pymongo import Connection 
+Conn = Connection('mongo.stuycs.org')
 
-class db:
-	def __init__(self):
-		self.connection = Connection('mongo.stuycs.org')
-		self.db = self.connection.admin
-		self.db.authenticate('ml7','ml7')
-		self.db = self.connection['z-pd6']
+def conn():	
+	db = Conn.admin
+	res = db.authenticate('ml7','ml7')
+	db = Conn['pd6-izzam']
+	stories = db.stories
+	return stories
 
 #this adds a new story called "title"
-def addStory(self, title):
-	self.db.stories.insert({'title': title, 'lines': []})
+def addStory(title):
+	stories = conn()
+	stories.insert({'title': title, 'lines': []})
 
-#this essentially deletes stories
-def dropStories(self):
-	self.db.stories.drop()
+#this deletes a story
+def dropStory(title):
+	stories = conn()
+	stories.remove(stories.find_one({'title': title}))
 
 #this gets all the stories in stories
 def getStories():
-	return [x['title'] for x in self.db.stories.find()]
+	stories = conn()
+	return [x['title'] for x in stories.find()]
 
-#this adds line to the story
-def addLine(self, story, line):
-	clct = self.db.stories
-	s = [x for x in clct.find({'title': story})][0]
-	clct.remove({'_id':story['_id']})
-	clct.insert(s)
+#this adds a line to the story
+def addLine(title, line):
+	stories = conn()
+	stories.update({'title': title}, {'$push': {'lines': line}})
 
 #this gets all lines added to the story
-def getLines(self, story):
-	clct = self.db.stories
-	return clct.find({'title': story})[0]['lines']
+def getLines(title):
+	stories = conn()
+	return stories.find_one({'title': title})['lines']
 
 if __name__=="__main__":
-	#addStories('The best story ever')
-	#addLine('It goes like this')
+	#addStory('The best story ever')
+	#addLine('The best story ever','It goes like this')
+	dropStory('storytime')
+	print getStories()
+	#print getLines('The best story ever')

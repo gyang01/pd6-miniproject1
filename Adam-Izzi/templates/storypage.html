@@ -2,20 +2,19 @@
 
 <link rel="stylesheet" type="text/css" href="style1.css">
 
-<h1>{{story}}</h1>
-<br>
-<br>
-{% for l in lines%}
-{{l}}
-<p>
-{% endfor %}	
-
 <form method ="POST">
-<input type="hidden" name="story" value="{{story}}"></input>
-New line: <br>
-<textarea rows = "4" cols="80" name="newlines"></textarea>
+<h1>{{title}}</h1>
+{% for line in lines%}
+{{line}}
+<p>
+{% endfor %}
+<input type="hidden" name="story" value="{{title}}"></input>
+Add a new line: <br>
+<textarea rows = "4" cols="80" name="newLine"></textarea>
 <br>
 <input type="submit" name="button" value="Save"></input>
+<br>
+<input type="submit" name="button" value="Home"></input>
 </form>
 
 
