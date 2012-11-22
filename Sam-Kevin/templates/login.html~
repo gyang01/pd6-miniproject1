@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+    <h1>
+      STORYTIME
+    </h1>
+    {% if stories %}
+        <form id="menu" action="" method="POST">
+            <select name="stories">
+            {% for story in stories %}
+                <option value="{{ story }}">{{ stories }}</option>
+            {% endfor %}
+            </select>
+            <input type="submit" value="Go">
+        </form>
+	{% endif %}
+	<form id="addStory" action="" method="POST">
+          <input type="text" name="addStory">
+          <input type="submit" value="Add Story">
+	</form>
+</html>
