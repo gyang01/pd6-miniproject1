@@ -1,0 +1,23 @@
+#footer {
+    background-color: blue ;
+}
+h1 {
+    background-color: black;
+    color: blue;
+    font-size:50px;
+    font-weight: bold;
+}
+h2 {
+    text-indent: 20px;
+    color: blue;
+    line-height:20px;
+}
+a.one:link {
+    color: yellow;
+}
+a.one:visited {
+    color: yellow;
+}
+a.one:hover {
+    color: white;
+}

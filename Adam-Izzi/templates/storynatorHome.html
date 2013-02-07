@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" type="text/css" href="style1.css">
+
+<html>
+<h1>ADAM AND IZZI'S UBER-STORYNATOR!</h1>
+
+<form method = "POST">
+        {% if 0<titles|length %}
+        Select (or drop) an already existing story:
+        <br>
+        <select name = "storyPicked">
+	{% for title in titles %}
+		<option value = "{{title}}">{{title}}</option>
+		{% endfor %}
+	</select>
+	<br>
+	<input type=submit name=button value="Select"></input>
+	<input type=submit name=button value="Drop"></input>
+	{% endif %}
+	<br>
+	<br>
+	Create a new story!
+	<br>
+	Title: <input type=text name="newTitle"></input>
+	<br>
+	<input type=submit name=button value="Create"></input>
+	<br>
+</form>
+
+<style type="text/css">
+	h1{font-family: Arial; color: navy; background-color: lime}
+	form{background-color: beige}
+</style>
+</html>

@@ -9,6 +9,7 @@ def auth():
 
     db = connection.admin
     res = db.authenticate('ml7', 'ml7')
+    print res
 
     db = connection['z-pd6']
     collection = db['HA']
@@ -17,21 +18,15 @@ def auth():
 def add_title(title):    
     global collection
     collection.insert({'title': title, 'lines': []})
-    print collection.find_one({'title': title})['title'].encode('utf8')
-    return 0
+    #print collection.find_one({'title': title})['title'].encode('utf8')
 
 # get a list of all the story titles
 def get_titles():
     global collection
-    lines = collection.find()
-    titles = []
-    for line in lines:
-        title = line['title'].encode('utf8')
-        titles.append(title)
-    print titles
+    titles = [line['title'].encode('utf8') for line in collection.find()]
     return titles
-
-# get all lines of a story
+    
+# returns all lines of a story
 def get_lines(title):
     global collection
     uLines = collection.find_one({'title': title})['lines']
@@ -39,6 +34,7 @@ def get_lines(title):
     for uLine in uLines:
         line = uLine.encode('utf8')
         lines.append(line)
+    print "got lines!" 
     print lines
     return lines
 
@@ -48,20 +44,29 @@ def add_line(title, line):
     lines1 = collection.find_one({'title': title})['lines']
     lines1.append(line)
     collection.update({'title': title}, {'title': title, 'lines': lines1})
-    print 'added new line to ' + title
+
+# return true if title already exists
+
+def exists(title):
+    global collection
+    return not collection.find_one({'title': title}) == None
     
 # drop all titles
 def drop_all_titles():
     global collection
     collection.drop()
 
+
 # testing
-#auth()
+
+#print auth()
+
+#print exists('OneWordTitle')
 
 #add_title('story1') 
 #add_title('story2')
 
-#get_titles()
+#print get_titles()
 
 #get_lines('story1')
 #get_lines('story2')
@@ -72,5 +77,5 @@ def drop_all_titles():
 #get_lines('story1')
 #get_lines('story2')
 
-#drop_all_titles()
+#print drop_all_titles()
 

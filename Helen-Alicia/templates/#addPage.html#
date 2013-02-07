@@ -1,0 +1,46 @@
+<!doctype HTML>
+
+{% extends "master.html" %}
+
+<<<<<<< HEAD:Helen-Alicia/templates/#addPage.html#
+{% block pgName %}</br></br>{{ currTitle }}{% endblock %}
+=======
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename=\
+'style.css') }}">
+</head>
+>>>>>>> 0e2a3d0f53cddde1bac82cdad79690f9fadb304d:Helen-Alicia/templates/addPage.html
+
+{% block content %}
+
+  {% for line in currLines %}
+  {{ line }}
+  <br><br>
+  {% endfor %}
+
+  <form method="POST">
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    
+    <p>Next Line: <input type="text" name="newLine">
+    <p><input type="submit" value="new" name="button">
+    <p><input type="submit" value="back" name="button">
+    
+      </br></br>
+
+  </form>
+
+</body>
+
+</html>
+{% endblock %}
