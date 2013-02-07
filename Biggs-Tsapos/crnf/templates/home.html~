@@ -1,0 +1,14 @@
+<html>
+<h1>
+Creative Non-Fiction
+</h1>
+<body>
+<br><br>
+<a href="/addpiece">Add Your Work To Be Reviewed</a>
+<br>
+{% for title in titles %}
+<a href="/piece/"+{{title[0]}}+"/"+{{title[1]}}>{{title[0]}} by {{title[1]}}</a>
+<br>
+{% endfor %}
+</body>
+</html>

@@ -1,0 +1,36 @@
+<html>
+<h1>
+  {{info[0]}} by {{info[1]}}
+</h1>
+<body>
+  {{info[2] | safe}}
+  <br>
+  <br>
+  {% if info[4] %}
+  <h2>
+    Comments
+    </h2>
+    {% for comment in info[3] %}
+    {{comment[1]}}:<br>
+    {{comment[0]}}<br><br>
+    {% endfor %}
+  <br>
+  <form action="" method="POST">
+  <textarea name="comment" placeholder="Enter comment..." cols="50" rows="5"></textarea>
+  <br>
+  Name of Commenter:
+  <input type="text" name="commenter"> Leave blank to comment anonymously
+  <br>
+  <input type="submit" name="submit" value="Comment">
+  <input type="submit" name="back" value="Back">
+  </form>
+  {% else %}
+  <h2>
+    <i> Comments Disabled </i>
+    </h2>
+  <form action="" method="POST">
+    <input type="submit" name="back" value="Back">
+  </form>
+  {% endif %}
+</body>
+</html>

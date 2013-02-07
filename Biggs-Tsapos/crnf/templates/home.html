@@ -1,0 +1,19 @@
+<html>
+<h1>
+Creative Non-Fiction
+</h1>
+<body>
+<br>
+<form action="" method="POST">
+<button name="add">Add Your Work To Be Reviewed</button>
+</form>
+<br>
+<h2>
+  Submitted Works
+</h2>
+{% for title in titles %}
+<a href="/piece/{{title[1]}}/{{title[0]}}">{{title[0]}} by {{title[1]}}</a>
+<br><br>
+{% endfor %}
+</body>
+</html>

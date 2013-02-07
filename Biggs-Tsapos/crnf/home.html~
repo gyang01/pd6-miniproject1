@@ -1,0 +1,9 @@
+<html>
+<head>
+Creative Non-Fiction
+</head>
+<body>
+{% for title in titles %}
+<a href="/piece/"+{{title[0]}}+"/"+{{title[1]}}>{{title[0]}} by {{title[1]}}</title>
+</body>
+</html>

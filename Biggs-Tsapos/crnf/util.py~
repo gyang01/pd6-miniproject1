@@ -1,0 +1,6 @@
+from pymongo import Connection
+
+Conn = Connection('ds041367.mongolab.com',41367)
+db = Conn['stuycs_sideprojects']
+res = db.authenticate('stuycs','stuycs')
+mongo = db.Project2
